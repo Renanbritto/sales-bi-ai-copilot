@@ -11,9 +11,7 @@ import {
   PieChart as PieIcon,
   Globe,
   Sliders,
-  Layers,
   Building2,
-  Network,
 } from "lucide-react";
 import {
   fetchKpis,
@@ -72,25 +70,24 @@ const RepsLeaderboard = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass-panel rounded-xl p-6 h-[400px] flex items-center justify-center text-slate-500 text-xs">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping mr-2" />
-        Carregando equipe comercial...
+      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
+        <span className="w-2 h-2 rounded-full bg-purple-400 animate-ping mr-2" />
+        Carregando performance de equipe...
       </div>
     ),
   }
 );
 
-type TabType = "executivo" | "produtos" | "clientes" | "geografia" | "simulador" | "equipe" | "modelagem";
+type TabType =
+  | "executivo"
+  | "produtos"
+  | "clientes"
+  | "geografia"
+  | "simulador"
+  | "equipe"
+  | "modelagem";
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<TabType>("executivo");
-  const [isCopilotOpen, setIsCopilotOpen] = useState(false);
-
-  // Filtros Globais
-  const [selectedRegion, setSelectedRegion] = useState("Todas");
-  const [selectedChannel, setSelectedChannel] = useState("Todos");
-
-  // Dados com Fallback Inicial
   const [kpis, setKpis] = useState<KpiData>(FALLBACK_KPIS);
   const [monthly, setMonthly] = useState<MonthlyItem[]>(FALLBACK_MONTHLY);
   const [pareto, setPareto] = useState<ParetoProduct[]>(FALLBACK_PARETO);
@@ -100,59 +97,79 @@ export default function DashboardPage() {
   const [channels, setChannels] = useState<ChannelItem[]>(FALLBACK_CHANNELS);
   const [topClients, setTopClients] = useState<TopClient[]>(FALLBACK_TOP_CLIENTS);
 
+  const [activeTab, setActiveTab] = useState<TabType>("executivo");
+  const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+  const [copilotInitialPrompt, setCopilotInitialPrompt] = useState<string>("");
+
+  // Filtros Globais
+  const [selectedRegion, setSelectedRegion] = useState<string>("Todas");
+  const [selectedChannel, setSelectedChannel] = useState<string>("Todos");
+
   useEffect(() => {
     async function loadData() {
-      try {
-        const [k, m, p, r, reg, seg, chan, top] = await Promise.all([
-          fetchKpis(),
-          fetchMonthly(),
-          fetchPareto(),
-          fetchReps(),
-          fetchRegions(),
-          fetchSegments(),
-          fetchChannels(),
-          fetchTopClients(),
-        ]);
-        setKpis(k);
-        setMonthly(m);
-        setPareto(p);
-        setReps(r);
-        setRegions(reg);
-        setSegments(seg);
-        setChannels(chan);
-        setTopClients(top);
-      } catch (err) {
-        console.error("Erro ao carregar dados, usando fallback:", err);
-      }
+      const [k, m, p, r, reg, seg, chan, tc] = await Promise.all([
+        fetchKpis(),
+        fetchMonthly(),
+        fetchPareto(),
+        fetchReps(),
+        fetchRegions(),
+        fetchSegments(),
+        fetchChannels(),
+        fetchTopClients(),
+      ]);
+      setKpis(k);
+      setMonthly(m);
+      setPareto(p);
+      setReps(r);
+      setRegions(reg);
+      setSegments(seg);
+      setChannels(chan);
+      setTopClients(tc);
     }
     loadData();
   }, []);
 
-  // Multiplicador reativo para os filtros
+  // Recalcula KPIs conforme filtros locais interativos
   const filteredKpis = useMemo(() => {
-    let mult = 1.0;
-    if (selectedRegion !== "Todas") {
-      const match = regions.find((r) => r.region === selectedRegion);
-      mult *= match ? match.share_pct / 25 : 1.0;
-    }
-    if (selectedChannel !== "Todos") {
-      mult *= selectedChannel === "B2B Enterprise" ? 0.42 : selectedChannel === "E-commerce Direto" ? 0.30 : 0.15;
-    }
+    let multiplier = 1.0;
+    if (selectedRegion === "Sudeste") multiplier *= 0.504;
+    else if (selectedRegion === "Sul") multiplier *= 0.248;
+    else if (selectedRegion === "Nordeste") multiplier *= 0.152;
+    else if (selectedRegion === "Centro-Oeste") multiplier *= 0.096;
+
+    if (selectedChannel === "B2B Enterprise") multiplier *= 0.42;
+    else if (selectedChannel === "E-commerce Direto") multiplier *= 0.28;
+    else if (selectedChannel === "Grandes Contas") multiplier *= 0.18;
+    else if (selectedChannel === "Canais & Parceiros") multiplier *= 0.12;
+
+    if (multiplier === 1.0) return kpis;
+
     return {
-      ...kpis,
-      faturamento_total: Math.round(kpis.faturamento_total * mult),
-      margem_total_reais: Math.round(kpis.margem_total_reais * mult),
-      total_pedidos: Math.round(kpis.total_pedidos * mult),
+      faturamento_total: kpis.faturamento_total * multiplier,
+      meta_total: kpis.meta_total * multiplier,
+      margem_contribuicao_pct: kpis.margem_contribuicao_pct,
+      margem_total_reais: kpis.margem_total_reais * multiplier,
+      total_pedidos: Math.round(kpis.total_pedidos * multiplier),
+      ticket_medio: kpis.ticket_medio,
+      clientes_ativos: Math.round(kpis.clientes_ativos * Math.sqrt(multiplier)),
+      atingimento_meta_pct: kpis.atingimento_meta_pct,
     };
-  }, [kpis, selectedRegion, selectedChannel, regions]);
+  }, [kpis, selectedRegion, selectedChannel]);
+
+  const handleOpenCopilot = (prompt?: string) => {
+    if (prompt) {
+      setCopilotInitialPrompt(prompt);
+    }
+    setIsCopilotOpen(true);
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#070b13]">
-      {/* Top Header Bar */}
-      <header className="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl">
+    <div className="min-h-screen bg-[#070a13] text-slate-100 flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+      {/* Top Header Navegação */}
+      <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-[#070b13]/85 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
               <BarChart3 className="w-5 h-5 text-slate-950 font-bold" />
             </div>
             <div>
@@ -171,7 +188,7 @@ export default function DashboardPage() {
           {/* Botão de Abrir Copilot */}
           <button
             type="button"
-            onClick={() => setIsCopilotOpen(true)}
+            onClick={() => handleOpenCopilot("Olá Copilot! Quais são os principais destaques executivos deste painel?")}
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-xs shadow-lg shadow-cyan-500/25 transition-all transform hover:scale-[1.02] cursor-pointer"
           >
             <Sparkles className="w-4 h-4 text-slate-950" />
@@ -238,8 +255,8 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* 4 Cards de KPI Executivos */}
-        <KpiSummary data={filteredKpis} />
+        {/* 4 Cards de KPI Executivos com Tooltips Inteligentes e Abertura Segura */}
+        <KpiSummary data={filteredKpis} onOpenCopilot={handleOpenCopilot} />
 
         {/* Menu de Abas (7 Níveis de Análise) */}
         <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 overflow-x-auto">
@@ -347,7 +364,11 @@ export default function DashboardPage() {
       </footer>
 
       {/* Drawer do AI Copilot */}
-      <CopilotSidebar isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} />
+      <CopilotSidebar
+        isOpen={isCopilotOpen}
+        onClose={() => setIsCopilotOpen(false)}
+        initialPrompt={copilotInitialPrompt}
+      />
     </div>
   );
 }

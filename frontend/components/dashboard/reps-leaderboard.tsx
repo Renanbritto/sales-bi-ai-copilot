@@ -31,7 +31,7 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
   const d = payload[0].payload;
 
   return (
-    <div className="rounded-xl p-3 bg-[#070d1a]/95 backdrop-blur-xl border border-cyan-500/40 shadow-[0_0_25px_rgba(6,182,212,0.2)] text-xs text-slate-100 min-w-[200px]">
+    <div className="rounded-2xl p-3.5 bg-[#070e1b]/98 backdrop-blur-2xl border border-cyan-500/50 shadow-[0_12px_40px_rgba(6,182,212,0.3)] text-xs text-slate-100 min-w-[220px]">
       <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-cyan-500/20 text-[10px] font-mono text-cyan-400">
         <Sparkles className="w-3 h-3 text-cyan-300 animate-pulse" />
         <span>Radar Benchmark (IA)</span>
@@ -75,59 +75,79 @@ export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
               Performance de vendas individuais com cálculo de atingimento de quota e margem.
             </p>
           </div>
+          <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full">
+            Top Performer: Marina Santos (148%)
+          </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 bg-slate-900/40">
-                <th className="py-3 px-3 font-medium">Posição</th>
-                <th className="py-3 px-3 font-medium">Vendedor</th>
-                <th className="py-3 px-3 font-medium">Regional</th>
-                <th className="py-3 px-3 font-medium text-right">Faturado</th>
-                <th className="py-3 px-3 font-medium text-right">Atingimento</th>
-                <th className="py-3 px-3 font-medium text-right">Ticket Médio</th>
-                <th className="py-3 px-3 font-medium text-right">Margem %</th>
-                <th className="py-3 px-3 font-medium text-center">Status</th>
+              <tr className="border-b border-slate-800 text-slate-400 font-medium">
+                <th className="pb-3 pl-2">Pos</th>
+                <th className="pb-3">Vendedor</th>
+                <th className="pb-3">Região</th>
+                <th className="pb-3 text-right">Faturamento</th>
+                <th className="pb-3 text-right">Meta</th>
+                <th className="pb-3 text-right">Atingimento</th>
+                <th className="pb-3 text-right">Margem %</th>
+                <th className="pb-3 text-right pr-2">Pedidos</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60">
-              {reps.map((r, idx) => {
-                const statusColor =
-                  r.status === "Superou"
-                    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
-                    : r.status === "Atingiu"
-                    ? "bg-blue-500/20 text-blue-300 border-blue-500/30"
-                    : "bg-amber-500/20 text-amber-300 border-amber-500/30";
+              {reps.map((rep, idx) => {
+                const rank = idx + 1;
+                const isTop3 = rank <= 3;
+                const medalColors = [
+                  "text-amber-400 bg-amber-500/10 border-amber-500/30",
+                  "text-slate-300 bg-slate-500/10 border-slate-400/30",
+                  "text-amber-600 bg-amber-700/10 border-amber-700/30",
+                ];
 
                 return (
-                  <tr key={r.id} className="hover:bg-slate-800/30 transition-colors group">
-                    <td className="py-3 px-3 font-mono font-bold text-slate-300">
-                      {idx === 0 ? "🥇 1º" : idx === 1 ? "🥈 2º" : idx === 2 ? "🥉 3º" : `#${idx + 1}`}
+                  <tr key={rep.id} className="hover:bg-slate-800/40 transition-colors">
+                    <td className="py-3 pl-2 font-mono">
+                      {isTop3 ? (
+                        <span
+                          className={`w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs border ${
+                            medalColors[rank - 1]
+                          }`}
+                        >
+                          {rank}
+                        </span>
+                      ) : (
+                        <span className="text-slate-500 ml-2 font-mono">{rank}</span>
+                      )}
                     </td>
-                    <td className="py-3 px-3">
-                      <div className="font-semibold text-slate-200 group-hover:text-cyan-300 transition-colors">
-                        {r.name}
-                      </div>
-                      <div className="text-[11px] text-slate-500">{r.deals} negócios fechados</div>
+                    <td className="py-3 font-semibold text-white">
+                      {rep.name}
+                      {rank === 1 && (
+                        <span className="ml-2 text-[10px] text-amber-400 font-mono">MVP</span>
+                      )}
                     </td>
-                    <td className="py-3 px-3 text-slate-400">{r.region}</td>
-                    <td className="py-3 px-3 text-right font-mono font-bold text-white">
-                      {formatCurrency(r.achieved)}
+                    <td className="py-3 text-slate-400">{rep.region}</td>
+                    <td className="py-3 text-right font-mono text-cyan-300 font-semibold">
+                      {formatCurrency(rep.achieved)}
                     </td>
-                    <td className="py-3 px-3 text-right font-mono font-bold text-cyan-400">
-                      {r.pct.toFixed(1)}%
+                    <td className="py-3 text-right font-mono text-slate-400">
+                      {formatCurrency(rep.quota)}
                     </td>
-                    <td className="py-3 px-3 text-right font-mono text-slate-300">
-                      {formatCurrency(r.avgTicket)}
-                    </td>
-                    <td className="py-3 px-3 text-right font-mono text-emerald-400">
-                      {r.margin.toFixed(1)}%
-                    </td>
-                    <td className="py-3 px-3 text-center">
-                      <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold border ${statusColor}`}>
-                        {r.status}
+                    <td className="py-3 text-right font-mono">
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded text-[11px] font-bold ${
+                          rep.pct >= 130
+                            ? "bg-emerald-500/20 text-emerald-400"
+                            : rep.pct >= 100
+                            ? "bg-cyan-500/20 text-cyan-400"
+                            : "bg-amber-500/20 text-amber-400"
+                        }`}
+                      >
+                        {rep.pct.toFixed(1)}%
                       </span>
+                    </td>
+                    <td className="py-3 text-right font-mono text-slate-300">{rep.margin}%</td>
+                    <td className="py-3 text-right pr-2 font-mono text-slate-400">
+                      {formatNumber(rep.deals)}
                     </td>
                   </tr>
                 );
@@ -137,43 +157,59 @@ export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
         </div>
       </div>
 
-      {/* Radar Multidimensional Regional (1 coluna) */}
+      {/* Radar de Competências / Performance */}
       <div className="glass-panel rounded-xl p-6 border border-slate-800 flex flex-col justify-between">
         <div>
-          <h2 className="text-base font-semibold text-white flex items-center gap-1.5">
-            <span>Equilíbrio Multidimensional Regional</span>
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-          </h2>
-          <p className="text-xs text-slate-400 mt-1">Comparativo de forças entre Sudeste e Sul com telemetria IA.</p>
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-cyan-400" /> Radar Regional
+            </h3>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 border border-cyan-800 text-cyan-400">
+              Benchmark IA
+            </span>
+          </div>
+          <p className="text-xs text-slate-400 mb-4">
+            Comparativo multidimensional entre as duas maiores regionais: Sudeste vs Sul.
+          </p>
         </div>
 
-        <div className="h-[280px] w-full mt-4 min-h-[280px] relative">
+        <div className="h-[280px] w-full flex items-center justify-center">
           {!mounted ? (
-            <div className="h-full w-full flex items-center justify-center text-xs text-slate-500">
-              Carregando gráfico radar...
-            </div>
+            <div className="text-slate-500 text-xs">Carregando radar...</div>
           ) : (
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="75%" data={RADAR_DATA}>
                 <PolarGrid stroke="#334155" />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: "#94a3b8", fontSize: 10 }} />
-                <PolarRadiusAxis angle={30} domain={[0, 150]} tick={{ fill: "#64748b", fontSize: 9 }} />
+                <PolarAngleAxis dataKey="subject" stroke="#94a3b8" fontSize={10} />
+                <PolarRadiusAxis stroke="#475569" fontSize={9} />
+                <Radar
+                  name="Sudeste"
+                  dataKey="Sudeste"
+                  stroke="#06b6d4"
+                  fill="#06b6d4"
+                  fillOpacity={0.35}
+                />
+                <Radar
+                  name="Sul"
+                  dataKey="Sul"
+                  stroke="#10b981"
+                  fill="#10b981"
+                  fillOpacity={0.35}
+                />
                 <Tooltip content={<AiFuturisticRadarTooltip />} />
-                <Radar name="Sudeste" dataKey="Sudeste" stroke="#0ea5e9" fill="#0ea5e9" fillOpacity={0.35} />
-                <Radar name="Sul" dataKey="Sul" stroke="#10b981" fill="#10b981" fillOpacity={0.25} />
               </RadarChart>
             </ResponsiveContainer>
           )}
         </div>
 
-        <div className="flex items-center justify-center gap-6 text-xs text-slate-400 pt-2 border-t border-slate-800">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-500 shadow-[0_0_6px_#0ea5e9]" />
-            <span>Sudeste</span>
+        <div className="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-around text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-cyan-500" />
+            <span className="text-slate-300">Sudeste (50.4%)</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]" />
-            <span>Sul</span>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-emerald-500" />
+            <span className="text-slate-300">Sul (24.8%)</span>
           </div>
         </div>
       </div>
