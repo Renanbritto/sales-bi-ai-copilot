@@ -28,7 +28,7 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-comfortaa)", "Comfortaa", "sans-serif"],
       },
     },
   },
