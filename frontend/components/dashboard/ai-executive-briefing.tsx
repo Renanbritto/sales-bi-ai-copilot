@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Sparkles, TrendingUp, AlertTriangle, ArrowRight, ShieldCheck, Target, Zap } from "lucide-react";
+import { Sparkles, TrendingUp, AlertTriangle, ArrowRight, Target } from "lucide-react";
 
 export function AiExecutiveBriefing() {
   return (
@@ -78,9 +78,9 @@ export function AiExecutiveBriefing() {
               Próximo Quarter
             </span>
           </div>
-          <h3 className="text-sm font-bold text-white mb-1">Expansão Sul e Cross-sell Classe A</h3>
+          <h3 className="text-sm font-bold text-white mb-1">Foco em Suíte Governança & Churn Zero</h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Priorizar a venda consultiva de <strong>Enterprise Analytics</strong> e migração cloud no Sul (+143% de quota), limitando o desconto teto em 7% para preservar margem bruta acima de 44%.
+            Expandir contratos do módulo de governança nos 40 clientes corporativos ativos, limitando a alçada de desconto em parceiros a no máximo 7.5% para preservar margem orçada.
           </p>
         </div>
       </div>
