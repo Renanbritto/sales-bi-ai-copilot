@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import { Database, Table, Key, Code2, Cpu } from "lucide-react";
+import { Database } from "lucide-react";
 
 export function ModelSchema() {
   const tables = [

@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import { ArrowDown, CheckCircle2, Users, FileText, Handshake, DollarSign } from "lucide-react";
+import { Users, FileText, Handshake, CheckCircle2 } from "lucide-react";
 
 const FUNNEL_STAGES = [
   { stage: "1. Leads Gerados (MQL)", count: 14200, value: "R$ 48.5M", convRate: "100.0%", dropOff: "0%", color: "bg-sky-500", icon: Users },
@@ -24,7 +26,6 @@ export function FunnelChart() {
 
       <div className="space-y-4">
         {FUNNEL_STAGES.map((stg, idx) => {
-          const Icon = stg.icon;
           const widthPct = Math.max(28, 100 - idx * 16);
           return (
             <div key={idx} className="relative">
@@ -42,7 +43,6 @@ export function FunnelChart() {
                 </div>
               </div>
 
-              {/* Barra do Funil com gradiente */}
               <div className="w-full bg-slate-900/80 rounded-lg h-9 p-1 border border-slate-800">
                 <div
                   className={`h-full rounded-md ${stg.color} opacity-90 transition-all duration-500 flex items-center justify-end px-3 shadow-inner`}

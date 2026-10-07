@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import {
   BarChart3,
   Filter,
@@ -8,9 +9,6 @@ import {
   Database,
   Users,
   PieChart as PieIcon,
-  Layers,
-  ArrowRight,
-  TrendingUp,
 } from "lucide-react";
 import {
   fetchKpis,
@@ -27,18 +25,42 @@ import {
   FALLBACK_REPS,
 } from "@/lib/api";
 import { KpiSummary } from "@/components/dashboard/kpi-summary";
-import { SalesChart } from "@/components/dashboard/sales-chart";
 import { FunnelChart } from "@/components/dashboard/funnel-chart";
 import { ParetoSection } from "@/components/dashboard/pareto-section";
-import { RepsLeaderboard } from "@/components/dashboard/reps-leaderboard";
 import { ModelSchema } from "@/components/dashboard/model-schema";
 import { CopilotSidebar } from "@/components/chat/copilot-sidebar";
+
+// Dynamic imports with ssr: false to prevent Recharts SSR hydration issues
+const SalesChart = dynamic(
+  () => import("@/components/dashboard/sales-chart").then((mod) => mod.SalesChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
+        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping mr-2" />
+        Carregando gráfico mensal...
+      </div>
+    ),
+  }
+);
+
+const RepsLeaderboard = dynamic(
+  () => import("@/components/dashboard/reps-leaderboard").then((mod) => mod.RepsLeaderboard),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="glass-panel rounded-xl p-6 h-[400px] flex items-center justify-center text-slate-500 text-xs">
+        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping mr-2" />
+        Carregando equipe comercial...
+      </div>
+    ),
+  }
+);
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<"executivo" | "funil" | "pareto" | "equipe" | "modelagem">("executivo");
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
 
-  // States com Fallback pré-carregado
   const [kpis, setKpis] = useState<KpiData>(FALLBACK_KPIS);
   const [monthly, setMonthly] = useState<MonthlyItem[]>(FALLBACK_MONTHLY);
   const [pareto, setPareto] = useState<ParetoProduct[]>(FALLBACK_PARETO);
@@ -46,16 +68,20 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function loadData() {
-      const [k, m, p, r] = await Promise.all([
-        fetchKpis(),
-        fetchMonthly(),
-        fetchPareto(),
-        fetchReps(),
-      ]);
-      setKpis(k);
-      setMonthly(m);
-      setPareto(p);
-      setReps(r);
+      try {
+        const [k, m, p, r] = await Promise.all([
+          fetchKpis(),
+          fetchMonthly(),
+          fetchPareto(),
+          fetchReps(),
+        ]);
+        setKpis(k);
+        setMonthly(m);
+        setPareto(p);
+        setReps(r);
+      } catch (err) {
+        console.error("Erro ao carregar dados da API, mantendo fallback:", err);
+      }
     }
     loadData();
   }, []);
@@ -84,8 +110,9 @@ export default function DashboardPage() {
 
           {/* Botão de Abrir Copilot */}
           <button
+            type="button"
             onClick={() => setIsCopilotOpen(true)}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-xs shadow-lg shadow-cyan-500/20 transition-all transform hover:scale-[1.02]"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-xs shadow-lg shadow-cyan-500/20 transition-all transform hover:scale-[1.02] cursor-pointer"
           >
             <Sparkles className="w-4 h-4 text-slate-950" />
             <span>Abrir AI Copilot</span>
@@ -113,9 +140,10 @@ export default function DashboardPage() {
               const isActive = activeTab === tab.id;
               return (
                 <button
+                  type="button"
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                     isActive
                       ? "bg-slate-800 text-cyan-400 border border-slate-700 shadow-sm"
                       : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
