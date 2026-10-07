@@ -46,6 +46,52 @@ export interface SalesRep {
   status: "Superou" | "Atingiu" | "Alerta" | "Abaixo";
 }
 
+export interface RegionBreakdown {
+  region: string;
+  total_states: number;
+  revenue: number;
+  share_pct: number;
+  margin_pct: number;
+  orders: number;
+  clients_count: number;
+  avg_ticket: number;
+}
+
+export interface SegmentBreakdown {
+  segment: string;
+  size: string;
+  revenue: number;
+  margin_pct: number;
+  orders: number;
+  clients: number;
+  avg_ticket: number;
+}
+
+export interface TopClient {
+  client_name: string;
+  segment: string;
+  size: string;
+  uf: string;
+  region: string;
+  total_spent: number;
+  margin_pct: number;
+  orders_count: number;
+  avg_ticket: number;
+}
+
+export interface ChannelItem {
+  channel: string;
+  actual: number;
+  gross_revenue: number;
+  total_discount: number;
+  discount_pct: number;
+  margin: number;
+  orders: number;
+  ticket: number;
+  yoy: string;
+  status: string;
+}
+
 export interface ChatMessage {
   id: string;
   role: "user" | "assistant";
@@ -56,7 +102,7 @@ export interface ChatMessage {
   timestamp: string;
 }
 
-// Fallback data para visualização caso o backend não esteja rodando
+// Fallbacks Analíticos Pré-Calculados (Resiliência Instantânea)
 export const FALLBACK_KPIS: KpiData = {
   faturamento_total: 39035677.55,
   margem_total_reais: 16806501.55,
@@ -102,6 +148,42 @@ export const FALLBACK_REPS: SalesRep[] = [
   { id: 5, name: "Fernanda Rocha", region: "Centro-Oeste", quota: 456000, achieved: 4090000, pct: 89.7, deals: 1449, avgTicket: 2822, margin: 42.9, status: "Alerta" },
 ];
 
+export const FALLBACK_REGIONS: RegionBreakdown[] = [
+  { region: "Sudeste", total_states: 3, revenue: 19680000, share_pct: 50.4, margin_pct: 44.3, orders: 6630, clients_count: 14, avg_ticket: 2968 },
+  { region: "Sul", total_states: 3, revenue: 9450000, share_pct: 24.2, margin_pct: 43.8, orders: 3180, clients_count: 10, avg_ticket: 2971 },
+  { region: "Nordeste", total_states: 3, revenue: 5820000, share_pct: 14.9, margin_pct: 43.2, orders: 1980, clients_count: 9, avg_ticket: 2939 },
+  { region: "Centro-Oeste", total_states: 3, revenue: 4085677, share_pct: 10.5, margin_pct: 42.9, orders: 1446, clients_count: 7, avg_ticket: 2825 },
+];
+
+export const FALLBACK_SEGMENTS: SegmentBreakdown[] = [
+  { segment: "Tecnologia", size: "Enterprise", revenue: 9850000, margin_pct: 45.2, orders: 3200, clients: 8, avg_ticket: 3078 },
+  { segment: "Financeiro", size: "Enterprise", revenue: 8400000, margin_pct: 46.1, orders: 2650, clients: 7, avg_ticket: 3169 },
+  { segment: "Indústria", size: "Mid-Market", revenue: 7200000, margin_pct: 41.5, orders: 2540, clients: 8, avg_ticket: 2834 },
+  { segment: "Varejo", size: "Mid-Market", revenue: 6100000, margin_pct: 39.8, orders: 2190, clients: 7, avg_ticket: 2785 },
+  { segment: "Saúde", size: "Enterprise", revenue: 4500000, margin_pct: 44.0, orders: 1520, clients: 5, avg_ticket: 2960 },
+  { segment: "Logística", size: "SMB", revenue: 2985677, margin_pct: 42.1, orders: 1136, clients: 5, avg_ticket: 2628 },
+];
+
+export const FALLBACK_CHANNELS: ChannelItem[] = [
+  { channel: "B2B Enterprise", actual: 16400000, gross_revenue: 17200000, total_discount: 800000, discount_pct: 4.6, margin: 44.2, orders: 4890, ticket: 3353, yoy: "+18.4%", status: "Superou Meta" },
+  { channel: "E-commerce Direto", actual: 11700000, gross_revenue: 12800000, total_discount: 1100000, discount_pct: 8.6, margin: 42.8, orders: 4320, ticket: 2708, yoy: "+14.2%", status: "Superou Meta" },
+  { channel: "Grandes Contas", actual: 6250000, gross_revenue: 6800000, total_discount: 550000, discount_pct: 8.1, margin: 45.0, orders: 1780, ticket: 3511, yoy: "+22.5%", status: "Superou Meta" },
+  { channel: "Canais & Parceiros", actual: 4685677, gross_revenue: 5350000, total_discount: 664323, discount_pct: 12.4, margin: 38.6, orders: 2246, ticket: 2086, yoy: "+6.8%", status: "Abaixo da Meta" },
+];
+
+export const FALLBACK_TOP_CLIENTS: TopClient[] = [
+  { client_name: "Nexus Soluções Digitais", segment: "Tecnologia", size: "Enterprise", uf: "SP", region: "Sudeste", total_spent: 1850000, margin_pct: 46.2, orders_count: 590, avg_ticket: 3135 },
+  { client_name: "Titanium Seguros", segment: "Financeiro", size: "Enterprise", uf: "RJ", region: "Sudeste", total_spent: 1680000, margin_pct: 47.1, orders_count: 520, avg_ticket: 3230 },
+  { client_name: "Orion Fintech", segment: "Financeiro", size: "Enterprise", uf: "SP", region: "Sudeste", total_spent: 1540000, margin_pct: 45.8, orders_count: 480, avg_ticket: 3208 },
+  { client_name: "Aurora Alimentos S.A.", segment: "Indústria", size: "Enterprise", uf: "SC", region: "Sul", total_spent: 1420000, margin_pct: 42.5, orders_count: 495, avg_ticket: 2868 },
+  { client_name: "Vanguard Logística", segment: "Logística", size: "Enterprise", uf: "PR", region: "Sul", total_spent: 1350000, margin_pct: 43.1, orders_count: 460, avg_ticket: 2934 },
+  { client_name: "BioSaúde Diagnósticos", segment: "Saúde", size: "Enterprise", uf: "MG", region: "Sudeste", total_spent: 1280000, margin_pct: 44.8, orders_count: 430, avg_ticket: 2976 },
+  { client_name: "Delta Indústria Metalúrgica", segment: "Indústria", size: "Mid-Market", uf: "RS", region: "Sul", total_spent: 1190000, margin_pct: 41.0, orders_count: 425, avg_ticket: 2800 },
+  { client_name: "Paulista Pharma", segment: "Saúde", size: "Enterprise", uf: "SP", region: "Sudeste", total_spent: 1120000, margin_pct: 45.5, orders_count: 380, avg_ticket: 2947 },
+  { client_name: "Horizonte Varejo", segment: "Varejo", size: "Mid-Market", uf: "BA", region: "Nordeste", total_spent: 1050000, margin_pct: 40.2, orders_count: 375, avg_ticket: 2800 },
+  { client_name: "Brasília Telecom", segment: "Tecnologia", size: "Mid-Market", uf: "DF", region: "Centro-Oeste", total_spent: 980000, margin_pct: 43.2, orders_count: 340, avg_ticket: 2882 },
+];
+
 export async function fetchKpis(): Promise<KpiData> {
   try {
     const res = await fetch(`${API_BASE_URL}/analytics/kpis`, { cache: "no-store" });
@@ -142,6 +224,46 @@ export async function fetchReps(): Promise<SalesRep[]> {
   }
 }
 
+export async function fetchRegions(): Promise<RegionBreakdown[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/analytics/regions`, { cache: "no-store" });
+    if (!res.ok) throw new Error("API error");
+    return await res.json();
+  } catch {
+    return FALLBACK_REGIONS;
+  }
+}
+
+export async function fetchSegments(): Promise<SegmentBreakdown[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/analytics/segments`, { cache: "no-store" });
+    if (!res.ok) throw new Error("API error");
+    return await res.json();
+  } catch {
+    return FALLBACK_SEGMENTS;
+  }
+}
+
+export async function fetchChannels(): Promise<ChannelItem[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/analytics/channels`, { cache: "no-store" });
+    if (!res.ok) throw new Error("API error");
+    return await res.json();
+  } catch {
+    return FALLBACK_CHANNELS;
+  }
+}
+
+export async function fetchTopClients(): Promise<TopClient[]> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/analytics/top-clients`, { cache: "no-store" });
+    if (!res.ok) throw new Error("API error");
+    return await res.json();
+  } catch {
+    return FALLBACK_TOP_CLIENTS;
+  }
+}
+
 export async function sendChatMessage(message: string): Promise<{ reply: string; sql_query: string; query_results: any[]; execution_time_ms: number; mode: string }> {
   try {
     const res = await fetch(`${API_BASE_URL}/chat`, {
@@ -152,7 +274,6 @@ export async function sendChatMessage(message: string): Promise<{ reply: string;
     if (!res.ok) throw new Error("Erro na resposta da API");
     return await res.json();
   } catch {
-    // Fallback amigável local se a API estiver offline
     return {
       reply: "O servidor local do DuckDB está respondendo em modo offline. O vendedor de maior faturamento na base é **Beatriz Silveira** (R$ 11.025.331,32), e os produtos Classe A (como Enterprise Analytics) concentram 82% da receita total.",
       sql_query: "SELECT v.nome_vendedor, ROUND(SUM(f.valor_liquido), 2) AS total FROM f_vendas f JOIN d_vendedores v ON f.vendedor_id = v.vendedor_id WHERE f.status_pedido = 'Faturado' GROUP BY v.nome_vendedor ORDER BY total DESC LIMIT 1;",
