@@ -134,7 +134,9 @@ def get_channels():
     SELECT 
         c.nome_canal AS channel,
         ROUND(SUM(v.valor_liquido), 2) AS actual,
-        ROUND(SUM(v.valor_liquido) * 0.95, 2) AS target,
+        ROUND(SUM(v.valor_bruto), 2) AS gross_revenue,
+        ROUND(SUM(v.valor_desconto), 2) AS total_discount,
+        ROUND((SUM(v.valor_desconto) / NULLIF(SUM(v.valor_bruto), 0)) * 100, 1) AS discount_pct,
         ROUND(AVG(v.margem_contribuicao_pct), 1) AS margin,
         COUNT(DISTINCT v.numero_pedido) AS orders,
         ROUND(SUM(v.valor_liquido) / COUNT(DISTINCT v.numero_pedido), 0) AS ticket,
@@ -145,5 +147,70 @@ def get_channels():
     WHERE v.status_pedido = 'Faturado'
     GROUP BY c.nome_canal
     ORDER BY actual DESC;
+    """
+    return execute_safe_query(sql)
+
+@router.get("/regions")
+def get_regional_breakdown():
+    sql = """
+    WITH total AS (
+        SELECT SUM(valor_liquido) AS total_rev FROM f_vendas WHERE status_pedido = 'Faturado'
+    )
+    SELECT 
+        cli.regiao AS region,
+        COUNT(DISTINCT cli.estado) AS total_states,
+        ROUND(SUM(v.valor_liquido), 2) AS revenue,
+        ROUND((SUM(v.valor_liquido) / t.total_rev) * 100, 1) AS share_pct,
+        ROUND(AVG(v.margem_contribuicao_pct), 1) AS margin_pct,
+        COUNT(DISTINCT v.numero_pedido) AS orders,
+        COUNT(DISTINCT v.cliente_id) AS clients_count,
+        ROUND(SUM(v.valor_liquido) / COUNT(DISTINCT v.numero_pedido), 0) AS avg_ticket
+    FROM f_vendas v
+    JOIN d_clientes cli ON v.cliente_id = cli.cliente_id
+    CROSS JOIN total t
+    WHERE v.status_pedido = 'Faturado'
+    GROUP BY cli.regiao, t.total_rev
+    ORDER BY revenue DESC;
+    """
+    return execute_safe_query(sql)
+
+@router.get("/segments")
+def get_segments_breakdown():
+    sql = """
+    SELECT 
+        cli.segmento AS segment,
+        cli.porte AS size,
+        ROUND(SUM(v.valor_liquido), 2) AS revenue,
+        ROUND(AVG(v.margem_contribuicao_pct), 1) AS margin_pct,
+        COUNT(DISTINCT v.numero_pedido) AS orders,
+        COUNT(DISTINCT v.cliente_id) AS clients,
+        ROUND(SUM(v.valor_liquido) / COUNT(DISTINCT v.numero_pedido), 0) AS avg_ticket
+    FROM f_vendas v
+    JOIN d_clientes cli ON v.cliente_id = cli.cliente_id
+    WHERE v.status_pedido = 'Faturado'
+    GROUP BY cli.segmento, cli.porte
+    ORDER BY revenue DESC;
+    """
+    return execute_safe_query(sql)
+
+@router.get("/top-clients")
+def get_top_clients():
+    sql = """
+    SELECT 
+        cli.razao_social AS client_name,
+        cli.segmento AS segment,
+        cli.porte AS size,
+        cli.estado AS uf,
+        cli.regiao AS region,
+        ROUND(SUM(v.valor_liquido), 2) AS total_spent,
+        ROUND(AVG(v.margem_contribuicao_pct), 1) AS margin_pct,
+        COUNT(DISTINCT v.numero_pedido) AS orders_count,
+        ROUND(SUM(v.valor_liquido) / COUNT(DISTINCT v.numero_pedido), 0) AS avg_ticket
+    FROM f_vendas v
+    JOIN d_clientes cli ON v.cliente_id = cli.cliente_id
+    WHERE v.status_pedido = 'Faturado'
+    GROUP BY cli.razao_social, cli.segmento, cli.porte, cli.estado, cli.regiao
+    ORDER BY total_spent DESC
+    LIMIT 10;
     """
     return execute_safe_query(sql)
