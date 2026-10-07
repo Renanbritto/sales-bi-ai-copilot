@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { ParetoProduct } from "@/lib/api";
-import { Award, AlertTriangle, Sparkles, TrendingUp } from "lucide-react";
+import { Award, AlertTriangle, Sparkles } from "lucide-react";
 
 interface ParetoSectionProps {
   products: ParetoProduct[];
@@ -10,7 +12,6 @@ interface ParetoSectionProps {
 export function ParetoSection({ products }: ParetoSectionProps) {
   return (
     <div className="space-y-6">
-      {/* Cards de Destaque ABC */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="glass-panel p-5 rounded-xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/30 to-slate-900/60">
           <div className="flex items-center justify-between">
@@ -58,7 +59,6 @@ export function ParetoSection({ products }: ParetoSectionProps) {
         </div>
       </div>
 
-      {/* Tabela Detalhada com Curva ABC */}
       <div className="glass-panel rounded-xl p-6 border border-slate-800">
         <div className="flex items-center justify-between mb-4">
           <div>

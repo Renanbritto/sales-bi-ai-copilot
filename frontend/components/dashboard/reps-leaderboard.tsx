@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { SalesRep } from "@/lib/api";
-import { Trophy, TrendingUp, CheckCircle2, AlertTriangle, ArrowUpRight } from "lucide-react";
+import { Trophy } from "lucide-react";
 import {
   RadarChart,
   Radar,
@@ -25,6 +27,12 @@ const RADAR_DATA = [
 ];
 
 export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Tabela Leaderboard (2 colunas) */}
@@ -105,31 +113,37 @@ export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
           <p className="text-xs text-slate-400 mt-1">Comparativo de forças entre Sudeste e Sul.</p>
         </div>
 
-        <div className="h-[280px] w-full mt-4">
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="75%" data={RADAR_DATA}>
-              <PolarGrid stroke="#334155" />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: "#94a3b8", fontSize: 10 }} />
-              <PolarRadiusAxis angle={30} domain={[0, 150]} tick={{ fill: "#64748b", fontSize: 9 }} />
-              <Tooltip
-                content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    const d = payload[0].payload;
-                    return (
-                      <div className="bg-slate-900 border border-slate-700 p-2.5 rounded shadow text-xs">
-                        <p className="font-bold text-white mb-1">{d.subject}</p>
-                        <p className="text-cyan-400">Sudeste: {d.Sudeste}</p>
-                        <p className="text-emerald-400">Sul: {d.Sul}</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
-              <Radar name="Sudeste" dataKey="Sudeste" stroke="#0ea5e9" fill="#0ea5e9" fillOpacity={0.35} />
-              <Radar name="Sul" dataKey="Sul" stroke="#10b981" fill="#10b981" fillOpacity={0.25} />
-            </RadarChart>
-          </ResponsiveContainer>
+        <div className="h-[280px] w-full mt-4 min-h-[280px] relative">
+          {!mounted ? (
+            <div className="h-full w-full flex items-center justify-center text-xs text-slate-500">
+              Carregando gráfico radar...
+            </div>
+          ) : (
+            <ResponsiveContainer width="100%" height={280}>
+              <RadarChart cx="50%" cy="50%" outerRadius="75%" data={RADAR_DATA}>
+                <PolarGrid stroke="#334155" />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: "#94a3b8", fontSize: 10 }} />
+                <PolarRadiusAxis angle={30} domain={[0, 150]} tick={{ fill: "#64748b", fontSize: 9 }} />
+                <Tooltip
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const d = payload[0].payload;
+                      return (
+                        <div className="bg-slate-900 border border-slate-700 p-2.5 rounded shadow text-xs">
+                          <p className="font-bold text-white mb-1">{d.subject}</p>
+                          <p className="text-cyan-400">Sudeste: {d.Sudeste}</p>
+                          <p className="text-emerald-400">Sul: {d.Sul}</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Radar name="Sudeste" dataKey="Sudeste" stroke="#0ea5e9" fill="#0ea5e9" fillOpacity={0.35} />
+                <Radar name="Sul" dataKey="Sul" stroke="#10b981" fill="#10b981" fillOpacity={0.25} />
+              </RadarChart>
+            </ResponsiveContainer>
+          )}
         </div>
 
         <div className="flex items-center justify-center gap-6 text-xs text-slate-400 pt-2 border-t border-slate-800">
