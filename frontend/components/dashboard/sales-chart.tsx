@@ -32,15 +32,15 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
   // Insight dinâmico gerado pelo agente para o mês
   let aiInsight = "";
   if (isSuperou && delta > 15) {
-    aiInsight = `⚡ Pico de performance (+${delta.toFixed(1)}% vs meta). Tração expressiva impulsionada pelo canal B2B Enterprise e produtos Classe A.`;
+    aiInsight = `Pico de performance (+${delta.toFixed(1)}% vs meta). Tração expressiva impulsionada pelo canal B2B Enterprise e produtos Classe A.`;
   } else if (isSuperou) {
-    aiInsight = `🎯 Meta superada com margem sólida de ${item.margin}%. O volume de ${item.orders} pedidos manteve o ticket médio alto.`;
+    aiInsight = `Meta superada com margem sólida de ${item.margin}%. O volume de ${item.orders} pedidos manteve o ticket médio alto.`;
   } else {
-    aiInsight = `⚠️ Leve gap de ${Math.abs(delta).toFixed(1)}% contra a meta orçada. Margem de ${item.margin}% permaneceu equilibrada.`;
+    aiInsight = `Leve gap de ${Math.abs(delta).toFixed(1)}% contra a meta orçada. Margem de ${item.margin}% permaneceu equilibrada.`;
   }
 
   return (
-    <div className="relative z-50 min-w-[290px] rounded-2xl p-4 bg-[#070d1a]/95 backdrop-blur-xl border border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.25)] text-slate-100 font-sans">
+    <div className="relative z-50 min-w-[300px] rounded-2xl p-4 bg-[#070e1b]/98 backdrop-blur-2xl border border-cyan-500/50 shadow-[0_12px_40px_rgba(6,182,212,0.35)] text-slate-100 font-sans">
       {/* Glow corner effects */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-20 h-20 bg-blue-600/10 rounded-full blur-xl pointer-events-none" />
@@ -123,101 +123,139 @@ export function SalesChart({ data }: SalesChartProps) {
   });
 
   return (
-    <div className="glass-panel rounded-xl p-6 border border-slate-800 relative overflow-hidden">
+    <div className="glass-panel rounded-xl p-6 border border-slate-800 relative">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#38bdf8]" />
-            <h2 className="text-lg font-semibold text-white tracking-tight">
-              Evolução Mensal: Faturamento x Meta x Margem
+            <h2 className="text-base font-bold text-white tracking-tight">
+              Evolução Temporal: Faturamento vs Metas & Margem
             </h2>
-            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-800/80 text-cyan-300">
-              <Sparkles className="w-2.5 h-2.5" /> AI Tooltips Ativos
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400">
+              DuckDB Analytics
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
-            Passe o cursor sobre os meses para visualizar a telemetria executiva e diagnósticos do Copilot.
+          <p className="text-xs text-slate-400 mt-0.5">
+            Série histórica de 12 meses com linha de tendência orçada e percentual de margem de contribuição.
           </p>
         </div>
 
-        {/* Filtros de Trimestre */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-900/80 rounded-lg border border-slate-800 text-xs">
-          {["Todos", "Q1", "Q2", "Q3", "Q4"].map((q) => (
-            <button
-              type="button"
-              key={q}
-              onClick={() => setSelectedQuarter(q)}
-              className={`px-3 py-1.5 rounded-md font-medium transition-colors cursor-pointer ${
-                selectedQuarter === q
-                  ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
-              }`}
-            >
-              {q}
-            </button>
-          ))}
+        {/* Filtros de Trimestre (Quarter) */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-slate-400 hidden md:inline">Trimestre:</span>
+          <div className="flex p-0.5 rounded-lg bg-slate-900 border border-slate-800 text-xs">
+            {["Todos", "Q1", "Q2", "Q3", "Q4"].map((q) => (
+              <button
+                type="button"
+                key={q}
+                onClick={() => setSelectedQuarter(q)}
+                className={`px-2.5 py-1 rounded-md transition-colors font-medium cursor-pointer ${
+                  selectedQuarter === q
+                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                {q}
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-950/40 border border-cyan-800/40 text-[11px] font-mono text-cyan-300">
+            <Sparkles className="w-2.5 h-2.5" /> AI Tooltips Ativos
+          </div>
         </div>
       </div>
 
-      <div className="h-[380px] w-full min-h-[380px] relative">
+      <div className="h-[380px] w-full">
         {!mounted ? (
-          <div className="h-full w-full flex items-center justify-center text-xs text-slate-500">
-            Carregando gráfico...
+          <div className="h-full flex items-center justify-center text-slate-500 text-xs">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping mr-2" />
+            Carregando telemetria gráfica...
           </div>
         ) : (
-          <ResponsiveContainer width="100%" height={380}>
-            <ComposedChart data={filteredData} margin={{ top: 15, right: 15, left: -10, bottom: 0 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart
+              data={filteredData}
+              margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
+            >
               <defs>
-                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.45} />
-                  <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0.0} />
+                <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.8} />
+                  <stop offset="100%" stopColor="#0284c7" stopOpacity={0.2} />
+                </linearGradient>
+                <linearGradient id="marginGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#10b981" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#10b981" stopOpacity={0.0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-              <XAxis dataKey="month" stroke="#64748b" tick={{ fill: "#94a3b8", fontSize: 12 }} />
+              <XAxis
+                dataKey="month"
+                stroke="#64748b"
+                fontSize={11}
+                tickLine={false}
+                axisLine={{ stroke: "#334155" }}
+              />
               <YAxis
                 yAxisId="left"
                 stroke="#64748b"
-                tick={{ fill: "#94a3b8", fontSize: 12 }}
-                tickFormatter={(v) => `R$ ${(v / 1000000).toFixed(1)}M`}
+                fontSize={11}
+                tickLine={false}
+                axisLine={{ stroke: "#334155" }}
+                tickFormatter={(val) => `R$ ${(val / 1000000).toFixed(1)}M`}
               />
               <YAxis
                 yAxisId="right"
                 orientation="right"
                 stroke="#64748b"
-                tick={{ fill: "#94a3b8", fontSize: 12 }}
-                tickFormatter={(v) => `${v}%`}
-                domain={[30, 55]}
+                fontSize={11}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(val) => `${val}%`}
+                domain={[30, 60]}
               />
-              <Tooltip content={<AiFuturisticSalesTooltip />} />
-              <Legend wrapperStyle={{ fontSize: 12, paddingTop: 16 }} iconType="circle" />
-              <Area
+
+              {/* Tooltip Futurista de IA */}
+              <Tooltip
+                content={<AiFuturisticSalesTooltip />}
+                cursor={{ stroke: "#06b6d4", strokeWidth: 1.5, strokeDasharray: "4 4" }}
+              />
+
+              <Legend
+                wrapperStyle={{ paddingTop: 16 }}
+                formatter={(val) => (
+                  <span className="text-xs text-slate-300 font-medium mr-4">
+                    {val === "revenue"
+                      ? "Faturamento Realizado (R$)"
+                      : val === "target"
+                      ? "Meta Orçada (R$)"
+                      : "Margem de Contribuição (%)"}
+                  </span>
+                )}
+              />
+
+              <Bar
                 yAxisId="left"
-                type="monotone"
                 dataKey="revenue"
-                name="Faturamento Real"
-                fill="url(#colorRevenue)"
-                stroke="#0ea5e9"
-                strokeWidth={2.5}
+                fill="url(#revenueGrad)"
+                radius={[6, 6, 0, 0]}
+                barSize={28}
               />
               <Line
                 yAxisId="left"
                 type="monotone"
                 dataKey="target"
-                name="Meta Orçada"
                 stroke="#f59e0b"
-                strokeWidth={2}
+                strokeWidth={2.5}
+                dot={{ fill: "#f59e0b", r: 4 }}
                 strokeDasharray="4 4"
-                dot={false}
               />
-              <Line
+              <Area
                 yAxisId="right"
                 type="monotone"
                 dataKey="margin"
-                name="Margem de Contribuição %"
                 stroke="#10b981"
-                strokeWidth={2.5}
-                dot={{ fill: "#10b981", r: 4 }}
+                strokeWidth={2}
+                fill="url(#marginGrad)"
               />
             </ComposedChart>
           </ResponsiveContainer>
