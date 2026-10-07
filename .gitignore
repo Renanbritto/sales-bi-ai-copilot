@@ -1,0 +1,35 @@
+﻿# Root .gitignore
+.env
+.env*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# DuckDB / SQLite / DBs
+*.duckdb.wal
+*.duckdb.tmp
+
+# Node / Frontend
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
