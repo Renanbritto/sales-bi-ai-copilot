@@ -3,7 +3,7 @@
 import React from "react";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { ParetoProduct } from "@/lib/api";
-import { Award, AlertTriangle, Sparkles, ExternalLink } from "lucide-react";
+import { Award, AlertTriangle, Layers, ExternalLink, Cpu } from "lucide-react";
 
 interface ParetoSectionProps {
   products: ParetoProduct[];
@@ -27,7 +27,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
             </div>
             <p className="text-2xl font-bold text-white mt-2">4 SKUs Estratégicos</p>
             <p className="text-xs text-slate-300 mt-1">
-              Enterprise Analytics, Cloud Server, AI Copilot Add-on e Governance Suite concentram 82% da receita total.
+              Enterprise Analytics, Cloud Server, RN Intelligence Enterprise Add-on e Governance Suite concentram 82% da receita total.
             </p>
           </div>
 
@@ -37,7 +37,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
               onClick={() => onOpenCopilot("Qual a concentração de receita nos produtos Classe A e quais clientes mais compram?")}
               className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-[11px] font-mono transition-colors border border-cyan-500/30 cursor-pointer"
             >
-              <span>Analisar Classe A no Copilot</span>
+              <span>Analisar Classe A na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           )}
@@ -48,7 +48,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 flex items-center gap-1.5 font-mono">
-                <Sparkles className="w-4 h-4" /> Classe B (Intermediários)
+                <Layers className="w-4 h-4" /> Classe B (Intermediários)
               </span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-bold border border-blue-500/30 font-mono">
                 13.0% Receita
@@ -66,7 +66,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
               onClick={() => onOpenCopilot("Como acelerar os produtos da Classe B para que se tornem Classe A?")}
               className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 text-[11px] font-mono transition-colors border border-blue-500/30 cursor-pointer"
             >
-              <span>Estratégia de Expansão no Copilot</span>
+              <span>Estratégia de Expansão na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           )}
@@ -95,7 +95,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
               onClick={() => onOpenCopilot("Quais produtos Classe C podem ser descontinuados para liberar capital de giro?")}
               className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-[11px] font-mono transition-colors border border-amber-500/30 cursor-pointer"
             >
-              <span>Avaliar Descontinuação no Copilot</span>
+              <span>Avaliar Descontinuação na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           )}
@@ -124,7 +124,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                 <th className="py-3 px-3 text-right">Acumulado %</th>
                 <th className="py-3 px-3 text-right">Margem %</th>
                 <th className="py-3 px-3 text-right">Volume</th>
-                <th className="py-3 px-3 text-center">Copilot</th>
+                <th className="py-3 px-3 text-center">RN Intelligence</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60">
@@ -165,9 +165,9 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                           type="button"
                           onClick={() => onOpenCopilot(`Analise a performance de vendas, volume e margem do produto ${p.name}.`)}
                           className="p-1 rounded-lg bg-slate-900 border border-cyan-500/30 text-cyan-400 hover:text-white hover:border-cyan-400 transition-colors"
-                          title="Analisar no Copilot"
+                          title="Analisar na RN Intelligence"
                         >
-                          <Sparkles className="w-3.5 h-3.5" />
+                          <Cpu className="w-3.5 h-3.5" />
                         </button>
                       )}
                     </td>

@@ -5,7 +5,7 @@ import { formatCurrency } from "@/lib/utils";
 import {
   Sliders,
   RefreshCw,
-  Sparkles,
+  Zap,
   TrendingUp,
   DollarSign,
   Target,
@@ -248,8 +248,8 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               onClick={() => onOpenCopilot(copilotSimPrompt)}
               className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 text-slate-950" />
-              <span>Consultar Viabilidade no Copilot</span>
+              <Zap className="w-4 h-4 text-slate-950" />
+              <span>Consultar Viabilidade na RN Intelligence</span>
             </button>
           )}
         </div>
@@ -259,8 +259,8 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
       <div className="p-4 rounded-xl bg-[#0a1122] border border-cyan-400/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            <span>PARECER DO AI COPILOT SOBRE O CENÁRIO SIMULADO</span>
+            <Zap className="w-3.5 h-3.5 text-cyan-300" />
+            <span>PARECER DA RN INTELLIGENCE SOBRE O CENÁRIO SIMULADO</span>
           </div>
           <p className="text-xs text-slate-200 max-w-4xl leading-relaxed">
             {aiSummary}

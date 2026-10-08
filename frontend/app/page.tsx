@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import {
   BarChart3,
   Filter,
-  Sparkles,
+  Bot,
   Users,
   PieChart as PieIcon,
   Globe,
@@ -181,7 +181,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base font-bold text-white tracking-tight">Sales BI & AI Copilot</h1>
+                <h1 className="text-base font-bold text-white tracking-tight">Sales BI & RN Intelligence</h1>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400">
                   Painel Tático Executivo
                 </span>
@@ -195,11 +195,11 @@ export default function DashboardPage() {
           {/* Botão de Abrir Copilot */}
           <button
             type="button"
-            onClick={() => handleOpenCopilot("Olá Copilot! Quais são os principais destaques executivos deste painel?")}
+            onClick={() => handleOpenCopilot("Olá RN Intelligence! Quais são os principais destaques executivos deste painel?")}
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-xs shadow-lg shadow-cyan-500/25 transition-all transform hover:scale-[1.02] cursor-pointer"
           >
-            <Sparkles className="w-4 h-4 text-slate-950" />
-            <span>Abrir AI Copilot</span>
+            <Bot className="w-4 h-4 text-slate-950" />
+            <span>Abrir RN Intelligence</span>
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
           </button>
         </div>
@@ -358,7 +358,7 @@ export default function DashboardPage() {
       {/* Footer */}
       <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
         <p>
-          Sales BI & AI Copilot • Desenvolvido por{" "}
+          Sales BI & RN Intelligence • Desenvolvido por{" "}
           <a
             href="https://renan-nocelli.vercel.app"
             target="_blank"
@@ -371,7 +371,7 @@ export default function DashboardPage() {
         </p>
       </footer>
 
-      {/* Drawer do AI Copilot */}
+      {/* Drawer da RN Intelligence */}
       <CopilotSidebar
         isOpen={isCopilotOpen}
         onClose={() => setIsCopilotOpen(false)}

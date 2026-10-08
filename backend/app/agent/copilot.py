@@ -4,7 +4,7 @@ from typing import Any
 from app.core.config import settings
 from app.db.session import execute_safe_query
 from app.db.schema_info import get_database_schema_context
-from app.agent.prompts import SYSTEM_BI_COPILOT_PROMPT, SQL_GENERATION_PROMPT
+from app.agent.prompts import SYSTEM_RN_INTELLIGENCE_PROMPT, SQL_GENERATION_PROMPT
 
 def to_float(val: Any) -> float:
     try:
@@ -173,7 +173,7 @@ async def run_copilot_pipeline(message: str, history: list[dict] | None = None) 
         
         # Etapa 3: Síntese executiva
         synthesis_prompt = (
-            f"{SYSTEM_BI_COPILOT_PROMPT}\n\n"
+            f"{SYSTEM_RN_INTELLIGENCE_PROMPT}\n\n"
             f"Pergunta original: {message}\n\n"
             f"SQL executado no DuckDB:\n{generated_sql}\n\n"
             f"Dados reais retornados:\n{query_results}\n\n"

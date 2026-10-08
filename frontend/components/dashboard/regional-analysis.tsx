@@ -10,8 +10,8 @@ import {
   Users,
   ArrowUpRight,
   DollarSign,
-  Sparkles,
   Cpu,
+  Bot,
   ChevronDown,
   X,
   ExternalLink,
@@ -113,8 +113,8 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                       : "bg-slate-900 text-cyan-400/80 border-cyan-500/30 hover:border-cyan-400"
                   }`}
                 >
-                  <Sparkles className="w-3 h-3 text-cyan-300" />
-                  <span>IA Insight</span>
+                  <Cpu className="w-3 h-3 text-cyan-300" />
+                  <span>RN Intelligence</span>
                   <ChevronDown
                     className={`w-3 h-3 transition-transform ${isSelected ? "rotate-180" : ""}`}
                   />
@@ -133,8 +133,8 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                 >
                   <div className="flex items-center justify-between pb-1.5 border-b border-cyan-500/20 text-[10px] font-mono">
                     <span className="text-cyan-400 flex items-center gap-1 font-semibold uppercase">
-                      <Sparkles className="w-3 h-3 text-cyan-300" />
-                      Diagnóstico Regional IA
+                      <Cpu className="w-3 h-3 text-cyan-300" />
+                      Diagnóstico Regional RN Intelligence
                     </span>
                     <button
                       type="button"
@@ -155,7 +155,7 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                       onClick={() => onOpenCopilot(insight.prompt)}
                       className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
                     >
-                      <span>Perguntar ao Copilot sobre {reg.region}</span>
+                      <span>Perguntar à RN Intelligence sobre {reg.region}</span>
                       <ExternalLink className="w-3 h-3 text-cyan-400" />
                     </button>
                   )}
