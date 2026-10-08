@@ -332,11 +332,11 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         {/* Grid de 3 Métricas */}
         <div className="grid grid-cols-3 gap-2 mb-3 text-center">
           <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono block">Faturamento</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block">Faturamento</span>
             <span className="font-bold text-blue-700 font-mono text-xs">{formatCurrency(p.revenue)}</span>
           </div>
           <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono block">Margem %</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block">Margem %</span>
             <span
               className={`font-bold font-mono text-xs ${
                 p.margin >= 40 ? "text-emerald-600" : "text-amber-600"
@@ -346,7 +346,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             </span>
           </div>
           <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono block">Volume</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block">Volume</span>
             <span className="font-bold text-slate-700 dark:text-slate-200 font-mono text-xs">{p.volume.toLocaleString("pt-BR")} un</span>
           </div>
         </div>
@@ -390,7 +390,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
                   Volume × Margem × Receita
                 </span>
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Mapeamento tático de 20 produtos por volume de vendas (X), rentabilidade (Y) e tamanho da receita (Raio).
               </p>
             </div>
@@ -399,7 +399,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
 
         {/* Filtros por Categoria de Produto */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 flex items-center gap-1">
+          <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
             <Filter className="w-3.5 h-3.5 text-blue-600" /> Categoria:
           </span>
           <div className="flex flex-wrap p-1 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 gap-1 text-xs">
@@ -412,7 +412,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
                   className={`px-2.5 py-1 rounded-lg transition-colors font-medium cursor-pointer ${
                     selectedCategory === cat
                       ? "bg-blue-500/15 text-blue-700 border border-slate-200 dark:border-slate-700/50 shadow-sm"
-                      : "text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200"
                   }`}
                 >
                   {cat}
@@ -431,7 +431,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <span className="font-mono text-[10px]">4 SKUs</span>
           </div>
           <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">R$ 26.5M • Margem 59.8%</p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-1">
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             <strong className="text-blue-600">Decisão:</strong> Blindar contas chave e incentivar vendas de pacotes plurianuais.
           </p>
         </div>
@@ -442,7 +442,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <span className="font-mono text-[10px]">6 SKUs</span>
           </div>
           <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">R$ 11.6M • Margem 56.8%</p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-1">
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             <strong className="text-emerald-600">Decisão:</strong> Aumentar comissão e incentivar cross-sell na base corporativa.
           </p>
         </div>
@@ -453,7 +453,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <span className="font-mono text-[10px]">4 SKUs</span>
           </div>
           <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">R$ 15.8M • Margem 17.8%</p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-1">
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             <strong className="text-amber-600">Decisão:</strong> Limitar descontos a 5% e atrelar a contratos obrigatórios de SaaS.
           </p>
         </div>
@@ -464,7 +464,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <span className="font-mono text-[10px]">6 SKUs</span>
           </div>
           <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">R$ 4.3M • Margem 24.5%</p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-1">
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             <strong className="text-rose-600">Decisão:</strong> Reajustar preços de manutenção ou programar descontinuação.
           </p>
         </div>
@@ -473,7 +473,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
       {/* Gráfico de Bolhas Recharts */}
       <div className="h-[430px] w-full relative">
         {!mounted ? (
-          <div className="h-full flex items-center justify-center text-slate-500 dark:text-slate-400 dark:text-slate-500 text-xs">
+          <div className="h-full flex items-center justify-center text-slate-500 dark:text-slate-400 text-xs">
             <span className="w-2 h-2 rounded-full bg-blue-500 mr-2" />
             Carregando matriz de decisão de portfólio...
           </div>
@@ -577,7 +577,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
           ))}
         </div>
 
-        <div className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-[11px] flex items-center gap-1">
+        <div className="text-slate-500 dark:text-slate-400 text-[11px] flex items-center gap-1">
           <Info className="w-3.5 h-3.5 text-blue-600" />
           <span>Tamanho da bolha = Faturamento Total (R$). Passe o mouse para inspecionar.</span>
         </div>

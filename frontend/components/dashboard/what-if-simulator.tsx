@@ -76,7 +76,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               Cenários Dinâmicos
             </span>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Sensibilidade de faturamento e margem bruta variando elasticidade de volume, repasse de preços e teto de descontos.
           </p>
         </div>
@@ -95,7 +95,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Controles de Sliders (2 colunas) */}
-        <div className="lg:col-span-2 space-y-6 bg-slate-50 dark:bg-slate-800/50/40 p-5 rounded-xl border border-slate-200 dark:border-slate-700/50">
+        <div className="lg:col-span-2 space-y-6 bg-slate-50 dark:bg-slate-800/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700/50">
           {/* Slider 1: Volume */}
           <div>
             <div className="flex justify-between items-center mb-2">
@@ -108,7 +108,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
                     ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
                     : volumeDelta < 0
                     ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
-                    : "bg-slate-100 text-slate-500 dark:text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700/50"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700/50"
                 }`}
               >
                 {volumeDelta > 0 ? `+${volumeDelta}%` : `${volumeDelta}%`}
@@ -121,9 +121,9 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               step="1"
               value={volumeDelta}
               onChange={(e) => setVolumeDelta(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono mt-1">
+            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-1">
               <span>-20% (Crise)</span>
               <span>0% (Baseline)</span>
               <span>+30% (Expansão Agressiva)</span>
@@ -142,7 +142,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
                     ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
                     : priceDelta < 0
                     ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
-                    : "bg-slate-100 text-slate-500 dark:text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700/50"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700/50"
                 }`}
               >
                 {priceDelta > 0 ? `+${priceDelta}%` : `${priceDelta}%`}
@@ -155,9 +155,9 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               step="1"
               value={priceDelta}
               onChange={(e) => setPriceDelta(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-400"
+              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono mt-1">
+            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-1">
               <span>-10% (Desconto Geral)</span>
               <span>0% (Tabela Atual)</span>
               <span>+20% (Repasse de Inflação)</span>
@@ -176,7 +176,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
                     ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
                     : discountDelta > 0
                     ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
-                    : "bg-slate-100 text-slate-500 dark:text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700/50"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700/50"
                 }`}
               >
                 {discountDelta > 0 ? `+${discountDelta}% (Mais Desconto)` : `${discountDelta}% (Contenção)`}
@@ -189,9 +189,9 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               step="1"
               value={discountDelta}
               onChange={(e) => setDiscountDelta(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-400"
+              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-400"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono mt-1">
+            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-1">
               <span>-5% (Rigor de Margem)</span>
               <span>0% (Políticas Vigentes)</span>
               <span>+10% (Alçada Livre)</span>

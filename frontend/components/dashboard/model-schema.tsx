@@ -8,7 +8,7 @@ export function ModelSchema() {
     {
       name: "f_vendas",
       type: "Tabela Fato",
-      color: "border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50/20",
+      color: "border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/60",
       badge: "13.7k+ Linhas",
       cols: [
         "venda_id (PK)",
@@ -73,7 +73,7 @@ export function ModelSchema() {
           <Database className="w-5 h-5 text-blue-600" />
           <h2 className="text-lg font-semibold text-slate-700 dark:text-slate-200">Arquitetura de Dados: Star Schema Dimensional (DuckDB)</h2>
         </div>
-        <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 max-w-3xl">
+        <p className="text-xs text-slate-500 dark:text-slate-400 max-w-3xl">
           Modelagem em Modelo Estrela (Kimball) otimizada para consultas analíticas colunares.
           O Agente de IA utiliza esta estrutura para gerar consultas SQL Text-to-SQL em milissegundos.
         </p>
@@ -84,7 +84,7 @@ export function ModelSchema() {
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/5">
                 <div>
                   <h3 className="font-mono font-bold text-slate-700 dark:text-slate-200 text-sm">{t.name}</h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500">{t.type}</p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">{t.type}</p>
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white dark:bg-slate-900/5 text-slate-600 dark:text-slate-300 border border-white/10">
                   {t.badge}

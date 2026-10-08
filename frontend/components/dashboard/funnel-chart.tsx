@@ -106,7 +106,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
             </h2>
             
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Taxas de conversão, dispersão e diagnósticos da IA por estágio do ciclo comercial.
           </p>
         </div>
@@ -115,7 +115,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
           <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20 font-mono font-bold">
             Conversão Global MQL → Venda: 6.27%
           </span>
-          <span className="hidden md:inline-block text-[11px] font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
+          <span className="hidden md:inline-block text-[11px] font-mono text-slate-500 dark:text-slate-400">
             Clique no estágio para ver RN Intelligence
           </span>
         </div>
@@ -132,7 +132,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
               className={`p-3 rounded-xl transition-all duration-200 cursor-pointer ${
                 isSelected
                   ? "bg-white dark:bg-slate-900 border-blue-500 shadow-md ring-2 ring-blue-500/10 shadow-blue-900/10"
-                  : "bg-transparent hover:bg-slate-50 dark:bg-slate-800/50/80"
+                  : "bg-transparent hover:bg-slate-50 dark:bg-slate-800/60"
               }`}
               onClick={() => setActiveStage(isSelected ? null : stg.id)}
             >
@@ -199,13 +199,13 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400 dark:text-slate-500">
+                      <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
                         <Clock className="w-3 h-3 text-blue-600" /> Ciclo Médio: {stg.avgCycleDays}
                       </span>
                       <button
                         type="button"
                         onClick={() => setActiveStage(null)}
-                        className="text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200 p-0.5 rounded hover:bg-slate-100 transition-colors"
+                        className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200 p-0.5 rounded hover:bg-slate-100 transition-colors"
                         title="Fechar insight"
                       >
                         <X className="w-3.5 h-3.5" />
@@ -221,7 +221,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                   </div>
 
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
-                    <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500 flex items-center gap-2">
+                    <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400 flex items-center gap-2">
                       <span className="text-emerald-400">● DuckDB Pipeline Stream</span>
                       <span>• Taxa de Perda: {stg.dropOff}</span>
                     </div>

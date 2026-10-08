@@ -76,11 +76,11 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                 Segmentação Estratégica
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Análise de receita, margem de contribuição e ticket por vertical com diagnósticos da IA.
             </p>
           </div>
-          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500 hidden sm:inline">
+          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 hidden sm:inline">
             Clique no card para ver RN Intelligence
           </span>
         </div>
@@ -113,19 +113,19 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
 
                 <div className="space-y-1.5 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Receita Total:</span>
+                    <span className="text-slate-500 dark:text-slate-400">Receita Total:</span>
                     <span className="font-bold text-slate-700 dark:text-slate-200 font-mono">{formatCurrency(s.revenue)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Margem Média:</span>
+                    <span className="text-slate-500 dark:text-slate-400">Margem Média:</span>
                     <span className="font-bold text-emerald-400 font-mono">{s.margin_pct.toFixed(1)}%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Ticket Médio:</span>
+                    <span className="text-slate-500 dark:text-slate-400">Ticket Médio:</span>
                     <span className="font-medium text-slate-600 dark:text-slate-300 font-mono">{formatCurrency(s.avg_ticket)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Contas Ativas:</span>
+                    <span className="text-slate-500 dark:text-slate-400">Contas Ativas:</span>
                     <span className="text-slate-600 dark:text-slate-300">{s.clients} clientes ({formatNumber(s.orders)} ped.)</span>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                     />
                   </button>
 
-                  <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
+                  <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
                     {isSelected ? "Aberto" : "Ver Ação"}
                   </span>
                 </div>
@@ -169,7 +169,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                       <button
                         type="button"
                         onClick={() => setActiveSegment(null)}
-                        className="text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200"
+                        className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200"
                       >
                         <X className="w-3.5 h-3.5" />
                       </button>
@@ -210,7 +210,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                 Key Accounts
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Clientes com maior participação na receita, margem de contribuição e diagnósticos de fidelização.
             </p>
           </div>
@@ -219,7 +219,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800/50 font-medium">
+              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 font-medium">
                 <th className="py-3 px-3">Ranking</th>
                 <th className="py-3 px-3">Cliente Corporativo</th>
                 <th className="py-3 px-3">Segmento</th>
@@ -250,7 +250,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                           className={`w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs ${
                             isTop3
                               ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                              : "bg-slate-100 text-slate-700 dark:text-slate-200"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
                           }`}
                         >
                           {rank}
@@ -260,8 +260,8 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                         {c.client_name}
                         {isTop3 && <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
                       </td>
-                      <td className="py-3 px-3 text-slate-500 dark:text-slate-400 dark:text-slate-500">{c.segment}</td>
-                      <td className="py-3 px-3 text-slate-500 dark:text-slate-400 dark:text-slate-500">{c.region}</td>
+                      <td className="py-3 px-3 text-slate-500 dark:text-slate-400">{c.segment}</td>
+                      <td className="py-3 px-3 text-slate-500 dark:text-slate-400">{c.region}</td>
                       <td className="py-3 px-3 text-right font-mono text-blue-700 font-bold">
                         {formatCurrency(c.total_spent)}
                       </td>

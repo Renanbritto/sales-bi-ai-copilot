@@ -48,7 +48,7 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
           <span className="font-mono font-bold">{d.Sul} pts</span>
         </div>
       </div>
-      <div className="mt-2 pt-1.5 border-t border-slate-200 dark:border-slate-700/50 text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 flex items-center gap-1">
+      <div className="mt-2 pt-1.5 border-t border-slate-200 dark:border-slate-700/50 text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
         <Cpu className="w-3 h-3 text-blue-600 shrink-0" />
         <span>Sul supera Sudeste em quota por +8 pts.</span>
       </div>
@@ -72,7 +72,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
             <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
               <Trophy className="w-5 h-5 text-amber-400" /> Leaderboard da Equipe Comercial
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Performance de vendas individuais com cálculo de atingimento de quota, margem e diagnósticos IA.
             </p>
           </div>
@@ -84,7 +84,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium bg-slate-50 dark:bg-slate-800/50">
+              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 font-medium bg-slate-50 dark:bg-slate-800/50">
                 <th className="py-3 pl-2">Pos</th>
                 <th className="py-3">Vendedor</th>
                 <th className="py-3">Região</th>
@@ -102,7 +102,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                 const isTop3 = rank <= 3;
                 const medalColors = [
                   "text-amber-400 bg-amber-500/10 border-amber-500/30",
-                  "text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/500/10 border-slate-400/30",
+                  "text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 border-slate-400/30",
                   "text-amber-600 bg-amber-700/10 border-amber-700/30",
                 ];
 
@@ -118,7 +118,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                           {rank}
                         </span>
                       ) : (
-                        <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500 ml-2 font-mono">{rank}</span>
+                        <span className="text-slate-500 dark:text-slate-400 ml-2 font-mono">{rank}</span>
                       )}
                     </td>
                     <td className="py-3 font-semibold text-slate-700 dark:text-slate-200">
@@ -127,11 +127,11 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                         <span className="ml-2 text-[10px] text-amber-400 font-mono">MVP</span>
                       )}
                     </td>
-                    <td className="py-3 text-slate-500 dark:text-slate-400 dark:text-slate-500">{rep.region}</td>
+                    <td className="py-3 text-slate-500 dark:text-slate-400">{rep.region}</td>
                     <td className="py-3 text-right font-mono text-blue-700 font-semibold">
                       {formatCurrency(rep.achieved)}
                     </td>
-                    <td className="py-3 text-right font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
+                    <td className="py-3 text-right font-mono text-slate-500 dark:text-slate-400">
                       {formatCurrency(rep.quota)}
                     </td>
                     <td className="py-3 text-right font-mono">
@@ -148,7 +148,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                       </span>
                     </td>
                     <td className="py-3 text-right font-mono text-slate-600 dark:text-slate-300">{rep.margin}%</td>
-                    <td className="py-3 text-right font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
+                    <td className="py-3 text-right font-mono text-slate-500 dark:text-slate-400">
                       {formatNumber(rep.deals)}
                     </td>
                     <td className="py-3 text-center pr-2">
@@ -186,14 +186,14 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
               RN Intelligence
             </span>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-4">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
             Comparativo multidimensional entre as duas maiores regionais: Sudeste vs Sul.
           </p>
         </div>
 
         <div className="h-[280px] w-full flex items-center justify-center">
           {!mounted ? (
-            <div className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-xs">Carregando radar...</div>
+            <div className="text-slate-500 dark:text-slate-400 text-xs">Carregando radar...</div>
           ) : (
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="75%" data={RADAR_DATA}>

@@ -55,7 +55,7 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
       {/* Título do Período */}
       <div className="flex items-center justify-between mb-3">
         <div>
-          <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 dark:text-slate-400 dark:text-slate-500">Competência</span>
+          <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 dark:text-slate-400">Competência</span>
           <h4 className="text-base font-bold text-slate-700 dark:text-slate-200 tracking-tight">{item.month} / 2025</h4>
         </div>
         <span
@@ -72,20 +72,20 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
 
       {/* Grid de Métricas HUD */}
       <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50/80 border border-slate-200 dark:border-slate-700/50">
-          <p className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono">Faturamento</p>
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Faturamento</p>
           <p className="font-bold text-blue-700 text-sm mt-0.5">{formatCurrency(item.revenue)}</p>
         </div>
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50/80 border border-slate-200 dark:border-slate-700/50">
-          <p className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono">Meta Orçada</p>
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Meta Orçada</p>
           <p className="font-bold text-slate-700 dark:text-slate-200 text-sm mt-0.5">{formatCurrency(item.target)}</p>
         </div>
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50/80 border border-slate-200 dark:border-slate-700/50">
-          <p className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono">Margem Realizada</p>
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Margem Realizada</p>
           <p className="font-bold text-teal-700 text-sm mt-0.5">{item.margin}%</p>
         </div>
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50/80 border border-slate-200 dark:border-slate-700/50">
-          <p className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono">Pedidos Faturados</p>
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Pedidos Faturados</p>
           <p className="font-bold text-slate-700 dark:text-slate-200 text-sm mt-0.5">{item.orders.toLocaleString("pt-BR")}</p>
         </div>
       </div>
@@ -127,15 +127,15 @@ export function SalesChart({ data }: SalesChartProps) {
             </h2>
             
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Série histórica de 12 meses com linha de tendência orçada e percentual de margem de contribuição.
           </p>
         </div>
 
         {/* Filtros de Trimestre (Quarter) */}
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 hidden md:inline">Trimestre:</span>
-          <div className="flex p-0.5 rounded-lg bg-slate-100 border border-slate-200 dark:border-slate-700/50 text-xs">
+          <span className="text-xs text-slate-500 dark:text-slate-400 hidden md:inline">Trimestre:</span>
+          <div className="flex p-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 text-xs">
             {["Todos", "Q1", "Q2", "Q3", "Q4"].map((q) => (
               <button
                 type="button"
@@ -144,7 +144,7 @@ export function SalesChart({ data }: SalesChartProps) {
                 className={`px-2.5 py-1 rounded-md transition-colors font-medium cursor-pointer ${
                   selectedQuarter === q
                     ? "bg-blue-500/20 text-blue-700 border border-blue-500/40 shadow-sm"
-                    : "text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200"
                 }`}
               >
                 {q}
@@ -152,7 +152,7 @@ export function SalesChart({ data }: SalesChartProps) {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 dark:border-slate-700/50 text-[11px] font-mono text-blue-700">
+          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 text-[11px] font-mono text-blue-700">
             <Activity className="w-2.5 h-2.5 text-blue-600" /> Telemetria Ativa
           </div>
         </div>
@@ -160,7 +160,7 @@ export function SalesChart({ data }: SalesChartProps) {
 
       <div className="h-[380px] w-full">
         {!mounted ? (
-          <div className="h-full flex items-center justify-center text-slate-500 dark:text-slate-400 dark:text-slate-500 text-xs">
+          <div className="h-full flex items-center justify-center text-slate-500 dark:text-slate-400 text-xs">
             <span className="w-2 h-2 rounded-full bg-blue-400 mr-2" />
             Carregando telemetria gráfica...
           </div>

@@ -70,7 +70,7 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
               className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-xl p-5 border transition-all duration-300 relative ${
                 isSelected
                   ? "border-blue-400/70 shadow-md shadow-blue-900/10 bg-slate-50 dark:bg-slate-800/50"
-                  : "border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50/50 hover:bg-slate-50 dark:bg-slate-800/50 hover:border-slate-200 dark:border-slate-700/50"
+                  : "border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-50 dark:bg-slate-800/50 hover:border-slate-200 dark:border-slate-700/50"
               }`}
             >
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-200 dark:border-slate-700/50">
@@ -85,19 +85,19 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
 
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Faturamento:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Faturamento:</span>
                   <span className="font-bold text-slate-700 dark:text-slate-200 font-mono">{formatCurrency(reg.revenue)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Margem Bruta:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Margem Bruta:</span>
                   <span className="font-bold text-emerald-400 font-mono">{reg.margin_pct}%</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Ticket Médio:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Ticket Médio:</span>
                   <span className="font-medium text-slate-700 dark:text-slate-200 font-mono">{formatCurrency(reg.avg_ticket)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Clientes Ativos:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Clientes Ativos:</span>
                   <span className="font-medium text-slate-600 dark:text-slate-300">{reg.clients_count} contas B2B</span>
                 </div>
               </div>
@@ -120,7 +120,7 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                   />
                 </button>
 
-                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
+                <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
                   {insight.strategy}
                 </span>
               </div>
@@ -139,7 +139,7 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                     <button
                       type="button"
                       onClick={() => setActiveRegion(null)}
-                      className="text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200"
+                      className="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:text-slate-200"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>

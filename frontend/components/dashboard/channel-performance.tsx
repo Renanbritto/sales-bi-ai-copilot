@@ -65,11 +65,11 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                 Canal Comercial
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Avaliação de faturamento bruto vs. descontos concedidos vs. faturamento líquido e margem.
             </p>
           </div>
-          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500 hidden sm:inline">
+          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 hidden sm:inline">
             Clique na linha para ver diagnóstico do canal
           </span>
         </div>
@@ -77,7 +77,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800/50 font-medium">
+              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 font-medium">
                 <th className="py-3 px-4">Canal Comercial</th>
                 <th className="py-3 px-4 text-right">Faturamento Bruto</th>
                 <th className="py-3 px-4 text-right">Descontos Concedidos</th>
