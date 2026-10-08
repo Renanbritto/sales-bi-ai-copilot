@@ -2,17 +2,30 @@
 
 import React, { useState } from "react";
 import { formatCurrency } from "@/lib/utils";
-import { Sliders, RefreshCw, Sparkles, TrendingUp, DollarSign, Target, ShieldCheck } from "lucide-react";
+import {
+  Sliders,
+  RefreshCw,
+  Sparkles,
+  TrendingUp,
+  DollarSign,
+  Target,
+  ShieldCheck,
+  Cpu,
+  ExternalLink,
+  AlertTriangle,
+} from "lucide-react";
 
 interface WhatIfSimulatorProps {
   baseRevenue: number;
   baseMarginPct: number;
+  onOpenCopilot?: (prompt?: string) => void;
 }
 
-export function WhatIfSimulator({ baseRevenue, baseMarginPct }: WhatIfSimulatorProps) {
+export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: WhatIfSimulatorProps) {
   const [volumeDelta, setVolumeDelta] = useState<number>(5);     // +5% volume
   const [priceDelta, setPriceDelta] = useState<number>(3);       // +3% preço
   const [discountDelta, setDiscountDelta] = useState<number>(-2); // -2% desconto
+  const [showAiDiagnosis, setShowAiDiagnosis] = useState<boolean>(true);
 
   // Cálculo projetado
   const volumeMultiplier = 1 + volumeDelta / 100;
@@ -35,42 +48,69 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct }: WhatIfSimulatorP
     setDiscountDelta(0);
   };
 
+  // Diagnóstico dinâmico da IA baseado nos parâmetros
+  const isLucrativo = marginDeltaAmount > 0 && revenueDeltaAmount > 0;
+  let aiSummary = "";
+  if (priceDelta > 0 && discountDelta <= 0) {
+    aiSummary = `Cenário Otimista: Aumento de preço de +${priceDelta}% combinado à contenção de descontos (${discountDelta}%) gera um ganho expressivo de +${formatCurrency(marginDeltaAmount)} em margem líquida, blindando a rentabilidade corporativa.`;
+  } else if (volumeDelta > 10 && priceDelta < 0) {
+    aiSummary = `Estratégia de Penetração de Mercado: Volume acelerado (+${volumeDelta}%) compensa a redução de preços, porém a margem sofre compressão de ${(marginDelta).toFixed(1)} p.p. Risco de canibalização nos canais parceiros.`;
+  } else if (discountDelta > 5) {
+    aiSummary = `Atenção Executiva: Concessão de descontos elevados (+${discountDelta}%) destrói valor de margem bruta. Recomendamos vincular descontos exclusivamente a contratos plurianuais com pagamento antecipado.`;
+  } else {
+    aiSummary = `Cenário Equilibrado: O delta projetado de receita é de +${formatCurrency(revenueDeltaAmount)} com margem ajustada de ${projectedMarginPct.toFixed(1)}%. Sensibilidade estável dentro da tolerância orçamentária.`;
+  }
+
+  const copilotSimPrompt = `Analise a viabilidade tática do cenário simulado com +${volumeDelta}% em volume, +${priceDelta}% em preço e ${discountDelta}% em descontos, gerando projeção de ${formatCurrency(projectedRevenue)}.`;
+
   return (
-    <div className="glass-panel rounded-xl p-6 border border-slate-800 space-y-6">
+    <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 gap-3">
         <div>
           <div className="flex items-center gap-2">
             <Sliders className="w-5 h-5 text-cyan-400" />
             <h2 className="text-lg font-bold text-white tracking-tight">
-              Simulador Comercial What-If (Projeção em Tempo Real)
+              Simulador Comercial What-If (Projeção Tática para Diretoria)
             </h2>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">
               Cenários Dinâmicos
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
-            Simule variações de volume, tabela de preços e teto de descontos para projetar o impacto na receita e margem.
+          <p className="text-xs text-slate-400 mt-0.5">
+            Sensibilidade de faturamento e margem bruta variando elasticidade de volume, repasse de preços e teto de descontos.
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={resetValues}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs border border-slate-700/80 transition-colors cursor-pointer w-fit"
-        >
-          <RefreshCw className="w-3.5 h-3.5" />
-          <span>Restaurar Cenário Base</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={resetValues}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs border border-slate-700 transition-colors cursor-pointer"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>Resetar Sliders</span>
+          </button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Controles de Sliders */}
-        <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Controles de Sliders (2 colunas) */}
+        <div className="lg:col-span-2 space-y-6 bg-slate-950/40 p-5 rounded-xl border border-slate-800/80">
           {/* Slider 1: Volume */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center text-xs">
-              <span className="font-semibold text-slate-200">1. Crescimento no Volume de Vendas</span>
-              <span className="font-mono font-bold text-cyan-400 text-sm">
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-xs font-semibold text-white flex items-center gap-1.5">
+                <Target className="w-3.5 h-3.5 text-cyan-400" /> Variação de Volume de Pedidos
+              </label>
+              <span
+                className={`font-mono font-bold text-xs px-2 py-0.5 rounded border ${
+                  volumeDelta > 0
+                    ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
+                    : volumeDelta < 0
+                    ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
+                    : "bg-slate-800 text-slate-400 border-slate-700"
+                }`}
+              >
                 {volumeDelta > 0 ? `+${volumeDelta}%` : `${volumeDelta}%`}
               </span>
             </div>
@@ -81,20 +121,30 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct }: WhatIfSimulatorP
               step="1"
               value={volumeDelta}
               onChange={(e) => setVolumeDelta(Number(e.target.value))}
-              className="w-full accent-cyan-500 cursor-pointer"
+              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 font-mono">
-              <span>-20% (Contração)</span>
-              <span>0% (Atual)</span>
+            <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+              <span>-20% (Crise)</span>
+              <span>0% (Baseline)</span>
               <span>+30% (Expansão Agressiva)</span>
             </div>
           </div>
 
-          {/* Slider 2: Preço Médio */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center text-xs">
-              <span className="font-semibold text-slate-200">2. Reajuste de Preço / Ticket Médio</span>
-              <span className="font-mono font-bold text-emerald-400 text-sm">
+          {/* Slider 2: Preço */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-xs font-semibold text-white flex items-center gap-1.5">
+                <DollarSign className="w-3.5 h-3.5 text-amber-400" /> Repasse de Tabela de Preço
+              </label>
+              <span
+                className={`font-mono font-bold text-xs px-2 py-0.5 rounded border ${
+                  priceDelta > 0
+                    ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
+                    : priceDelta < 0
+                    ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
+                    : "bg-slate-800 text-slate-400 border-slate-700"
+                }`}
+              >
                 {priceDelta > 0 ? `+${priceDelta}%` : `${priceDelta}%`}
               </span>
             </div>
@@ -105,92 +155,116 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct }: WhatIfSimulatorP
               step="1"
               value={priceDelta}
               onChange={(e) => setPriceDelta(Number(e.target.value))}
-              className="w-full accent-emerald-500 cursor-pointer"
+              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+            <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
               <span>-10% (Desconto Geral)</span>
               <span>0% (Tabela Atual)</span>
-              <span>+20% (Reprecificação Premium)</span>
+              <span>+20% (Repasse de Inflação)</span>
             </div>
           </div>
 
-          {/* Slider 3: Política de Descontos */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center text-xs">
-              <span className="font-semibold text-slate-200">3. Variação no Teto de Descontos Comerciais</span>
-              <span className="font-mono font-bold text-amber-400 text-sm">
-                {discountDelta > 0 ? `+${discountDelta}% (Mais desconto)` : `${discountDelta}% (Mais rigor)`}
+          {/* Slider 3: Desconto */}
+          <div>
+            <div className="flex justify-between items-center mb-2">
+              <label className="text-xs font-semibold text-white flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-purple-400" /> Política de Descontos Concedidos
+              </label>
+              <span
+                className={`font-mono font-bold text-xs px-2 py-0.5 rounded border ${
+                  discountDelta < 0
+                    ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
+                    : discountDelta > 0
+                    ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
+                    : "bg-slate-800 text-slate-400 border-slate-700"
+                }`}
+              >
+                {discountDelta > 0 ? `+${discountDelta}% (Mais Desconto)` : `${discountDelta}% (Contenção)`}
               </span>
             </div>
             <input
               type="range"
-              min="-10"
+              min="-5"
               max="10"
               step="1"
               value={discountDelta}
               onChange={(e) => setDiscountDelta(Number(e.target.value))}
-              className="w-full accent-amber-500 cursor-pointer"
+              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-400"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 font-mono">
-              <span>-10% (Governança Forte)</span>
-              <span>0% (Política Vigente)</span>
-              <span>+10% (Flexibilização)</span>
+            <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+              <span>-5% (Rigor de Margem)</span>
+              <span>0% (Políticas Vigentes)</span>
+              <span>+10% (Alçada Livre)</span>
             </div>
           </div>
         </div>
 
-        {/* Painel de Resultados Projetados */}
-        <div className="p-5 rounded-xl bg-slate-950/80 border border-cyan-500/30 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-800">
-              <span className="text-xs uppercase font-mono font-semibold tracking-wider text-cyan-400 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Impacto Financeiro Projetado
-              </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
-                PROJEÇÃO REAL
-              </span>
+        {/* Resultados Projetados (1 coluna) */}
+        <div className="space-y-4 flex flex-col justify-between">
+          <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-950/40 to-slate-900/80 border border-cyan-500/30 space-y-1">
+            <span className="text-[10px] uppercase font-mono text-cyan-300 tracking-wider">
+              Faturamento Líquido Projetado
+            </span>
+            <div className="text-2xl font-bold text-white font-mono">
+              {formatCurrency(projectedRevenue)}
             </div>
-
-            <div className="space-y-4">
-              <div>
-                <p className="text-xs text-slate-400">Faturamento Líquido Projetado:</p>
-                <div className="flex items-baseline gap-2 mt-0.5">
-                  <h3 className="text-2xl font-bold text-white font-mono">{formatCurrency(projectedRevenue)}</h3>
-                  <span
-                    className={`text-xs font-mono font-bold ${
-                      revenueDeltaAmount >= 0 ? "text-emerald-400" : "text-amber-400"
-                    }`}
-                  >
-                    ({revenueDeltaAmount >= 0 ? "+" : ""}{formatCurrency(revenueDeltaAmount)})
-                  </span>
-                </div>
-              </div>
-
-              <div>
-                <p className="text-xs text-slate-400">Margem de Contribuição Projetada:</p>
-                <div className="flex items-baseline gap-2 mt-0.5">
-                  <h3 className="text-2xl font-bold text-emerald-400 font-mono">
-                    {projectedMarginPct.toFixed(1)}%
-                  </h3>
-                  <span className="text-xs text-slate-400">
-                    ({formatCurrency(projectedMarginAmount)} em margem)
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 text-xs">
-                <p className="text-slate-300 leading-relaxed">
-                  💡 <strong>Diagnóstico da Simulação:</strong> Com esse ajuste de cenário, a empresa ganharia um adicional líquido de{" "}
-                  <strong className="text-cyan-300 font-mono">{formatCurrency(marginDeltaAmount)}</strong> em margem de contribuição anual.
-                </p>
-              </div>
+            <div
+              className={`text-xs font-mono font-semibold flex items-center gap-1 ${
+                revenueDeltaAmount >= 0 ? "text-emerald-400" : "text-rose-400"
+              }`}
+            >
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>
+                {revenueDeltaAmount >= 0 ? "+" : ""}
+                {formatCurrency(revenueDeltaAmount)} vs Baseline
+              </span>
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500 font-mono flex items-center justify-between">
-            <span>Base Atual: R$ 39.0M (43.0% margem)</span>
-            <span className="text-emerald-400">Simulação Válida</span>
+          <div className="p-4 rounded-xl bg-gradient-to-br from-emerald-950/40 to-slate-900/80 border border-emerald-500/30 space-y-1">
+            <span className="text-[10px] uppercase font-mono text-emerald-300 tracking-wider">
+              Margem de Contribuição Projetada
+            </span>
+            <div className="text-2xl font-bold text-white font-mono">
+              {projectedMarginPct.toFixed(1)}%
+            </div>
+            <div
+              className={`text-xs font-mono font-semibold flex items-center gap-1 ${
+                marginDeltaAmount >= 0 ? "text-emerald-400" : "text-rose-400"
+              }`}
+            >
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>
+                {marginDeltaAmount >= 0 ? "+" : ""}
+                {formatCurrency(marginDeltaAmount)} em lucro bruto
+              </span>
+            </div>
           </div>
+
+          {/* Botão de Chamar Copilot */}
+          {onOpenCopilot && (
+            <button
+              type="button"
+              onClick={() => onOpenCopilot(copilotSimPrompt)}
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4 text-slate-950" />
+              <span>Consultar Viabilidade no Copilot</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Diagnóstico Executivo Autônomo da IA */}
+      <div className="p-4 rounded-xl bg-[#0a1122] border border-cyan-400/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-semibold">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
+            <span>PARECER DO AI COPILOT SOBRE O CENÁRIO SIMULADO</span>
+          </div>
+          <p className="text-xs text-slate-200 max-w-4xl leading-relaxed">
+            {aiSummary}
+          </p>
         </div>
       </div>
     </div>
