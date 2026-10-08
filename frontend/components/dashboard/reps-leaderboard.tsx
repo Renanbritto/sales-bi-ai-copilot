@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { SalesRep } from "@/lib/api";
-import { Trophy, Sparkles, Cpu } from "lucide-react";
+import { Trophy, Sparkles, Cpu, ExternalLink } from "lucide-react";
 import {
   RadarChart,
   Radar,
@@ -16,6 +16,7 @@ import {
 
 interface RepsLeaderboardProps {
   reps: SalesRep[];
+  onOpenCopilot?: (prompt?: string) => void;
 }
 
 const RADAR_DATA = [
@@ -55,7 +56,7 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
   );
 }
 
-export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
+export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -65,14 +66,14 @@ export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Tabela Leaderboard (2 colunas) */}
-      <div className="lg:col-span-2 glass-panel rounded-xl p-6 border border-slate-800">
-        <div className="flex items-center justify-between mb-6">
+      <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
-            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <Trophy className="w-5 h-5 text-amber-400" /> Leaderboard da Equipe Comercial
             </h2>
             <p className="text-xs text-slate-400 mt-0.5">
-              Performance de vendas individuais com cálculo de atingimento de quota e margem.
+              Performance de vendas individuais com cálculo de atingimento de quota, margem e diagnósticos IA.
             </p>
           </div>
           <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full">
@@ -83,15 +84,16 @@ export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 font-medium">
-                <th className="pb-3 pl-2">Pos</th>
-                <th className="pb-3">Vendedor</th>
-                <th className="pb-3">Região</th>
-                <th className="pb-3 text-right">Faturamento</th>
-                <th className="pb-3 text-right">Meta</th>
-                <th className="pb-3 text-right">Atingimento</th>
-                <th className="pb-3 text-right">Margem %</th>
-                <th className="pb-3 text-right pr-2">Pedidos</th>
+              <tr className="border-b border-slate-800 text-slate-400 font-medium bg-slate-900/40">
+                <th className="py-3 pl-2">Pos</th>
+                <th className="py-3">Vendedor</th>
+                <th className="py-3">Região</th>
+                <th className="py-3 text-right">Faturamento</th>
+                <th className="py-3 text-right">Meta</th>
+                <th className="py-3 text-right">Atingimento</th>
+                <th className="py-3 text-right">Margem %</th>
+                <th className="py-3 text-right">Pedidos</th>
+                <th className="py-3 text-center pr-2">Copilot</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60">
@@ -146,8 +148,24 @@ export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
                       </span>
                     </td>
                     <td className="py-3 text-right font-mono text-slate-300">{rep.margin}%</td>
-                    <td className="py-3 text-right pr-2 font-mono text-slate-400">
+                    <td className="py-3 text-right font-mono text-slate-400">
                       {formatNumber(rep.deals)}
+                    </td>
+                    <td className="py-3 text-center pr-2">
+                      {onOpenCopilot && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            onOpenCopilot(
+                              `Analise a performance individual do vendedor ${rep.name} (${rep.region}), atingimento de ${rep.pct.toFixed(1)}% da quota e margem de ${rep.margin}%.`
+                            )
+                          }
+                          className="p-1 rounded-lg bg-slate-900 border border-cyan-500/30 text-cyan-400 hover:text-white hover:border-cyan-400 transition-colors"
+                          title="Analisar performance no Copilot"
+                        >
+                          <Sparkles className="w-3.5 h-3.5" />
+                        </button>
+                      )}
                     </td>
                   </tr>
                 );
@@ -158,7 +176,7 @@ export function RepsLeaderboard({ reps }: RepsLeaderboardProps) {
       </div>
 
       {/* Radar de Competências / Performance */}
-      <div className="glass-panel rounded-xl p-6 border border-slate-800 flex flex-col justify-between">
+      <div className="glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-1.5">
