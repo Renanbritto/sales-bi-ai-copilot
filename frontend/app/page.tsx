@@ -208,24 +208,24 @@ export default function DashboardPage() {
       
       {/* Sidebar Retrátil */}
       <aside 
-        className={`flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700/50 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-64' : 'w-20'} shrink-0`}
+        className={`flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700/50 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-72' : 'w-20'} shrink-0`}
       >
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
             <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 shadow-sm shadow-blue-900/10">
               <BarChart3 className="w-4 h-4 text-white font-bold" />
             </div>
-            <h1 className="text-sm font-bold text-slate-700 dark:text-slate-200 tracking-tight">RN Intelligence</h1>
+            <h1 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight">RN Intelligence</h1>
           </div>
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-blue-600 hover:bg-slate-100 transition-colors shrink-0"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
           >
             {isSidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1.5">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden py-4 px-3 space-y-1.5">
           {[
             { id: "executivo", label: "Visão Executiva", icon: BarChart3 },
             { id: "produtos", label: "Portfólio & Matriz de Decisão", icon: PieIcon },
@@ -242,18 +242,18 @@ export default function DashboardPage() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as TabType)}
                 title={!isSidebarOpen ? tab.label : undefined}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer group ${
                   isActive
-                    ? "bg-blue-50 text-blue-600 font-semibold shadow-sm border border-blue-100"
-                    : "text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200 hover:bg-slate-100/70 border border-transparent"
+                    ? "bg-blue-50 dark:bg-blue-600/15 text-blue-600 dark:text-blue-400 font-semibold shadow-xs border border-blue-200/80 dark:border-blue-500/30"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-transparent"
                 }`}
               >
-                <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-blue-600' : 'text-slate-400 dark:text-slate-500'}`} />
+                <Icon className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300'}`} />
                 <span className={`whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
                   {tab.label}
                 </span>
                 {isActive && isSidebarOpen && (
-                  <div className="ml-auto w-1 h-4 bg-blue-600 rounded-full" />
+                  <div className="ml-auto w-1 h-4 bg-blue-600 dark:bg-blue-400 rounded-full shrink-0" />
                 )}
               </button>
             );
@@ -263,11 +263,11 @@ export default function DashboardPage() {
         {/* User / Settings / Status na base da sidebar */}
         <div className="p-4 border-t border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 transition-all duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>
-             <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center shrink-0">
-               <Users className="w-4 h-4 text-slate-500 dark:text-slate-400 dark:text-slate-500" />
+             <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
+               <Users className="w-4 h-4 text-blue-600 dark:text-blue-400" />
              </div>
              <div className="flex flex-col text-left">
-               <span className="text-xs font-bold text-slate-700 dark:text-slate-200">Diretoria</span>
+               <span className="text-xs font-bold text-slate-800 dark:text-slate-100">Diretoria</span>
                <span className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500">Visão Consolidada</span>
              </div>
           </div>
