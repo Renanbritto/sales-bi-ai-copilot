@@ -10,7 +10,7 @@ const comfortaa = Comfortaa({
 });
 
 export const metadata = {
-  title: "Sales BI & RN Intelligence | Painel Comercial Executivo",
+  title: "Análise Comercial | RN Intelligence",
   description: "Plataforma analítica executiva de BI Comercial integrada com DuckDB OLAP e RN Intelligence (Google Gemini).",
 };
 
