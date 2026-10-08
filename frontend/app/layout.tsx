@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={`dark ${comfortaa.variable}`}>
-      <body className={`${comfortaa.className} min-h-screen bg-[#0a0f1d] text-slate-100 antialiased selection:bg-blue-500/15 selection:text-blue-200 font-sans`}>
+      <body className={`${comfortaa.className} min-h-screen bg-[#f8fafc] text-slate-900 antialiased selection:bg-blue-600/20 selection:text-blue-900 font-sans`}>
         {children}
       </body>
     </html>
