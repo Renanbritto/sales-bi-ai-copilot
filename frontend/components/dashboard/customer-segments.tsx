@@ -241,7 +241,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                   <React.Fragment key={c.client_name}>
                     <tr
                       className={`hover:bg-slate-100/30 transition-colors cursor-pointer ${
-                        isSelected ? "bg-blue-50/50" : ""
+                        isSelected ? "bg-blue-50/50 dark:bg-blue-950/40" : ""
                       }`}
                       onClick={() => setActiveClient(isSelected ? null : rank)}
                     >

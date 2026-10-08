@@ -172,7 +172,7 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                 }}
                 className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                   isVisible
-                    ? "bg-blue-50 text-blue-700 border-blue-200 shadow-xs"
+                    ? "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800 shadow-xs"
                     : "bg-slate-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 border-slate-100 dark:border-slate-800/50 hover:border-slate-200 dark:border-slate-700/50 hover:text-blue-600 hover:bg-slate-50 dark:bg-slate-800/50"
                 }`}
                 title="Clique para abrir ou fixar diagnóstico da RN Intelligence"

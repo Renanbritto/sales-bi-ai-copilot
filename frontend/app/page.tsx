@@ -420,7 +420,7 @@ export default function DashboardPage() {
 
             {activeTab === "simulador" && (
               <div className="space-y-6">
-                <WhatIfSimulator currentRevenue={filteredKpis.faturamento_total} currentMarginPct={filteredKpis.margem_contribuicao_pct} />
+                <WhatIfSimulator baseRevenue={filteredKpis.faturamento_total} baseMarginPct={filteredKpis.margem_contribuicao_pct} currentRevenue={filteredKpis.faturamento_total} currentMarginPct={filteredKpis.margem_contribuicao_pct} onOpenCopilot={handleOpenCopilot} />
               </div>
             )}
 

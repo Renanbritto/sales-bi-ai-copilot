@@ -588,7 +588,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-slate-200 dark:border-slate-700/50">
+              <span className="text-xs font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 dark:border-slate-700/50">
                 {selectedProduct.category}
               </span>
               <h3 className="text-base font-bold text-slate-700 dark:text-slate-200">{selectedProduct.name}</h3>

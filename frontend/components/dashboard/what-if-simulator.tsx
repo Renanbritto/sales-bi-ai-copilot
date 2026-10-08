@@ -10,35 +10,53 @@ import {
   DollarSign,
   Target,
   ShieldCheck,
-  Cpu,
-  ExternalLink,
-  AlertTriangle,
 } from "lucide-react";
 
 interface WhatIfSimulatorProps {
-  baseRevenue: number;
-  baseMarginPct: number;
+  baseRevenue?: number;
+  baseMarginPct?: number;
+  currentRevenue?: number;
+  currentMarginPct?: number;
   onOpenCopilot?: (prompt?: string) => void;
 }
 
-export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: WhatIfSimulatorProps) {
+export function WhatIfSimulator({
+  baseRevenue,
+  baseMarginPct,
+  currentRevenue,
+  currentMarginPct,
+  onOpenCopilot,
+}: WhatIfSimulatorProps) {
   const [volumeDelta, setVolumeDelta] = useState<number>(5);     // +5% volume
   const [priceDelta, setPriceDelta] = useState<number>(3);       // +3% preço
   const [discountDelta, setDiscountDelta] = useState<number>(-2); // -2% desconto
-  const [showAiDiagnosis, setShowAiDiagnosis] = useState<boolean>(true);
+
+  // Resolve base values safely to guarantee no NaN
+  const effectiveBaseRevenue =
+    typeof baseRevenue === "number" && !isNaN(baseRevenue)
+      ? baseRevenue
+      : typeof currentRevenue === "number" && !isNaN(currentRevenue)
+      ? currentRevenue
+      : 39035678;
+
+  const effectiveBaseMarginPct =
+    typeof baseMarginPct === "number" && !isNaN(baseMarginPct)
+      ? baseMarginPct
+      : typeof currentMarginPct === "number" && !isNaN(currentMarginPct)
+      ? currentMarginPct
+      : 43.0;
 
   // Cálculo projetado
   const volumeMultiplier = 1 + volumeDelta / 100;
   const priceMultiplier = 1 + priceDelta / 100;
-  const discountEfficiency = 1 - discountDelta / 100;
 
-  const projectedRevenue = Math.round(baseRevenue * volumeMultiplier * priceMultiplier);
-  const revenueDeltaAmount = projectedRevenue - baseRevenue;
+  const projectedRevenue = Math.round(effectiveBaseRevenue * volumeMultiplier * priceMultiplier);
+  const revenueDeltaAmount = projectedRevenue - effectiveBaseRevenue;
 
   // Ajuste de margem
   const marginDelta = (priceDelta * 0.75) + (-discountDelta * 0.4) + (volumeDelta * 0.1);
-  const projectedMarginPct = Math.min(65, Math.max(20, baseMarginPct + marginDelta));
-  const baseMarginAmount = (baseRevenue * baseMarginPct) / 100;
+  const projectedMarginPct = Math.min(65, Math.max(20, effectiveBaseMarginPct + marginDelta));
+  const baseMarginAmount = (effectiveBaseRevenue * effectiveBaseMarginPct) / 100;
   const projectedMarginAmount = (projectedRevenue * projectedMarginPct) / 100;
   const marginDeltaAmount = projectedMarginAmount - baseMarginAmount;
 
@@ -49,7 +67,6 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
   };
 
   // Diagnóstico dinâmico da IA baseado nos parâmetros
-  const isLucrativo = marginDeltaAmount > 0 && revenueDeltaAmount > 0;
   let aiSummary = "";
   if (priceDelta > 0 && discountDelta <= 0) {
     aiSummary = `Cenário Otimista: Aumento de preço de +${priceDelta}% combinado à contenção de descontos (${discountDelta}%) gera um ganho expressivo de +${formatCurrency(marginDeltaAmount)} em margem líquida, blindando a rentabilidade corporativa.`;
@@ -64,15 +81,15 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
   const copilotSimPrompt = `Analise a viabilidade tática do cenário simulado com +${volumeDelta}% em volume, +${priceDelta}% em preço e ${discountDelta}% em descontos, gerando projeção de ${formatCurrency(projectedRevenue)}.`;
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-700/50 gap-3">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs rounded-2xl p-6 space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <Sliders className="w-5 h-5 text-blue-600" />
-            <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 tracking-tight">
+            <Sliders className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight">
               Simulador Comercial What-If (Projeção Tática para Diretoria)
             </h2>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 dark:bg-slate-800/50 text-blue-700 border border-slate-200 dark:border-slate-700/50">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/80 font-medium">
               Cenários Dinâmicos
             </span>
           </div>
@@ -85,7 +102,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
           <button
             type="button"
             onClick={resetValues}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 text-slate-600 dark:text-slate-300 text-xs border border-slate-200 dark:border-slate-700/50 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Resetar Sliders</span>
@@ -95,20 +112,20 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Controles de Sliders (2 colunas) */}
-        <div className="lg:col-span-2 space-y-6 bg-slate-50 dark:bg-slate-800/60 p-5 rounded-xl border border-slate-200 dark:border-slate-700/50">
+        <div className="lg:col-span-2 space-y-6 bg-slate-50/70 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700/60">
           {/* Slider 1: Volume */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
-                <Target className="w-3.5 h-3.5 text-blue-600" /> Variação de Volume de Pedidos
+              <label className="text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                <Target className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> Variação de Volume de Pedidos
               </label>
               <span
                 className={`font-mono font-bold text-xs px-2 py-0.5 rounded border ${
                   volumeDelta > 0
-                    ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/80"
                     : volumeDelta < 0
-                    ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700/50"
+                    ? "bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800/80"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700"
                 }`}
               >
                 {volumeDelta > 0 ? `+${volumeDelta}%` : `${volumeDelta}%`}
@@ -121,9 +138,9 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               step="1"
               value={volumeDelta}
               onChange={(e) => setVolumeDelta(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-1">
+            <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-1.5">
               <span>-20% (Crise)</span>
               <span>0% (Baseline)</span>
               <span>+30% (Expansão Agressiva)</span>
@@ -133,16 +150,16 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
           {/* Slider 2: Preço */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
-                <DollarSign className="w-3.5 h-3.5 text-amber-400" /> Repasse de Tabela de Preço
+              <label className="text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                <DollarSign className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" /> Repasse de Tabela de Preço
               </label>
               <span
                 className={`font-mono font-bold text-xs px-2 py-0.5 rounded border ${
                   priceDelta > 0
-                    ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/80"
                     : priceDelta < 0
-                    ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700/50"
+                    ? "bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800/80"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700"
                 }`}
               >
                 {priceDelta > 0 ? `+${priceDelta}%` : `${priceDelta}%`}
@@ -155,9 +172,9 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               step="1"
               value={priceDelta}
               onChange={(e) => setPriceDelta(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400"
+              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-1">
+            <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-1.5">
               <span>-10% (Desconto Geral)</span>
               <span>0% (Tabela Atual)</span>
               <span>+20% (Repasse de Inflação)</span>
@@ -167,16 +184,16 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
           {/* Slider 3: Desconto */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-purple-400" /> Política de Descontos Concedidos
+              <label className="text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400" /> Política de Descontos Concedidos
               </label>
               <span
                 className={`font-mono font-bold text-xs px-2 py-0.5 rounded border ${
                   discountDelta < 0
-                    ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/30"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/80"
                     : discountDelta > 0
-                    ? "bg-rose-500/10 text-rose-300 border-rose-500/30"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700/50"
+                    ? "bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800/80"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700"
                 }`}
               >
                 {discountDelta > 0 ? `+${discountDelta}% (Mais Desconto)` : `${discountDelta}% (Contenção)`}
@@ -189,9 +206,9 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               step="1"
               value={discountDelta}
               onChange={(e) => setDiscountDelta(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-400"
+              className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
             />
-            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-1">
+            <div className="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-1.5">
               <span>-5% (Rigor de Margem)</span>
               <span>0% (Políticas Vigentes)</span>
               <span>+10% (Alçada Livre)</span>
@@ -201,16 +218,16 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
 
         {/* Resultados Projetados (1 coluna) */}
         <div className="space-y-4 flex flex-col justify-between">
-          <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-1">
-            <span className="text-[10px] uppercase font-mono text-blue-700 tracking-wider">
+          <div className="p-5 rounded-xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 space-y-1.5 shadow-xs">
+            <span className="text-[10px] uppercase font-mono text-blue-700 dark:text-blue-400 tracking-wider font-semibold">
               Faturamento Líquido Projetado
             </span>
-            <div className="text-2xl font-bold text-slate-700 dark:text-slate-200 font-mono">
+            <div className="text-2xl font-bold text-slate-800 dark:text-slate-100 font-mono">
               {formatCurrency(projectedRevenue)}
             </div>
             <div
               className={`text-xs font-mono font-semibold flex items-center gap-1 ${
-                revenueDeltaAmount >= 0 ? "text-emerald-600" : "text-rose-600"
+                revenueDeltaAmount >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
               }`}
             >
               <TrendingUp className="w-3.5 h-3.5" />
@@ -221,16 +238,16 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
-            <span className="text-[10px] uppercase font-mono text-emerald-700 tracking-wider">
+          <div className="p-5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 space-y-1.5 shadow-xs">
+            <span className="text-[10px] uppercase font-mono text-emerald-700 dark:text-emerald-400 tracking-wider font-semibold">
               Margem de Contribuição Projetada
             </span>
-            <div className="text-2xl font-bold text-slate-700 dark:text-slate-200 font-mono">
+            <div className="text-2xl font-bold text-slate-800 dark:text-slate-100 font-mono">
               {projectedMarginPct.toFixed(1)}%
             </div>
             <div
               className={`text-xs font-mono font-semibold flex items-center gap-1 ${
-                marginDeltaAmount >= 0 ? "text-emerald-600" : "text-rose-600"
+                marginDeltaAmount >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
               }`}
             >
               <TrendingUp className="w-3.5 h-3.5" />
@@ -246,9 +263,9 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
             <button
               type="button"
               onClick={() => onOpenCopilot(copilotSimPrompt)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-600 text-slate-700 dark:text-slate-200 font-bold text-xs shadow-lg shadow-blue-900/10 transition-all cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md shadow-blue-900/20 transition-all cursor-pointer"
             >
-              <Zap className="w-4 h-4 text-slate-700 dark:text-slate-200" />
+              <Zap className="w-4 h-4 text-white" />
               <span>Consultar Viabilidade na RN Intelligence</span>
             </button>
           )}
@@ -256,13 +273,13 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
       </div>
 
       {/* Diagnóstico Executivo Autônomo da IA */}
-      <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+      <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs font-mono text-blue-600 font-semibold">
-            <Zap className="w-3.5 h-3.5 text-blue-700" />
+          <div className="flex items-center gap-2 text-xs font-mono text-blue-600 dark:text-blue-400 font-semibold">
+            <Zap className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>PARECER DA RN INTELLIGENCE SOBRE O CENÁRIO SIMULADO</span>
           </div>
-          <p className="text-xs text-slate-700 dark:text-slate-200 max-w-4xl leading-relaxed">
+          <p className="text-xs text-slate-700 dark:text-slate-300 max-w-4xl leading-relaxed">
             {aiSummary}
           </p>
         </div>
@@ -270,4 +287,3 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
     </div>
   );
 }
- 
