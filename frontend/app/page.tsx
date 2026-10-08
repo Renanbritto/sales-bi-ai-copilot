@@ -352,7 +352,7 @@ export default function DashboardPage() {
             {activeTab === "executivo" && (
               <div className="space-y-6">
                 <AiExecutiveBriefing onOpenCopilot={handleOpenCopilot} />
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-6">
                   <SalesChart data={monthly} />
                   <FunnelChart onOpenCopilot={handleOpenCopilot} />
                 </div>
