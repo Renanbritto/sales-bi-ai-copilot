@@ -67,53 +67,53 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
           return (
             <div
               key={reg.region}
-              className={`glass-panel rounded-xl p-5 border transition-all duration-300 relative ${
+              className={`bg-white border border-slate-200 shadow-xs rounded-xl p-5 border transition-all duration-300 relative ${
                 isSelected
-                  ? "border-blue-400/70 shadow-md shadow-blue-950/40 bg-slate-900"
-                  : "border-slate-800 bg-gradient-to-br from-slate-900/60 to-slate-950 hover:border-slate-700"
+                  ? "border-blue-400/70 shadow-md shadow-blue-950/40 bg-slate-50"
+                  : "border-slate-200 bg-gradient-to-br from-slate-900/60 to-slate-950 hover:border-slate-200"
               }`}
             >
-              <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-800">
-                <span className="font-bold text-white text-base flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-blue-400" />
+              <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-200">
+                <span className="font-bold text-slate-900 text-base flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-blue-600" />
                   Região {reg.region}
                 </span>
-                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 border border-slate-700">
+                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-700 border border-slate-200">
                   {reg.share_pct}% do Total
                 </span>
               </div>
 
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-400">Faturamento:</span>
-                  <span className="font-bold text-white font-mono">{formatCurrency(reg.revenue)}</span>
+                  <span className="text-slate-500">Faturamento:</span>
+                  <span className="font-bold text-slate-900 font-mono">{formatCurrency(reg.revenue)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-400">Margem Bruta:</span>
+                  <span className="text-slate-500">Margem Bruta:</span>
                   <span className="font-bold text-emerald-400 font-mono">{reg.margin_pct}%</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-400">Ticket Médio:</span>
-                  <span className="font-medium text-slate-200 font-mono">{formatCurrency(reg.avg_ticket)}</span>
+                  <span className="text-slate-500">Ticket Médio:</span>
+                  <span className="font-medium text-slate-700 font-mono">{formatCurrency(reg.avg_ticket)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-400">Clientes Ativos:</span>
-                  <span className="font-medium text-slate-300">{reg.clients_count} contas B2B</span>
+                  <span className="text-slate-500">Clientes Ativos:</span>
+                  <span className="font-medium text-slate-600">{reg.clients_count} contas B2B</span>
                 </div>
               </div>
 
               {/* Botão de Gatilho IA */}
-              <div className="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between">
+              <div className="mt-3 pt-2 border-t border-slate-200 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setActiveRegion(isSelected ? null : reg.region)}
                   className={`flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded-lg border transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-blue-500/15 text-blue-300 border-blue-400"
-                      : "bg-slate-900 text-blue-400/80 border-slate-700 hover:border-blue-400"
+                      ? "bg-blue-500/15 text-blue-700 border-blue-400"
+                      : "bg-slate-50 text-blue-600/80 border-slate-200 hover:border-blue-400"
                   }`}
                 >
-                  <Cpu className="w-3 h-3 text-blue-300" />
+                  <Cpu className="w-3 h-3 text-blue-700" />
                   <span>RN Intelligence</span>
                   <ChevronDown
                     className={`w-3 h-3 transition-transform ${isSelected ? "rotate-180" : ""}`}
@@ -128,24 +128,24 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
               {/* Popover de Diagnóstico Regional */}
               {isSelected && (
                 <div
-                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-[#0a1122] border border-blue-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-200 animate-in fade-in space-y-3"
+                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-[#0a1122] border border-blue-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-700 animate-in fade-in space-y-3"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex items-center justify-between pb-1.5 border-b border-slate-800 text-[10px] font-mono">
-                    <span className="text-blue-400 flex items-center gap-1 font-semibold uppercase">
-                      <Cpu className="w-3 h-3 text-blue-300" />
+                  <div className="flex items-center justify-between pb-1.5 border-b border-slate-200 text-[10px] font-mono">
+                    <span className="text-blue-600 flex items-center gap-1 font-semibold uppercase">
+                      <Cpu className="w-3 h-3 text-blue-700" />
                       Diagnóstico Regional RN Intelligence
                     </span>
                     <button
                       type="button"
                       onClick={() => setActiveRegion(null)}
-                      className="text-slate-400 hover:text-white"
+                      className="text-slate-500 hover:text-slate-900"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <p className="text-[11.5px] leading-relaxed text-slate-300">
+                  <p className="text-[11.5px] leading-relaxed text-slate-600">
                     {insight.diagnosis}
                   </p>
 
@@ -153,10 +153,10 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                     <button
                       type="button"
                       onClick={() => onOpenCopilot(insight.prompt)}
-                      className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-700 text-blue-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
+                      className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-700 hover:text-slate-900 text-[11px] font-medium transition-all cursor-pointer"
                     >
                       <span>Perguntar à RN Intelligence sobre {reg.region}</span>
-                      <ExternalLink className="w-3 h-3 text-blue-400" />
+                      <ExternalLink className="w-3 h-3 text-blue-600" />
                     </button>
                   )}
                 </div>

@@ -171,16 +171,16 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1d] text-slate-100 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-200">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col font-sans selection:bg-blue-600/20 selection:text-blue-900">
       {/* Top Header Navegação */}
-      <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-[#0d1527]/85 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-[#0d1527]/85 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/40">
+            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-900/20">
               <BarChart3 className="w-5 h-5 text-white font-bold" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white tracking-tight">Análise Comercial</h1>
+              <h1 className="text-lg font-bold text-slate-900 tracking-tight">Análise Comercial</h1>
             </div>
           </div>
 
@@ -188,7 +188,7 @@ export default function DashboardPage() {
           <button
             type="button"
             onClick={() => handleOpenCopilot("Olá RN Intelligence! Quais são os principais destaques executivos deste painel?")}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs shadow-md shadow-blue-950/40 border border-blue-400/20 transition-all cursor-pointer"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-sm border border-blue-700/20 transition-all cursor-pointer"
           >
             <Bot className="w-4 h-4 text-white" />
             <span>Abrir RN Intelligence</span>
@@ -200,7 +200,7 @@ export default function DashboardPage() {
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Barra de Filtros Globais */}
-        <div className="glass-panel rounded-xl p-3 px-4 border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="glass-panel rounded-xl p-3 px-4 border border-slate-200 bg-white shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2 text-slate-400 font-medium">
             <Filter className="w-4 h-4 text-slate-400" />
             <span>Filtros Globais:</span>
@@ -213,7 +213,7 @@ export default function DashboardPage() {
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-slate-200 outline-none cursor-pointer focus:border-blue-500"
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs"
               >
                 <option value="Todas">Todas as Regiões</option>
                 <option value="Sudeste">Sudeste</option>
@@ -229,7 +229,7 @@ export default function DashboardPage() {
               <select
                 value={selectedChannel}
                 onChange={(e) => setSelectedChannel(e.target.value)}
-                className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-slate-200 outline-none cursor-pointer focus:border-blue-500"
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs"
               >
                 <option value="Todos">Todos os Canais</option>
                 <option value="B2B Enterprise">B2B Enterprise</option>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   setSelectedRegion("Todas");
                   setSelectedChannel("Todos");
                 }}
-                className="text-[11px] text-blue-400 hover:underline cursor-pointer"
+                className="text-[11px] text-blue-600 hover:underline cursor-pointer font-medium"
               >
                 Limpar Filtros
               </button>
@@ -258,7 +258,7 @@ export default function DashboardPage() {
         <KpiSummary data={filteredKpis} onOpenCopilot={handleOpenCopilot} />
 
         {/* Menu de Abas (6 Níveis de Análise Tática para Negócios & Diretoria) */}
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 overflow-x-auto">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-2 overflow-x-auto">
           <div className="flex gap-1.5">
             {[
               { id: "executivo", label: "Visão Executiva", icon: BarChart3 },
@@ -277,8 +277,8 @@ export default function DashboardPage() {
                   onClick={() => setActiveTab(tab.id as TabType)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
                     isActive
-                      ? "bg-slate-800 text-blue-400 border border-slate-700 shadow-sm"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/60"
+                      ? "bg-white text-blue-600 border border-slate-200 shadow-xs font-semibold"
+                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/70"
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />

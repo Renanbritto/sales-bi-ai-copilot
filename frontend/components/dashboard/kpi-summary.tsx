@@ -141,29 +141,29 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
             {/* Cabeçalho do Card */}
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                <p className="text-xs font-medium uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                   {c.title}
                 </p>
-                <h3 className="text-2xl font-bold tracking-tight text-white mt-1">{c.value}</h3>
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900 mt-1">{c.value}</h3>
               </div>
-              <div className={`p-2.5 rounded-lg bg-slate-900/60 border border-white/5 ${c.accent}`}>
+              <div className={`p-2.5 rounded-lg bg-slate-50 border border-slate-200/80 ${c.accent}`}>
                 <Icon className="w-5 h-5" />
               </div>
             </div>
 
             {/* Subtexto e Badge */}
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400">
-              <span className="flex items-center gap-1 text-slate-300">
+            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span className="flex items-center gap-1 text-slate-600">
                 <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
                 {c.subtext}
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-white/5 text-[11px] font-medium text-slate-300 border border-white/5">
+              <span className="px-2 py-0.5 rounded-full bg-white/5 text-[11px] font-medium text-slate-600 border border-white/5">
                 {c.badge}
               </span>
             </div>
 
                         {/* Botão de Gatilho do Insight da IA */}
-            <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between">
+            <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
               <button
                 type="button"
                 onClick={(e) => {
@@ -172,22 +172,22 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                 }}
                 className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                   isVisible
-                    ? "bg-blue-500/15 text-blue-300 border-blue-500/40 shadow-sm"
-                    : "bg-slate-900/60 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-blue-300 hover:bg-slate-900"
+                    ? "bg-blue-50 text-blue-700 border-blue-200 shadow-xs"
+                    : "bg-slate-50/60 text-slate-400 border-slate-100 hover:border-slate-200 hover:text-blue-300 hover:bg-slate-50"
                 }`}
                 title="Clique para abrir ou fixar diagnóstico da RN Intelligence"
               >
-                <Cpu className="w-3.5 h-3.5 text-blue-400" />
+                <Cpu className="w-3.5 h-3.5 text-blue-600" />
                 <span>RN Intelligence</span>
                 <ChevronDown
                   className={`w-3 h-3 transition-transform duration-200 ${
-                    isVisible ? "rotate-180 text-blue-400" : "text-slate-500"
+                    isVisible ? "rotate-180 text-blue-600" : "text-slate-500"
                   }`}
                 />
               </button>
 
               {isPinned && (
-                <span className="text-[10px] font-mono text-blue-400 font-semibold flex items-center gap-1">
+                <span className="text-[10px] font-mono text-blue-600 font-semibold flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-400 " /> Fixado
                 </span>
               )}
@@ -196,19 +196,19 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
             {/* AI Futuristic Popover Tooltip (Abre PARA BAIXO para nunca ser cortado pelo topo da tela) */}
             {isVisible && (
               <div
-                className={`absolute ${alignClasses} top-full mt-2.5 z-50 w-[320px] sm:w-[360px] p-4 rounded-2xl bg-[#0d162a] border border-slate-700 shadow-[0_20px_50px_rgba(0,0,0,0.9)] text-xs text-slate-200 transition-all duration-200 animate-in fade-in zoom-in-95`}
+                className={`absolute ${alignClasses} top-full mt-2.5 z-50 w-[320px] sm:w-[360px] p-4 rounded-2xl bg-white border border-slate-200 shadow-xl text-xs text-slate-700 transition-all duration-200 animate-in fade-in zoom-in-95`}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Seta indicadora futurista apontando para o card acima */}
                 <div
-                  className={`absolute -top-1.5 w-3 h-3 bg-[#0d162a] border-t border-l border-slate-700 transform rotate-45 ${
+                  className={`absolute -top-1.5 w-3 h-3 bg-[#0d162a] border-t border-l border-slate-200 transform rotate-45 ${
                     idx >= 2 ? "right-12" : "left-8"
                   }`}
                 />
 
                 {/* Header HUD do Insight */}
-                <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-slate-800 text-[11px] font-mono">
-                  <div className="flex items-center gap-1.5 text-blue-400">
+                <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-slate-100 text-[11px] font-mono">
+                  <div className="flex items-center gap-1.5 text-blue-600">
                     <Cpu className="w-3.5 h-3.5 text-blue-300 " />
                     <span className="font-bold tracking-wider uppercase text-[10px]">
                       RN Intelligence • Telemetria
@@ -217,7 +217,7 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
 
                   <div className="flex items-center gap-2">
                     {isPinned && (
-                      <span className="flex items-center gap-1 text-[10px] text-blue-400 font-mono bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+                      <span className="flex items-center gap-1 text-[10px] text-blue-600 font-mono bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100">
                         <Pin className="w-2.5 h-2.5" /> Fixado
                       </span>
                     )}
@@ -241,20 +241,20 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                     <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                     <span>{c.aiMetric}</span>
                   </span>
-                  <span className="text-blue-400/80">DuckDB Real-time</span>
+                  <span className="text-blue-600/80">DuckDB Real-time</span>
                 </div>
 
                 {/* Diagnóstico Executivo */}
-                <div className="p-3 rounded-xl bg-[#0f172a] border border-slate-800 text-[12px] leading-relaxed text-slate-200 mb-3">
+                <div className="p-3 rounded-xl bg-[#0f172a] border border-slate-100 text-[12px] leading-relaxed text-slate-800 mb-3">
                   <p className="flex items-start gap-2">
-                    <Cpu className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                    <Cpu className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                     <span>{c.aiDiagnosis}</span>
                   </p>
                 </div>
 
                 {/* Barra de Telemetria Inferior */}
-                <div className="text-[10px] font-mono text-slate-400 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 mb-3 flex items-center justify-between">
-                  <span className="text-slate-300">{c.telemetry}</span>
+                <div className="text-[10px] font-mono text-slate-400 bg-slate-50 border border-slate-100 rounded-lg px-2.5 py-1 mb-3 flex items-center justify-between">
+                  <span className="text-slate-600">{c.telemetry}</span>
                   <span className="text-emerald-400 font-semibold">4.2ms</span>
                 </div>
 
@@ -267,10 +267,10 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                       setPinnedCard(null);
                       setHoveredCard(null);
                     }}
-                    className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-700 text-blue-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
                   >
                     <span>Perguntar à RN Intelligence no Chat</span>
-                    <ExternalLink className="w-3 h-3 text-blue-400" />
+                    <ExternalLink className="w-3 h-3 text-blue-600" />
                   </button>
                 )}
               </div>

@@ -97,18 +97,18 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
   const [activeStage, setActiveStage] = useState<number | null>(null);
 
   return (
-    <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+    <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-white tracking-tight">
+            <h2 className="text-lg font-bold text-slate-900 tracking-tight">
               Funil de Vendas Corporativo (B2B Pipeline)
             </h2>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-blue-400">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-blue-400">
               Pipeline Velocity
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Taxas de conversão, dispersão e diagnósticos da IA por estágio do ciclo comercial.
           </p>
         </div>
@@ -133,7 +133,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
               key={stg.id}
               className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer ${
                 isSelected
-                  ? "bg-slate-900/90 border-blue-500/40 shadow-md shadow-blue-950/30"
+                  ? "bg-white border-blue-500 shadow-md ring-2 ring-blue-500/10 shadow-blue-950/30"
                   : "bg-slate-950/40 border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/40"
               }`}
               onClick={() => setActiveStage(isSelected ? null : stg.id)}
@@ -146,7 +146,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                 </span>
 
                 <div className="flex items-center gap-3 text-xs">
-                  <span className="text-slate-400 font-mono">{stg.count.toLocaleString("pt-BR")} deals</span>
+                  <span className="text-slate-500 font-mono">{stg.count.toLocaleString("pt-BR")} deals</span>
                   <span className="font-bold text-white font-mono">{stg.value}</span>
                   <span className="text-blue-400 font-mono text-[11px] bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
                     Conv: {stg.convRate}
@@ -161,7 +161,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                     className={`flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-lg border transition-all cursor-pointer ${
                       isSelected
                         ? "bg-blue-500/15 text-blue-300 border-blue-500/40"
-                        : "bg-slate-900 text-blue-400/80 border-slate-700 hover:border-blue-400"
+                        : "bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-400 hover:text-blue-600"
                     }`}
                   >
                     <Cpu className="w-3 h-3 text-blue-300" />
@@ -188,10 +188,10 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
               {/* Painel de Diagnóstico IA Expansível */}
               {isSelected && (
                 <div
-                  className="mt-3 p-4 rounded-xl bg-[#0a1122] border border-slate-700 text-xs text-slate-200 animate-in fade-in zoom-in-95 space-y-3"
+                  className="mt-3 p-4 rounded-xl bg-white border border-slate-200 shadow-xl text-xs text-slate-700 animate-in fade-in zoom-in-95 space-y-3"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-slate-800 text-[10px] font-mono">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100 text-[10px] font-mono">
                     <div className="flex items-center gap-1.5 text-blue-400">
                       <Cpu className="w-3.5 h-3.5 text-blue-300" />
                       <span className="font-bold tracking-wider uppercase">
@@ -200,13 +200,13 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="flex items-center gap-1 text-slate-400">
+                      <span className="flex items-center gap-1 text-slate-500">
                         <Clock className="w-3 h-3 text-blue-400" /> Ciclo Médio: {stg.avgCycleDays}
                       </span>
                       <button
                         type="button"
                         onClick={() => setActiveStage(null)}
-                        className="text-slate-400 hover:text-white p-0.5 rounded hover:bg-slate-800"
+                        className="text-slate-500 hover:text-white p-0.5 rounded hover:bg-slate-800"
                         title="Fechar insight"
                       >
                         <X className="w-3.5 h-3.5" />
@@ -222,7 +222,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                   </div>
 
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
-                    <div className="text-[10px] font-mono text-slate-400 flex items-center gap-2">
+                    <div className="text-[10px] font-mono text-slate-500 flex items-center gap-2">
                       <span className="text-emerald-400">● DuckDB Pipeline Stream</span>
                       <span>• Taxa de Perda: {stg.dropOff}</span>
                     </div>
