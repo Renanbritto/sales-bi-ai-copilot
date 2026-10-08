@@ -68,11 +68,11 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <Sliders className="w-5 h-5 text-cyan-400" />
+            <Sliders className="w-5 h-5 text-blue-400" />
             <h2 className="text-lg font-bold text-white tracking-tight">
               Simulador Comercial What-If (Projeção Tática para Diretoria)
             </h2>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900 text-blue-300 border border-slate-800">
               Cenários Dinâmicos
             </span>
           </div>
@@ -100,7 +100,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
           <div>
             <div className="flex justify-between items-center mb-2">
               <label className="text-xs font-semibold text-white flex items-center gap-1.5">
-                <Target className="w-3.5 h-3.5 text-cyan-400" /> Variação de Volume de Pedidos
+                <Target className="w-3.5 h-3.5 text-blue-400" /> Variação de Volume de Pedidos
               </label>
               <span
                 className={`font-mono font-bold text-xs px-2 py-0.5 rounded border ${
@@ -121,7 +121,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
               step="1"
               value={volumeDelta}
               onChange={(e) => setVolumeDelta(Number(e.target.value))}
-              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
             />
             <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
               <span>-20% (Crise)</span>
@@ -201,8 +201,8 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
 
         {/* Resultados Projetados (1 coluna) */}
         <div className="space-y-4 flex flex-col justify-between">
-          <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-950/40 to-slate-900/80 border border-cyan-500/30 space-y-1">
-            <span className="text-[10px] uppercase font-mono text-cyan-300 tracking-wider">
+          <div className="p-4 rounded-xl bg-gradient-to-br from-slate-900 to-blue-950/40 border border-slate-700 space-y-1">
+            <span className="text-[10px] uppercase font-mono text-blue-300 tracking-wider">
               Faturamento Líquido Projetado
             </span>
             <div className="text-2xl font-bold text-white font-mono">
@@ -246,7 +246,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
             <button
               type="button"
               onClick={() => onOpenCopilot(copilotSimPrompt)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-bold text-xs shadow-lg shadow-blue-950/30 transition-all cursor-pointer"
             >
               <Zap className="w-4 h-4 text-slate-950" />
               <span>Consultar Viabilidade na RN Intelligence</span>
@@ -256,10 +256,10 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
       </div>
 
       {/* Diagnóstico Executivo Autônomo da IA */}
-      <div className="p-4 rounded-xl bg-[#0a1122] border border-cyan-400/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+      <div className="p-4 rounded-xl bg-[#0a1122] border border-blue-400/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-semibold">
-            <Zap className="w-3.5 h-3.5 text-cyan-300" />
+          <div className="flex items-center gap-2 text-xs font-mono text-blue-400 font-semibold">
+            <Zap className="w-3.5 h-3.5 text-blue-300" />
             <span>PARECER DA RN INTELLIGENCE SOBRE O CENÁRIO SIMULADO</span>
           </div>
           <p className="text-xs text-slate-200 max-w-4xl leading-relaxed">

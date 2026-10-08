@@ -69,16 +69,16 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
               key={reg.region}
               className={`glass-panel rounded-xl p-5 border transition-all duration-300 relative ${
                 isSelected
-                  ? "border-cyan-400/70 shadow-[0_0_25px_rgba(6,182,212,0.25)] bg-slate-900"
+                  ? "border-blue-400/70 shadow-md shadow-blue-950/40 bg-slate-900"
                   : "border-slate-800 bg-gradient-to-br from-slate-900/60 to-slate-950 hover:border-slate-700"
               }`}
             >
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-800">
                 <span className="font-bold text-white text-base flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-cyan-400" />
+                  <MapPin className="w-4 h-4 text-blue-400" />
                   Região {reg.region}
                 </span>
-                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 border border-slate-700">
                   {reg.share_pct}% do Total
                 </span>
               </div>
@@ -109,11 +109,11 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                   onClick={() => setActiveRegion(isSelected ? null : reg.region)}
                   className={`flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded-lg border transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-cyan-500/20 text-cyan-300 border-cyan-400"
-                      : "bg-slate-900 text-cyan-400/80 border-cyan-500/30 hover:border-cyan-400"
+                      ? "bg-blue-500/15 text-blue-300 border-blue-400"
+                      : "bg-slate-900 text-blue-400/80 border-slate-700 hover:border-blue-400"
                   }`}
                 >
-                  <Cpu className="w-3 h-3 text-cyan-300" />
+                  <Cpu className="w-3 h-3 text-blue-300" />
                   <span>RN Intelligence</span>
                   <ChevronDown
                     className={`w-3 h-3 transition-transform ${isSelected ? "rotate-180" : ""}`}
@@ -128,12 +128,12 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
               {/* Popover de Diagnóstico Regional */}
               {isSelected && (
                 <div
-                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-[#0a1122] border border-cyan-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-200 animate-in fade-in space-y-3"
+                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-[#0a1122] border border-blue-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-200 animate-in fade-in space-y-3"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex items-center justify-between pb-1.5 border-b border-cyan-500/20 text-[10px] font-mono">
-                    <span className="text-cyan-400 flex items-center gap-1 font-semibold uppercase">
-                      <Cpu className="w-3 h-3 text-cyan-300" />
+                  <div className="flex items-center justify-between pb-1.5 border-b border-slate-800 text-[10px] font-mono">
+                    <span className="text-blue-400 flex items-center gap-1 font-semibold uppercase">
+                      <Cpu className="w-3 h-3 text-blue-300" />
                       Diagnóstico Regional RN Intelligence
                     </span>
                     <button
@@ -153,10 +153,10 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                     <button
                       type="button"
                       onClick={() => onOpenCopilot(insight.prompt)}
-                      className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
+                      className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-700 text-blue-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
                     >
                       <span>Perguntar à RN Intelligence sobre {reg.region}</span>
-                      <ExternalLink className="w-3 h-3 text-cyan-400" />
+                      <ExternalLink className="w-3 h-3 text-blue-400" />
                     </button>
                   )}
                 </div>

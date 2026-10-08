@@ -270,7 +270,7 @@ export const PORTFOLIO_PRODUCTS: BubbleProduct[] = [
 ];
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "Software / SaaS": "#06b6d4",       // Ciano Neon
+  "Software / SaaS": "#3b82f6",       // Ciano Neon
   "IA & Automação": "#10b981",        // Esmeralda Neon
   "Consultoria & Dados": "#8b5cf6",    // Roxo Neon
   "Hardware & Infra": "#f59e0b",       // Âmbar / Laranja
@@ -301,11 +301,11 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
     const p = payload[0].payload as BubbleProduct;
 
     return (
-      <div className="z-50 min-w-[310px] max-w-[360px] p-4 rounded-2xl bg-[#0a1122] border border-cyan-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-100 font-sans pointer-events-auto">
+      <div className="z-50 min-w-[310px] max-w-[360px] p-4 rounded-2xl bg-[#0a1122] border border-blue-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-100 font-sans pointer-events-auto">
         {/* Header HUD */}
-        <div className="flex items-center justify-between pb-2 mb-2 border-b border-cyan-500/20 text-[10px] font-mono">
-          <span className="text-cyan-400 flex items-center gap-1 font-semibold uppercase tracking-wider">
-            <Cpu className="w-3 h-3 text-cyan-300" />
+        <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-[10px] font-mono">
+          <span className="text-blue-400 flex items-center gap-1 font-semibold uppercase tracking-wider">
+            <Cpu className="w-3 h-3 text-blue-300" />
             Decisão de Portfólio RN Intelligence
           </span>
           <span className="px-2 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300">
@@ -318,7 +318,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         <span
           className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold mb-3 border ${
             p.margin >= 40 && p.volume >= 1500
-              ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40"
+              ? "bg-blue-500/15 text-blue-300 border-slate-700"
               : p.margin >= 40
               ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
               : p.volume >= 1500
@@ -333,7 +333,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         <div className="grid grid-cols-3 gap-2 mb-3 text-center">
           <div className="p-2 rounded-xl bg-slate-900/90 border border-slate-800">
             <span className="text-[10px] text-slate-400 font-mono block">Faturamento</span>
-            <span className="font-bold text-cyan-300 font-mono text-xs">{formatCurrency(p.revenue)}</span>
+            <span className="font-bold text-blue-300 font-mono text-xs">{formatCurrency(p.revenue)}</span>
           </div>
           <div className="p-2 rounded-xl bg-slate-900/90 border border-slate-800">
             <span className="text-[10px] text-slate-400 font-mono block">Margem %</span>
@@ -354,7 +354,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         {/* Diagnóstico Executivo da IA */}
         <div className="p-2.5 rounded-xl bg-[#0f172a] border border-slate-800 text-[11px] leading-relaxed text-slate-300 mb-3">
           <p className="flex items-start gap-1.5">
-            <Cpu className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+            <Cpu className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
             <span>{p.aiDiagnosis}</span>
           </p>
         </div>
@@ -364,10 +364,10 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
           <button
             type="button"
             onClick={() => onOpenCopilot(p.copilotPrompt)}
-            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-700 text-blue-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
           >
             <span>Perguntar à RN Intelligence no Chat</span>
-            <ExternalLink className="w-3 h-3 text-cyan-400" />
+            <ExternalLink className="w-3 h-3 text-blue-400" />
           </button>
         )}
       </div>
@@ -380,13 +380,13 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-600 flex items-center justify-center shadow-lg shadow-blue-950/30">
               <Layers className="w-4 h-4 text-slate-950 font-bold" />
             </div>
             <div>
               <h2 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
                 Matriz Estratégica de Decisão de Portfólio (Gráfico de Bolhas)
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-blue-400">
                   Volume × Margem × Receita
                 </span>
               </h2>
@@ -400,7 +400,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         {/* Filtros por Categoria de Produto */}
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs text-slate-400 flex items-center gap-1">
-            <Filter className="w-3.5 h-3.5 text-cyan-400" /> Categoria:
+            <Filter className="w-3.5 h-3.5 text-blue-400" /> Categoria:
           </span>
           <div className="flex flex-wrap p-1 rounded-xl bg-slate-900 border border-slate-800 gap-1 text-xs">
             {["Todas", "Software / SaaS", "IA & Automação", "Consultoria & Dados", "Hardware & Infra"].map(
@@ -411,7 +411,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-2.5 py-1 rounded-lg transition-colors font-medium cursor-pointer ${
                     selectedCategory === cat
-                      ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm"
+                      ? "bg-blue-500/15 text-blue-300 border border-slate-700 shadow-sm"
                       : "text-slate-400 hover:text-slate-200"
                   }`}
                 >
@@ -425,14 +425,14 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
 
       {/* 4 Cards de Síntese Tática dos Quadrantes (Decisão Executiva) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30">
-          <div className="flex items-center justify-between text-xs font-semibold text-cyan-300 mb-1">
+        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-700">
+          <div className="flex items-center justify-between text-xs font-semibold text-blue-300 mb-1">
             <span>💎 Core Lucrativo (Líderes de Mercado)</span>
             <span className="font-mono text-[10px]">4 SKUs</span>
           </div>
           <p className="text-xs text-slate-300 font-medium">R$ 26.5M • Margem 59.8%</p>
           <p className="text-[11px] text-slate-400 mt-1">
-            <strong className="text-cyan-400">Decisão:</strong> Blindar contas chave e incentivar vendas de pacotes plurianuais.
+            <strong className="text-blue-400">Decisão:</strong> Blindar contas chave e incentivar vendas de pacotes plurianuais.
           </p>
         </div>
 
@@ -474,7 +474,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
       <div className="h-[430px] w-full relative">
         {!mounted ? (
           <div className="h-full flex items-center justify-center text-slate-500 text-xs">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping mr-2" />
+            <span className="w-2 h-2 rounded-full bg-blue-500 mr-2" />
             Carregando matriz de decisão de portfólio...
           </div>
         ) : (
@@ -525,12 +525,12 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
               />
               <ReferenceLine
                 x={1500}
-                stroke="#06b6d4"
+                stroke="#3b82f6"
                 strokeDasharray="4 4"
                 strokeWidth={1.5}
                 label={{
                   value: "Corte de Volume: 1.500 un",
-                  fill: "#06b6d4",
+                  fill: "#3b82f6",
                   fontSize: 10,
                   position: "insideTopLeft",
                 }}
@@ -553,7 +553,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
                 {filteredProducts.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={CATEGORY_COLORS[entry.category] || "#06b6d4"}
+                    fill={CATEGORY_COLORS[entry.category] || "#3b82f6"}
                     fillOpacity={0.75}
                     stroke="#ffffff"
                     strokeWidth={1.5}
@@ -578,17 +578,17 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         </div>
 
         <div className="text-slate-400 text-[11px] flex items-center gap-1">
-          <Info className="w-3.5 h-3.5 text-cyan-400" />
+          <Info className="w-3.5 h-3.5 text-blue-400" />
           <span>Tamanho da bolha = Faturamento Total (R$). Passe o mouse para inspecionar.</span>
         </div>
       </div>
 
       {/* Ficha Tática do Produto Selecionado (Quando clicado) */}
       {selectedProduct && (
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">
+              <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-blue-300 border border-slate-700">
                 {selectedProduct.category}
               </span>
               <h3 className="text-base font-bold text-white">{selectedProduct.name}</h3>
@@ -597,7 +597,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
               </span>
             </div>
             <p className="text-xs text-slate-300 max-w-3xl">
-              <strong className="text-cyan-400">Diagnóstico RN Intelligence:</strong> {selectedProduct.aiDiagnosis}
+              <strong className="text-blue-400">Diagnóstico RN Intelligence:</strong> {selectedProduct.aiDiagnosis}
             </p>
           </div>
 
@@ -605,7 +605,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <button
               type="button"
               onClick={() => onOpenCopilot(selectedProduct.copilotPrompt)}
-              className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20 transition-all cursor-pointer"
+              className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-bold text-xs shadow-md shadow-blue-950/30 transition-all cursor-pointer"
             >
               <Cpu className="w-3.5 h-3.5" />
               <span>Explorar na RN Intelligence</span>
