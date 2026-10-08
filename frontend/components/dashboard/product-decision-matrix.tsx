@@ -301,7 +301,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
     const p = payload[0].payload as BubbleProduct;
 
     return (
-      <div className="z-50 min-w-[310px] max-w-[360px] p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-700 dark:text-slate-200 font-sans pointer-events-auto">
+      <div className="z-50 min-w-[310px] max-w-[360px] p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-800 dark:text-slate-100 font-sans pointer-events-auto">
         {/* Header HUD */}
         <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono">
           <span className="text-blue-600 flex items-center gap-1 font-semibold uppercase tracking-wider">
@@ -314,7 +314,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         </div>
 
         {/* Nome do Produto & Quadrante */}
-        <h4 className="text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">{p.name}</h4>
+        <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-1">{p.name}</h4>
         <span
           className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold mb-3 border ${
             p.margin >= 40 && p.volume >= 1500
@@ -333,7 +333,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         <div className="grid grid-cols-3 gap-2 mb-3 text-center">
           <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
             <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block">Faturamento</span>
-            <span className="font-bold text-blue-700 font-mono text-xs">{formatCurrency(p.revenue)}</span>
+            <span className="font-bold text-blue-600 dark:text-blue-400 font-mono text-xs">{formatCurrency(p.revenue)}</span>
           </div>
           <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
             <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block">Margem %</span>
@@ -347,12 +347,12 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
           </div>
           <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
             <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block">Volume</span>
-            <span className="font-bold text-slate-700 dark:text-slate-200 font-mono text-xs">{p.volume.toLocaleString("pt-BR")} un</span>
+            <span className="font-bold text-slate-800 dark:text-slate-100 font-mono text-xs">{p.volume.toLocaleString("pt-BR")} un</span>
           </div>
         </div>
 
         {/* Diagnóstico Executivo da IA */}
-        <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 text-[11px] leading-relaxed text-slate-600 dark:text-slate-300 mb-3">
+        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-[11px] leading-relaxed text-slate-700 dark:text-slate-300 mb-3">
           <p className="flex items-start gap-1.5">
             <Cpu className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
             <span>{p.aiDiagnosis}</span>
@@ -364,7 +364,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
           <button
             type="button"
             onClick={() => onOpenCopilot(p.copilotPrompt)}
-            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 dark:border-slate-700/50 text-blue-700 hover:text-slate-700 dark:text-slate-200 text-[11px] font-medium transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-[11px] font-medium transition-all cursor-pointer"
           >
             <span>Perguntar à RN Intelligence no Chat</span>
             <ExternalLink className="w-3 h-3 text-blue-600" />

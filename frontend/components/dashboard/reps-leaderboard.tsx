@@ -32,7 +32,7 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
   const d = payload[0].payload;
 
   return (
-    <div className="rounded-2xl p-3.5 bg-white dark:bg-slate-900/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-700/50 shadow-lg text-xs text-slate-700 dark:text-slate-200 min-w-[220px]">
+    <div className="rounded-2xl p-3.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl text-xs text-slate-800 dark:text-slate-100 min-w-[220px]">
       <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono text-blue-600">
         <Cpu className="w-3 h-3 text-blue-700" />
         <span>Radar Benchmark (RN Intelligence)</span>

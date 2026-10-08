@@ -45,9 +45,9 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
   }
 
   return (
-    <div className="relative z-50 min-w-[300px] rounded-2xl p-4 bg-white dark:bg-slate-900/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-700/50 shadow-xl shadow-black/5 text-slate-700 dark:text-slate-200 font-sans">
+    <div className="relative z-50 min-w-[300px] rounded-2xl p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl shadow-black/20 text-slate-800 dark:text-slate-100 font-sans">
       {/* Glow corner effects */}
-      <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 dark:bg-blue-900/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-20 h-20 bg-blue-600/10 rounded-full blur-xl pointer-events-none" />
 
       
@@ -56,13 +56,13 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
       <div className="flex items-center justify-between mb-3">
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 dark:text-slate-400">Competência</span>
-          <h4 className="text-base font-bold text-slate-700 dark:text-slate-200 tracking-tight">{item.month} / 2025</h4>
+          <h4 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">{item.month} / 2025</h4>
         </div>
         <span
           className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold flex items-center gap-1 border ${
             isSuperou
-              ? "bg-emerald-500/20 text-teal-700 border-emerald-500/40"
-              : "bg-amber-500/20 text-slate-700 dark:text-slate-200 border-amber-500/40"
+              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
+              : "bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800"
           }`}
         >
           {isSuperou ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
@@ -72,28 +72,28 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
 
       {/* Grid de Métricas HUD */}
       <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
           <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Faturamento</p>
-          <p className="font-bold text-blue-700 text-sm mt-0.5">{formatCurrency(item.revenue)}</p>
+          <p className="font-bold text-blue-600 dark:text-blue-400 text-sm mt-0.5 font-mono">{formatCurrency(item.revenue)}</p>
         </div>
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
           <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Meta Orçada</p>
-          <p className="font-bold text-slate-700 dark:text-slate-200 text-sm mt-0.5">{formatCurrency(item.target)}</p>
+          <p className="font-bold text-slate-900 dark:text-white text-sm mt-0.5 font-mono">{formatCurrency(item.target)}</p>
         </div>
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
           <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Margem Realizada</p>
-          <p className="font-bold text-teal-700 text-sm mt-0.5">{item.margin}%</p>
+          <p className="font-bold text-emerald-600 dark:text-emerald-400 text-sm mt-0.5 font-mono">{item.margin}%</p>
         </div>
-        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50">
+        <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
           <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Pedidos Faturados</p>
-          <p className="font-bold text-slate-700 dark:text-slate-200 text-sm mt-0.5">{item.orders.toLocaleString("pt-BR")}</p>
+          <p className="font-bold text-slate-900 dark:text-white text-sm mt-0.5 font-mono">{item.orders.toLocaleString("pt-BR")}</p>
         </div>
       </div>
 
       {/* Micro-insight do Agente de IA */}
-      <div className="p-2.5 rounded-xl bg-gradient-to-r from-blue-50/50 to-slate-50 border border-slate-200 dark:border-slate-700/50 text-[11px] leading-relaxed text-slate-700 dark:text-slate-200">
+      <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/70 text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
         <p className="flex items-start gap-1.5">
-          <Cpu className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
+          <Cpu className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
           <span>{aiInsight}</span>
         </p>
       </div>
@@ -135,7 +135,7 @@ export function SalesChart({ data }: SalesChartProps) {
         {/* Filtros de Trimestre (Quarter) */}
         <div className="flex items-center gap-2">
           <span className="text-xs text-slate-500 dark:text-slate-400 hidden md:inline">Trimestre:</span>
-          <div className="flex p-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 text-xs">
+          <div className="flex p-0.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs">
             {["Todos", "Q1", "Q2", "Q3", "Q4"].map((q) => (
               <button
                 type="button"
@@ -152,7 +152,7 @@ export function SalesChart({ data }: SalesChartProps) {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 text-[11px] font-mono text-blue-700">
+          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-[11px] font-mono text-blue-700">
             <Activity className="w-2.5 h-2.5 text-blue-600" /> Telemetria Ativa
           </div>
         </div>
