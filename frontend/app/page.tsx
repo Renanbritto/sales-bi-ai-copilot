@@ -112,6 +112,12 @@ export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<TabType>("executivo");
     const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setIsSidebarOpen(false);
+    }
+  }, []);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -206,9 +212,21 @@ export default function DashboardPage() {
   return (
     <div className="flex h-screen bg-[#f8fafc] dark:bg-slate-900 text-slate-700 dark:text-slate-200 font-sans selection:bg-blue-600/20 selection:text-blue-900 overflow-hidden">
       
-      {/* Sidebar Retrátil */}
-      <aside 
-        className={`flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700/50 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-72' : 'w-20'} shrink-0`}
+            {/* Backdrop para fechar menu no mobile */}
+      {isSidebarOpen && (
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 md:hidden animate-in fade-in duration-200"
+        />
+      )}
+
+      {/* Sidebar Retrátil / Drawer Mobile */}
+      <aside
+        className={`flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 z-50 shrink-0 ${
+          isSidebarOpen
+            ? 'fixed inset-y-0 left-0 w-72 shadow-2xl md:relative md:shadow-none'
+            : 'hidden md:flex md:w-20'
+        }`}
       >
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
@@ -240,7 +258,12 @@ export default function DashboardPage() {
               <button
                 type="button"
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as TabType)}
+                onClick={() => {
+                  setActiveTab(tab.id as TabType);
+                  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+                    setIsSidebarOpen(false);
+                  }
+                }}
                 title={!isSidebarOpen ? tab.label : undefined}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer group ${
                   isActive
@@ -278,12 +301,19 @@ export default function DashboardPage() {
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto relative">
         
         {/* Top Header Navegação (Agora só tem título da aba e botão IA) */}
-        <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-700/50 bg-white dark:bg-slate-900/95 backdrop-blur-xl shrink-0">
-          <div className="px-6 h-16 flex items-center justify-between">
+        <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/95 backdrop-blur-xl shrink-0">
+          <div className="px-4 sm:px-6 h-16 flex items-center justify-between">
             
-            <div className="flex items-center gap-2">
-               {/* Mobile menu toggle fallback could go here if we do mobile responsive, but keeping simple */}
-               <h2 className="text-base font-bold text-slate-700 dark:text-slate-200 tracking-tight hidden sm:block">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+               <button
+                 type="button"
+                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                 className="md:hidden p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
+                 title="Abrir menu"
+               >
+                 <PanelLeftOpen className="w-5 h-5" />
+               </button>
+               <h2 className="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-100 tracking-tight truncate">
                   {[
                     { id: "executivo", label: "Visão Executiva" },
                     { id: "produtos", label: "Portfólio & Matriz de Decisão" },
@@ -316,16 +346,17 @@ export default function DashboardPage() {
                 onClick={() => handleOpenCopilot("Olá RN Intelligence! Quais são os principais destaques executivos deste painel?")}
                 className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
               >
-                <Bot className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span>Abrir RN Intelligence</span>
-                <div className="w-2 h-2 rounded-full bg-emerald-400 border border-blue-600 animate-pulse ml-1" />
+                <Bot className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" />
+                <span className="hidden sm:inline">Abrir RN Intelligence</span>
+                <span className="sm:hidden font-medium">Copilot</span>
+                <div className="w-2 h-2 rounded-full bg-emerald-400 border border-blue-600 animate-pulse ml-0.5 sm:ml-1 shrink-0" />
               </button>
             </div>
           </div>
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 w-full max-w-7xl mx-auto p-4 lg:p-6 pb-20">
+        <main className="flex-1 w-full max-w-7xl mx-auto p-3 sm:p-4 lg:p-6 pb-20">
           
           {/* Filtros Globais */}
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">

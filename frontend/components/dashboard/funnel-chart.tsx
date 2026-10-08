@@ -118,7 +118,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
 
       <div className="space-y-4">
         {FUNNEL_STAGES.map((stg) => {
-          const widthPct = Math.max(28, 100 - stg.id * 16);
+          const widthPct = Math.max(38, 100 - stg.id * 14);
           const isSelected = activeStage === stg.id;
 
           return (
@@ -172,7 +172,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                   style={{ width: `${widthPct}%` }}
                 >
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <span className="text-sm font-bold text-white tracking-widest font-mono z-10 drop-shadow-md">
+                  <span className="text-xs sm:text-sm font-bold text-white tracking-wider sm:tracking-widest font-mono z-10 drop-shadow-md">
                     {stg.count.toLocaleString("pt-BR")} DEALS
                   </span>
                 </div>
