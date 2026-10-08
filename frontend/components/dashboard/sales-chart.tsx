@@ -172,15 +172,15 @@ export function SalesChart({ data }: SalesChartProps) {
             >
               <defs>
                 <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#93c5fd" stopOpacity={0.9} />
-                  <stop offset="100%" stopColor="#6ee7b7" stopOpacity={0.2} />
+                  <stop offset="0%" stopColor="#2563eb" stopOpacity={0.85} />
+                  <stop offset="100%" stopColor="#0d9488" stopOpacity={0.35} />
                 </linearGradient>
                 <linearGradient id="marginGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#0f766e" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="#0f766e" stopOpacity={0.0} />
+                  <stop offset="0%" stopColor="#10b981" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#10b981" stopOpacity={0.0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.15)" vertical={false} />
               <XAxis
                 dataKey="month"
                 stroke="#94a3b8"
@@ -246,7 +246,7 @@ export function SalesChart({ data }: SalesChartProps) {
                 yAxisId="right"
                 type="monotone"
                 dataKey="margin"
-                stroke="#0f766e"
+                stroke="#10b981"
                 strokeWidth={2}
                 fill="url(#marginGrad)"
               />
