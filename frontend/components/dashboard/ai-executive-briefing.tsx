@@ -34,13 +34,13 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
       {/* 3 Pilares do Diagnóstico Executivo com Gatilhos de Ação */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Pilar 1: Destaque Positivo */}
-        <div className="p-4 rounded-xl bg-emerald-50/40 border border-emerald-200 hover:border-emerald-300 transition-all flex flex-col justify-between space-y-3">
+        <div className="p-4 rounded-xl bg-emerald-50/40 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/50 hover:border-emerald-300 dark:hover:border-emerald-700/50 transition-all flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <TrendingUp className="w-3.5 h-3.5" /> 1. Alavanca de Receita
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                 Superou Meta
               </span>
             </div>
@@ -58,7 +58,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
                   "Detalhe como o canal B2B Enterprise e a regional Sudeste lideraram o faturamento no período."
                 )
               }
-              className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 text-[11px] font-mono font-medium transition-colors cursor-pointer"
+              className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950 hover:bg-emerald-100 dark:hover:bg-emerald-900 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-[11px] font-mono font-medium transition-colors cursor-pointer"
             >
               <span>Aprofundar Alavanca na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
@@ -67,13 +67,13 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
         </div>
 
         {/* Pilar 2: Ponto de Atenção */}
-        <div className="p-4 rounded-xl bg-amber-50/40 border border-amber-200 hover:border-amber-300 transition-all flex flex-col justify-between space-y-3">
+        <div className="p-4 rounded-xl bg-amber-50/40 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 hover:border-amber-300 dark:hover:border-amber-700/50 transition-all flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold text-amber-700 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <AlertTriangle className="w-3.5 h-3.5" /> 2. Risco de Margem
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
                 Erosão em Hardware
               </span>
             </div>
@@ -91,7 +91,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
                   "Quais produtos e representantes mais concederam descontos no canal Canais & Parceiros?"
                 )
               }
-              className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-700 text-[11px] font-mono font-medium transition-colors cursor-pointer"
+              className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-950 hover:bg-amber-100 dark:hover:bg-amber-900 border border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-400 text-[11px] font-mono font-medium transition-colors cursor-pointer"
             >
               <span>Investigar Risco na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
@@ -106,7 +106,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
               <span className="text-xs font-semibold text-blue-700 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <Target className="w-3.5 h-3.5" /> 3. Ação Recomendada
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
                 Próximo Quarter
               </span>
             </div>
