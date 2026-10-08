@@ -57,7 +57,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
           <div>
             <div className="flex items-center gap-2">
               <Award className="w-5 h-5 text-blue-600" />
-              <h2 className="text-lg font-bold text-slate-900 tracking-tight">
+              <h2 className="text-lg font-bold text-slate-700 tracking-tight">
                 Classificação BCG de Portfólio (Rentabilidade × Demanda)
               </h2>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-blue-600">
@@ -75,7 +75,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
             <div key={idx} className={`p-5 rounded-xl border ${q.color} flex flex-col justify-between space-y-4`}>
               <div>
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
-                  <h3 className="font-bold text-slate-900 text-base">{q.title}</h3>
+                  <h3 className="font-bold text-slate-700 text-base">{q.title}</h3>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-slate-600 font-semibold">
                     {q.tag}
                   </span>

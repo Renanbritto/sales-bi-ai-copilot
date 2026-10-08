@@ -58,7 +58,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
           <div>
             <div className="flex items-center gap-2">
               <Network className="w-5 h-5 text-blue-600" />
-              <h2 className="text-lg font-bold text-slate-900 tracking-tight">
+              <h2 className="text-lg font-bold text-slate-700 tracking-tight">
                 Matriz de Performance & Erosão de Descontos por Canal
               </h2>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-blue-600">
@@ -102,12 +102,12 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                 return (
                   <React.Fragment key={c.channel}>
                     <tr
-                      className={`hover:bg-slate-800/30 transition-colors cursor-pointer ${
-                        isSelected ? "bg-slate-800/40" : ""
+                      className={`hover:bg-slate-100/30 transition-colors cursor-pointer ${
+                        isSelected ? "bg-blue-50/50" : ""
                       }`}
                       onClick={() => setActiveChannel(isSelected ? null : c.channel)}
                     >
-                      <td className="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-2">
+                      <td className="py-3.5 px-4 font-bold text-slate-700 flex items-center gap-2">
                         <span className={`w-2 h-2 rounded-full ${discountAlert ? "bg-amber-400" : "bg-blue-500"}`} />
                         {c.channel}
                       </td>
@@ -169,7 +169,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                     {isSelected && (
                       <tr>
                         <td colSpan={9} className="p-0">
-                          <div className="p-4 bg-[#0a1122] border-y border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+                          <div className="p-4 bg-white border-y border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
                             <div className="space-y-1">
                               <div className="flex items-center gap-2 text-xs font-mono text-blue-600 font-semibold">
                                 <Cpu className="w-3.5 h-3.5 text-blue-700" />
@@ -189,7 +189,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                               <button
                                 type="button"
                                 onClick={() => onOpenCopilot(insight.prompt)}
-                                className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-700 hover:text-slate-900 text-xs font-semibold transition-all cursor-pointer"
+                                className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-700 hover:text-slate-700 text-xs font-semibold transition-all cursor-pointer"
                               >
                                 <span>Analisar Canal na RN Intelligence</span>
                                 <ExternalLink className="w-3 h-3 text-blue-600" />

@@ -8,7 +8,7 @@ export function ModelSchema() {
     {
       name: "f_vendas",
       type: "Tabela Fato",
-      color: "border-blue-500/50 bg-slate-50/20",
+      color: "border-slate-200 bg-slate-50/20",
       badge: "13.7k+ Linhas",
       cols: [
         "venda_id (PK)",
@@ -71,7 +71,7 @@ export function ModelSchema() {
       <div className="bg-white border border-slate-200 shadow-xs rounded-xl p-6 border border-slate-200">
         <div className="flex items-center gap-3 mb-2">
           <Database className="w-5 h-5 text-blue-600" />
-          <h2 className="text-lg font-semibold text-slate-900">Arquitetura de Dados: Star Schema Dimensional (DuckDB)</h2>
+          <h2 className="text-lg font-semibold text-slate-700">Arquitetura de Dados: Star Schema Dimensional (DuckDB)</h2>
         </div>
         <p className="text-xs text-slate-500 max-w-3xl">
           Modelagem em Modelo Estrela (Kimball) otimizada para consultas analíticas colunares.
@@ -83,7 +83,7 @@ export function ModelSchema() {
             <div key={t.name} className={`p-4 rounded-xl border ${t.color} bg-white border border-slate-200 shadow-xs`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/5">
                 <div>
-                  <h3 className="font-mono font-bold text-slate-900 text-sm">{t.name}</h3>
+                  <h3 className="font-mono font-bold text-slate-700 text-sm">{t.name}</h3>
                   <p className="text-[11px] text-slate-500">{t.type}</p>
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 text-slate-600 border border-white/10">

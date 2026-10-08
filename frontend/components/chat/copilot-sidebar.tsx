@@ -125,7 +125,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header do Copilot */}
-        <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
+        <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-950/40">
               <Bot className="w-4 h-4 text-slate-950" />
@@ -133,7 +133,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             <div>
               <h2 className="text-sm font-bold text-white flex items-center gap-2">
                 RN Intelligence
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-blue-400">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-50 border border-slate-200 text-blue-600">
                   DuckDB + Gemini
                 </span>
               </h2>
@@ -145,7 +145,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             <button
               type="button"
               onClick={clearChat}
-              className="p-1.5 text-slate-500 hover:text-slate-200 hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
               title="Limpar Conversa"
             >
               <Trash2 className="w-4 h-4" />
@@ -153,7 +153,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-500 hover:text-white hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-slate-500 hover:text-white hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
               title="Fechar Painel"
             >
               <X className="w-5 h-5" />
@@ -163,7 +163,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
 
         {/* Telemetria de Conexão */}
         <div className="px-4 py-2 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-500">
-          <div className="flex items-center gap-1.5 text-blue-400">
+          <div className="flex items-center gap-1.5 text-blue-600">
             <Cpu className="w-3.5 h-3.5" />
             <span>Motor: DuckDB OLAP Columnar</span>
           </div>
@@ -185,8 +185,8 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                 }`}
               >
                 {!isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 mt-0.5">
-                    <Bot className="w-3.5 h-3.5 text-blue-400" />
+                  <div className="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0 mt-0.5">
+                    <Bot className="w-3.5 h-3.5 text-blue-600" />
                   </div>
                 )}
 
@@ -194,19 +194,19 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                   className={`max-w-[85%] rounded-2xl p-3.5 space-y-2.5 ${
                     isUser
                       ? "bg-gradient-to-r bg-blue-600 text-white rounded-br-xs"
-                      : "bg-slate-900/90 border border-slate-800 text-slate-200 rounded-bl-xs"
+                      : "bg-white/90 border border-slate-200 text-slate-800 rounded-bl-xs"
                   }`}
                 >
                   <p className="whitespace-pre-line">{msg.content}</p>
 
                   {/* SQL Telemetry & Code Accordion */}
                   {msg.sql && (
-                    <div className="mt-2 pt-2 border-t border-slate-800/80 space-y-1.5">
+                    <div className="mt-2 pt-2 border-t border-slate-200/80 space-y-1.5">
                       <div className="flex items-center justify-between">
                         <button
                           type="button"
                           onClick={() => toggleSql(msg.id)}
-                          className="flex items-center gap-1 text-[11px] font-mono text-blue-400 hover:text-blue-300 cursor-pointer"
+                          className="flex items-center gap-1 text-[11px] font-mono text-blue-600 hover:text-blue-600 cursor-pointer"
                         >
                           <Code2 className="w-3.5 h-3.5" />
                           <span>{expandedSql[msg.id] ? "Ocultar SQL" : "Inspecionar SQL DuckDB"}</span>
@@ -226,7 +226,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                       </div>
 
                       {expandedSql[msg.id] && (
-                        <pre className="p-2.5 rounded-lg bg-black/60 border border-slate-800 text-[11px] font-mono text-blue-300 overflow-x-auto">
+                        <pre className="p-2.5 rounded-lg bg-black/60 border border-slate-200 text-[11px] font-mono text-blue-600 overflow-x-auto">
                           {msg.sql}
                         </pre>
                       )}
@@ -239,8 +239,8 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                 </div>
 
                 {isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 mt-0.5">
-                    <User className="w-3.5 h-3.5 text-slate-300" />
+                  <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-200 flex items-center justify-center shrink-0 mt-0.5">
+                    <User className="w-3.5 h-3.5 text-slate-700" />
                   </div>
                 )}
               </div>
@@ -249,12 +249,12 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
 
           {isLoading && (
             <div className="flex gap-3 text-xs items-center text-slate-500">
-              <div className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0">
-                <Bot className="w-3.5 h-3.5 text-blue-400 " />
+              <div className="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+                <Bot className="w-3.5 h-3.5 text-blue-600 " />
               </div>
-              <div className="flex items-center gap-2 p-3 rounded-2xl bg-slate-900 border border-slate-800">
+              <div className="flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200">
                 <div className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-                <span className="text-slate-300 font-mono text-[11px]">
+                <span className="text-slate-700 font-mono text-[11px]">
                   Executando consulta SQL no DuckDB...
                 </span>
               </div>
@@ -265,7 +265,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
         </div>
 
         {/* Perguntas Rápidas */}
-        <div className="p-3 border-t border-slate-800/80 bg-slate-950/40">
+        <div className="p-3 border-t border-slate-200/80 bg-slate-50/40">
           <p className="text-[10px] uppercase font-mono tracking-wider text-slate-500 mb-2">
             Perguntas Rápidas Sugeridas:
           </p>
@@ -276,7 +276,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                 type="button"
                 onClick={() => handleSend(prompt)}
                 disabled={isLoading}
-                className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-900/50 hover:text-blue-300 hover:border-slate-800 border border-slate-800 text-slate-300 transition-colors text-left cursor-pointer disabled:opacity-50"
+                className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-slate-50/50 hover:text-blue-600 hover:border-slate-200 border border-slate-200 text-slate-700 transition-colors text-left cursor-pointer disabled:opacity-50"
               >
                 {prompt}
               </button>
@@ -285,7 +285,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
         </div>
 
         {/* Input de Mensagem */}
-        <div className="p-4 border-t border-slate-800 bg-slate-900/60">
+        <div className="p-4 border-t border-slate-200 bg-slate-50/60">
           <form
             onSubmit={(e) => {
               e.preventDefault();

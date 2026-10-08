@@ -171,16 +171,16 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col font-sans selection:bg-blue-600/20 selection:text-blue-900">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-700 flex flex-col font-sans selection:bg-blue-600/20 selection:text-blue-900">
       {/* Top Header Navegação */}
-      <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-[#0d1527]/85 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-900/20">
               <BarChart3 className="w-5 h-5 text-white font-bold" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-slate-900 tracking-tight">Análise Comercial</h1>
+              <h1 className="text-lg font-bold text-slate-700 tracking-tight">Análise Comercial</h1>
             </div>
           </div>
 
@@ -278,7 +278,7 @@ export default function DashboardPage() {
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
                     isActive
                       ? "bg-white text-blue-600 border border-slate-200 shadow-xs font-semibold"
-                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/70"
+                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-100/70"
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -348,7 +348,7 @@ export default function DashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-500">
         <p>
           Análise Comercial • RN Intelligence • Desenvolvido por{" "}
           <a

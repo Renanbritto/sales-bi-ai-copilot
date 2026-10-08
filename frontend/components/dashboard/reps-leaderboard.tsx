@@ -32,12 +32,12 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
   const d = payload[0].payload;
 
   return (
-    <div className="rounded-2xl p-3.5 bg-[#0a1122]/98 backdrop-blur-2xl border border-blue-500/50 shadow-[0_12px_40px_rgba(6,182,212,0.3)] text-xs text-slate-100 min-w-[220px]">
+    <div className="rounded-2xl p-3.5 bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-lg text-xs text-slate-700 min-w-[220px]">
       <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-slate-200 text-[10px] font-mono text-blue-600">
         <Cpu className="w-3 h-3 text-blue-700" />
         <span>Radar Benchmark (RN Intelligence)</span>
       </div>
-      <p className="font-bold text-slate-900 mb-2">{d.subject}</p>
+      <p className="font-bold text-slate-700 mb-2">{d.subject}</p>
       <div className="space-y-1 text-xs">
         <div className="flex items-center justify-between text-blue-700">
           <span>Sudeste:</span>
@@ -69,7 +69,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
       <div className="lg:col-span-2 bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
-            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg font-bold text-slate-700 flex items-center gap-2">
               <Trophy className="w-5 h-5 text-amber-400" /> Leaderboard da Equipe Comercial
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -107,7 +107,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                 ];
 
                 return (
-                  <tr key={rep.id} className="hover:bg-slate-800/40 transition-colors">
+                  <tr key={rep.id} className="hover:bg-slate-100/40 transition-colors">
                     <td className="py-3 pl-2 font-mono">
                       {isTop3 ? (
                         <span
@@ -121,7 +121,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                         <span className="text-slate-500 ml-2 font-mono">{rank}</span>
                       )}
                     </td>
-                    <td className="py-3 font-semibold text-slate-900">
+                    <td className="py-3 font-semibold text-slate-700">
                       {rep.name}
                       {rank === 1 && (
                         <span className="ml-2 text-[10px] text-amber-400 font-mono">MVP</span>
@@ -160,7 +160,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                               `Analise a performance individual do vendedor ${rep.name} (${rep.region}), atingimento de ${rep.pct.toFixed(1)}% da quota e margem de ${rep.margin}%.`
                             )
                           }
-                          className="p-1 rounded-lg bg-slate-50 border border-slate-200 text-blue-600 hover:text-slate-900 hover:border-blue-400 transition-colors"
+                          className="p-1 rounded-lg bg-slate-50 border border-slate-200 text-blue-600 hover:text-slate-700 hover:border-blue-400 transition-colors"
                           title="Analisar performance na RN Intelligence"
                         >
                           <Cpu className="w-3.5 h-3.5" />
@@ -179,7 +179,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
       <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200 flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-base font-bold text-slate-900 tracking-tight flex items-center gap-1.5">
+            <h3 className="text-base font-bold text-slate-700 tracking-tight flex items-center gap-1.5">
               <Trophy className="w-4 h-4 text-amber-400" /> Radar Regional
             </h3>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-blue-600">
