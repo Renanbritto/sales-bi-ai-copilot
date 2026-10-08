@@ -23,7 +23,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Backend analítico com DuckDB e Copilot de IA (Gemini) para Business Intelligence Comercial.",
+    description="Backend analítico com DuckDB e RN Intelligence (Gemini) para Business Intelligence Comercial.",
     lifespan=lifespan
 )
 

@@ -6,11 +6,11 @@ import { SegmentBreakdown, TopClient } from "@/lib/api";
 import {
   Building2,
   Users,
-  Star,
+  Award,
   ArrowUpRight,
   ShieldCheck,
-  Sparkles,
   Cpu,
+  Bot,
   ChevronDown,
   X,
   ExternalLink,
@@ -81,7 +81,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
             </p>
           </div>
           <span className="text-xs font-mono text-slate-400 hidden sm:inline">
-            Clique no card para abrir diagnóstico IA
+            Clique no card para ver RN Intelligence
           </span>
         </div>
 
@@ -143,8 +143,8 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                         : "bg-slate-900 text-cyan-400/80 border-cyan-500/30 hover:border-cyan-400"
                     }`}
                   >
-                    <Sparkles className="w-3 h-3 text-cyan-300" />
-                    <span>IA Insight</span>
+                    <Cpu className="w-3 h-3 text-cyan-300" />
+                    <span>RN Intelligence</span>
                     <ChevronDown
                       className={`w-3 h-3 transition-transform ${isSelected ? "rotate-180" : ""}`}
                     />
@@ -163,8 +163,8 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                   >
                     <div className="flex items-center justify-between pb-1.5 border-b border-cyan-500/20 text-[10px] font-mono">
                       <span className="text-cyan-400 flex items-center gap-1 font-semibold uppercase">
-                        <Sparkles className="w-3 h-3 text-cyan-300" />
-                        Diagnóstico Vertical IA
+                        <Cpu className="w-3 h-3 text-cyan-300" />
+                        Diagnóstico RN Intelligence
                       </span>
                       <button
                         type="button"
@@ -185,7 +185,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                         onClick={() => onOpenCopilot(insight.prompt)}
                         className="w-full flex items-center justify-center gap-1 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
                       >
-                        <span>Perguntar ao Copilot sobre {s.segment}</span>
+                        <span>Perguntar à RN Intelligence sobre {s.segment}</span>
                         <ExternalLink className="w-3 h-3 text-cyan-400" />
                       </button>
                     )}
@@ -202,7 +202,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
         <div className="flex items-center justify-between pb-3 border-b border-slate-800">
           <div>
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-amber-400" />
+              <Award className="w-5 h-5 text-amber-400" />
               <h2 className="text-lg font-bold text-white tracking-tight">
                 Top 10 Contas Corporativas (Maior LTV Acumulado)
               </h2>
@@ -258,7 +258,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                       </td>
                       <td className="py-3 px-3 font-bold text-white flex items-center gap-2">
                         {c.client_name}
-                        {isTop3 && <Star className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
+                        {isTop3 && <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
                       </td>
                       <td className="py-3 px-3 text-slate-400">{c.segment}</td>
                       <td className="py-3 px-3 text-slate-400">{c.region}</td>
@@ -292,7 +292,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                           }`}
                           title="Ver Diagnóstico do Cliente"
                         >
-                          <Sparkles className="w-3.5 h-3.5" />
+                          <Cpu className="w-3.5 h-3.5" />
                         </button>
                       </td>
                     </tr>
@@ -304,8 +304,8 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                           <div className="p-4 bg-[#0a1122] border-y border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
                             <div className="space-y-1">
                               <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-semibold">
-                                <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-                                <span>DIAGNÓSTICO ESTRATÉGICO: {c.client_name.toUpperCase()}</span>
+                                <Cpu className="w-3.5 h-3.5 text-cyan-300" />
+                                <span>DIAGNÓSTICO RN INTELLIGENCE: {c.client_name.toUpperCase()}</span>
                               </div>
                               <p className="text-xs text-slate-300">
                                 Conta classe A com faturamento acumulado de <strong>{formatCurrency(c.total_spent)}</strong> ({c.orders_count} pedidos). Margem de {c.margin_pct.toFixed(1)}%. Recomenda-se agendar reunião trimestral de alinhamento executivo (QBR) com o Diretor de TI.
@@ -322,7 +322,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                                 }
                                 className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
                               >
-                                <span>Analisar Conta no Copilot</span>
+                                <span>Analisar Conta na RN Intelligence</span>
                                 <ExternalLink className="w-3 h-3 text-cyan-400" />
                               </button>
                             )}

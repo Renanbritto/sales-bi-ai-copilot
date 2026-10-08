@@ -7,8 +7,8 @@ import {
   ShoppingCart,
   Target,
   ArrowUpRight,
-  Sparkles,
   Cpu,
+  Bot,
   ChevronDown,
   X,
   ExternalLink,
@@ -175,10 +175,10 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                     ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.3)]"
                     : "bg-slate-900/80 text-cyan-400/90 border-cyan-500/30 hover:border-cyan-400 hover:text-cyan-200"
                 }`}
-                title="Clique para fixar o diagnóstico da IA"
+                title="Clique para fixar o diagnóstico da RN Intelligence"
               >
-                <Sparkles className="w-3 h-3 text-cyan-300 animate-pulse" />
-                <span>IA Insight</span>
+                <Cpu className="w-3 h-3 text-cyan-300" />
+                <span>RN Intelligence</span>
                 <ChevronDown
                   className={`w-3 h-3 text-cyan-400 transition-transform duration-200 ${
                     isVisible ? "rotate-180" : ""
@@ -207,9 +207,9 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                 {/* Header HUD do Insight */}
                 <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-cyan-500/20 text-[11px] font-mono">
                   <div className="flex items-center gap-1.5 text-cyan-400">
-                    <Sparkles className="w-3.5 h-3.5 text-cyan-300 animate-pulse" />
+                    <Cpu className="w-3.5 h-3.5 text-cyan-300 animate-pulse" />
                     <span className="font-bold tracking-wider uppercase text-[10px]">
-                      AI Copilot • Telemetria
+                      RN Intelligence • Telemetria
                     </span>
                   </div>
 
@@ -256,7 +256,7 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                   <span className="text-emerald-400 font-semibold">4.2ms</span>
                 </div>
 
-                {/* Botão de Ação: Perguntar ao AI Copilot */}
+                {/* Botão de Ação: Perguntar ao RN Intelligence */}
                 {onOpenCopilot && (
                   <button
                     type="button"
@@ -267,7 +267,7 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
                     }}
                     className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
                   >
-                    <span>Perguntar ao Copilot no Chat</span>
+                    <span>Perguntar à RN Intelligence no Chat</span>
                     <ExternalLink className="w-3 h-3 text-cyan-400" />
                   </button>
                 )}

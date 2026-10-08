@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from typing import Any
 from app.agent.copilot import run_copilot_pipeline
 
-router = APIRouter(prefix="/chat", tags=["AI Copilot"])
+router = APIRouter(prefix="/chat", tags=["RN Intelligence"])
 
 class ChatRequest(BaseModel):
     message: str = Field(..., description="Pergunta do usuário sobre o BI comercial", min_length=2)

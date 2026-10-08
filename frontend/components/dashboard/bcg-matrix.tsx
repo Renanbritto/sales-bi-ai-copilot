@@ -3,7 +3,7 @@
 import React from "react";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { ParetoProduct } from "@/lib/api";
-import { Star, Sparkles, AlertCircle, HelpCircle, ArrowUpRight, TrendingUp, ExternalLink } from "lucide-react";
+import { Award, AlertCircle, HelpCircle, ArrowUpRight, TrendingUp, ExternalLink } from "lucide-react";
 
 interface BcgMatrixProps {
   products: ParetoProduct[];
@@ -13,7 +13,7 @@ interface BcgMatrixProps {
 export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
   const quadrants = [
     {
-      title: "⭐ Estrelas (Stars)",
+      title: "Líderes de Mercado (Estrelas)",
       tag: "Alto Volume & Alta Margem",
       color: "border-cyan-500/40 bg-cyan-950/20",
       desc: "Produtos líderes de mercado com forte crescimento e alta rentabilidade. Exigem investimento contínuo para manter dominância.",
@@ -22,7 +22,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
       items: products.filter((p) => p.margin >= 44 && p.volume >= 2500),
     },
     {
-      title: "🐄 Vacas Leiteiras (Cash Cows)",
+      title: "Alta Geração de Caixa (Cash Cows)",
       tag: "Volume Massivo & Margem Excelente",
       color: "border-emerald-500/40 bg-emerald-950/20",
       desc: "Produtos maduros que geram fluxo de caixa abundante com baixo custo de aquisição adicional.",
@@ -31,7 +31,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
       items: products.filter((p) => p.margin >= 60 && p.volume >= 8000),
     },
     {
-      title: "❓ Oportunidades (Question Marks)",
+      title: "Oportunidades em Escala (Question Marks)",
       tag: "Margem Moderada & Potencial de Escala",
       color: "border-blue-500/40 bg-blue-950/20",
       desc: "Serviços consultivos e conectores com demanda crescente. Podem virar Estrelas com o impulso comercial correto.",
@@ -40,7 +40,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
       items: products.filter((p) => p.margin >= 35 && p.margin < 44),
     },
     {
-      title: "⚠️ Margem Crítica (Abacaxis / Dogs)",
+      title: "Margem Crítica (Revisão)",
       tag: "Baixa Margem (<20%) & Custo Elevado",
       color: "border-amber-500/40 bg-amber-950/20",
       desc: "Hardware com margem bruta reduzida que consome capital de giro e logística sem retorno proporcional.",
@@ -56,7 +56,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-amber-400" />
+              <Award className="w-5 h-5 text-cyan-400" />
               <h2 className="text-lg font-bold text-white tracking-tight">
                 Classificação BCG de Portfólio (Rentabilidade × Demanda)
               </h2>
@@ -113,7 +113,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
                     onClick={() => onOpenCopilot(q.prompt)}
                     className="shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-[11px] font-mono transition-colors cursor-pointer border border-cyan-500/30"
                   >
-                    <span>Consultar IA</span>
+                    <span>Consultar RN Intelligence</span>
                     <ExternalLink className="w-3 h-3" />
                   </button>
                 )}

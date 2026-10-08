@@ -3,7 +3,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Sales BI & AI Copilot API"
+    PROJECT_NAME: str = "Sales BI & RN Intelligence API"
     VERSION: str = "1.0.0"
     DEBUG: bool = True
     

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Sparkles, TrendingUp, AlertTriangle, ArrowRight, Target, ExternalLink } from "lucide-react";
+import { Brain, TrendingUp, AlertTriangle, ArrowRight, Target, ExternalLink } from "lucide-react";
 
 interface AiExecutiveBriefingProps {
   onOpenCopilot?: (prompt?: string) => void;
@@ -17,11 +17,11 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-cyan-500/20 gap-3">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/25">
-            <Sparkles className="w-4 h-4 text-slate-950" />
+            <Brain className="w-4 h-4 text-slate-950" />
           </div>
           <div>
             <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
-              Briefing Executivo Diário • AI Copilot
+              Briefing Executivo Diário • RN Intelligence
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
                 SÍNTESE EXECUTIVA
               </span>
@@ -67,7 +67,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
               }
               className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[11px] font-mono font-medium transition-colors cursor-pointer"
             >
-              <span>Aprofundar Alavanca no Copilot</span>
+              <span>Aprofundar Alavanca na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           )}
@@ -100,7 +100,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
               }
               className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[11px] font-mono font-medium transition-colors cursor-pointer"
             >
-              <span>Investigar Risco no Copilot</span>
+              <span>Investigar Risco na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           )}
@@ -133,7 +133,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
               }
               className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono font-medium transition-colors cursor-pointer"
             >
-              <span>Simular Ação no Copilot</span>
+              <span>Simular Ação na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           )}

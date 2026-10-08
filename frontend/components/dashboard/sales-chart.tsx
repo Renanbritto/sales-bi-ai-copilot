@@ -15,7 +15,12 @@ import {
 } from "recharts";
 import { formatCurrency } from "@/lib/utils";
 import { MonthlyItem } from "@/lib/api";
-import { Sparkles, TrendingUp, TrendingDown, Cpu, Activity } from "lucide-react";
+import {
+  Cpu,
+  TrendingUp,
+  TrendingDown,
+  Activity
+} from "lucide-react";
 
 interface SalesChartProps {
   data: MonthlyItem[];
@@ -48,8 +53,8 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
       {/* Header do Agente IA */}
       <div className="flex items-center justify-between pb-2 mb-3 border-b border-cyan-500/20 text-[11px] font-mono">
         <div className="flex items-center gap-1.5 text-cyan-400">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-300 animate-pulse" />
-          <span className="font-semibold tracking-wider uppercase text-[10px]">AI Copilot • Telemetria</span>
+          <Cpu className="w-3.5 h-3.5 text-cyan-300" />
+          <span className="font-semibold tracking-wider uppercase text-[10px]">RN Intelligence • Telemetria</span>
         </div>
         <div className="flex items-center gap-1.5 text-[10px] text-emerald-400">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
@@ -160,7 +165,7 @@ export function SalesChart({ data }: SalesChartProps) {
           </div>
 
           <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-950/40 border border-cyan-800/40 text-[11px] font-mono text-cyan-300">
-            <Sparkles className="w-2.5 h-2.5" /> AI Tooltips Ativos
+            <Activity className="w-2.5 h-2.5 text-cyan-400" /> Telemetria Ativa
           </div>
         </div>
       </div>
