@@ -45,3 +45,15 @@ body {
   border-color: #cbd5e1;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
 }
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark .glass-panel-hover:hover {
+  border-color: rgba(71, 85, 105, 0.8);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.3);
+}
+ 

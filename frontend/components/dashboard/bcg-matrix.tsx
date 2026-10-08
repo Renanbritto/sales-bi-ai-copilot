@@ -52,7 +52,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
             <div className="flex items-center gap-2">
@@ -76,7 +76,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
               <div>
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
                   <h3 className="font-bold text-slate-700 dark:text-slate-200 text-base">{q.title}</h3>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white dark:bg-[#0f172a]/10 text-slate-600 dark:text-slate-300 font-semibold">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white dark:bg-slate-900/10 text-slate-600 dark:text-slate-300 font-semibold">
                     {q.tag}
                   </span>
                 </div>
@@ -125,3 +125,4 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
     </div>
   );
 }
+ 

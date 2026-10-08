@@ -45,7 +45,7 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
   }
 
   return (
-    <div className="relative z-50 min-w-[300px] rounded-2xl p-4 bg-white dark:bg-[#0f172a]/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-700/50 shadow-xl shadow-black/5 text-slate-700 dark:text-slate-200 font-sans">
+    <div className="relative z-50 min-w-[300px] rounded-2xl p-4 bg-white dark:bg-slate-900/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-700/50 shadow-xl shadow-black/5 text-slate-700 dark:text-slate-200 font-sans">
       {/* Glow corner effects */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-20 h-20 bg-blue-600/10 rounded-full blur-xl pointer-events-none" />
@@ -257,3 +257,4 @@ export function SalesChart({ data }: SalesChartProps) {
     </div>
   );
 }
+ 

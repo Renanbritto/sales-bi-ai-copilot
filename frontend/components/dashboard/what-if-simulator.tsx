@@ -64,7 +64,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
   const copilotSimPrompt = `Analise a viabilidade tática do cenário simulado com +${volumeDelta}% em volume, +${priceDelta}% em preço e ${discountDelta}% em descontos, gerando projeção de ${formatCurrency(projectedRevenue)}.`;
 
   return (
-    <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-6">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-700/50 gap-3">
         <div>
           <div className="flex items-center gap-2">
@@ -256,7 +256,7 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
       </div>
 
       {/* Diagnóstico Executivo Autônomo da IA */}
-      <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+      <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs font-mono text-blue-600 font-semibold">
             <Zap className="w-3.5 h-3.5 text-blue-700" />
@@ -270,3 +270,4 @@ export function WhatIfSimulator({ baseRevenue, baseMarginPct, onOpenCopilot }: W
     </div>
   );
 }
+ 

@@ -121,7 +121,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm transition-all duration-300">
       <div
-        className="w-full max-w-lg h-full bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-slate-700/50 flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
+        className="w-full max-w-lg h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-700/50 flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header do Copilot */}
@@ -194,7 +194,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                   className={`max-w-[85%] rounded-2xl p-3.5 space-y-2.5 ${
                     isUser
                       ? "bg-gradient-to-r bg-blue-600 text-white rounded-br-xs"
-                      : "bg-white dark:bg-[#0f172a]/90 border border-slate-200 dark:border-slate-700/50 text-slate-800 rounded-bl-xs"
+                      : "bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700/50 text-slate-800 rounded-bl-xs"
                   }`}
                 >
                   <p className="whitespace-pre-line">{msg.content}</p>
@@ -300,7 +300,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
               onChange={(e) => setInput(e.target.value)}
               placeholder="Pergunte ao RN Intelligence (ex: vendas por canal, ranking...)"
               disabled={isLoading}
-              className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder-slate-400 focus:bg-white dark:bg-[#0f172a] focus:border-blue-600 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder-slate-400 focus:bg-white dark:bg-slate-900 focus:border-blue-600 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
             />
             <button
               type="submit"

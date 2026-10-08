@@ -53,7 +53,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
 
   return (
     <div className="space-y-6">
-      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-700/50">
           <div>
             <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                     {isSelected && (
                       <tr>
                         <td colSpan={9} className="p-0">
-                          <div className="p-4 bg-white dark:bg-[#0f172a] border-y border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+                          <div className="p-4 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
                             <div className="space-y-1">
                               <div className="flex items-center gap-2 text-xs font-mono text-blue-600 font-semibold">
                                 <Cpu className="w-3.5 h-3.5 text-blue-700" />
@@ -209,3 +209,4 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
     </div>
   );
 }
+ 

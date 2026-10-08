@@ -9,7 +9,7 @@ interface AiExecutiveBriefingProps {
 
 export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps) {
   return (
-    <div className="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 shadow-xs relative overflow-hidden">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 shadow-xs relative overflow-hidden">
       {/* Decorative cyber ambient glow */}
       
       
@@ -100,7 +100,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
         </div>
 
         {/* Pilar 3: Ação Tática */}
-        <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a]/70 border border-slate-200 dark:border-slate-700/50 hover:border-slate-200 dark:border-slate-700/50 transition-all flex flex-col justify-between space-y-3">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-700/50 hover:border-slate-200 dark:border-slate-700/50 transition-all flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold text-blue-700 flex items-center gap-1.5 uppercase tracking-wider font-mono">
@@ -135,3 +135,4 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
     </div>
   );
 }
+ 

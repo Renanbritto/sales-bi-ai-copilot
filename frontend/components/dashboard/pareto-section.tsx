@@ -15,7 +15,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Classe A */}
-        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 flex items-center gap-1.5 font-mono">
@@ -44,7 +44,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
         </div>
 
         {/* Classe B */}
-        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-blue-500/30 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-blue-500/30 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 flex items-center gap-1.5 font-mono">
@@ -73,7 +73,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
         </div>
 
         {/* Classe C */}
-        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-amber-500/30 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-amber-500/30 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 font-mono">
@@ -103,7 +103,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
       </div>
 
       {/* Tabela da Curva ABC */}
-      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 tracking-tight">Curva ABC de Faturamento e Margem</h2>
@@ -181,3 +181,4 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
     </div>
   );
 }
+ 

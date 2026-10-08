@@ -204,11 +204,11 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#f8fafc] dark:bg-slate-950 text-slate-700 dark:text-slate-200 font-sans selection:bg-blue-600/20 selection:text-blue-900 overflow-hidden">
+    <div className="flex h-screen bg-[#f8fafc] dark:bg-slate-900 text-slate-700 dark:text-slate-200 font-sans selection:bg-blue-600/20 selection:text-blue-900 overflow-hidden">
       
       {/* Sidebar Retrátil */}
       <aside 
-        className={`flex flex-col bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-700/50 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-64' : 'w-20'} shrink-0`}
+        className={`flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700/50 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-64' : 'w-20'} shrink-0`}
       >
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
@@ -278,7 +278,7 @@ export default function DashboardPage() {
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto relative">
         
         {/* Top Header Navegação (Agora só tem título da aba e botão IA) */}
-        <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-700/50 bg-white dark:bg-[#0f172a]/95 backdrop-blur-xl shrink-0">
+        <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-700/50 bg-white dark:bg-slate-900/95 backdrop-blur-xl shrink-0">
           <div className="px-6 h-16 flex items-center justify-between">
             
             <div className="flex items-center gap-2">
@@ -328,7 +328,7 @@ export default function DashboardPage() {
         <main className="flex-1 w-full max-w-7xl mx-auto p-4 lg:p-6 pb-20">
           
           {/* Filtros Globais */}
-          <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 dark:text-slate-500">
               <Filter className="w-4 h-4" />
               <span className="text-xs font-bold uppercase tracking-wider">Filtros Globais:</span>
@@ -341,7 +341,7 @@ export default function DashboardPage() {
                 <select
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-blue-600 focus:bg-white dark:bg-[#0f172a] text-xs font-medium shadow-sm transition-all"
+                  className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-blue-600 focus:bg-white dark:bg-slate-900 text-xs font-medium shadow-sm transition-all"
                 >
                   <option value="Todas">Todas as Regiões</option>
                   <option value="Sudeste">Sudeste</option>
@@ -357,7 +357,7 @@ export default function DashboardPage() {
                 <select
                   value={selectedChannel}
                   onChange={(e) => setSelectedChannel(e.target.value)}
-                  className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-blue-600 focus:bg-white dark:bg-[#0f172a] text-xs font-medium shadow-sm transition-all"
+                  className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-blue-600 focus:bg-white dark:bg-slate-900 text-xs font-medium shadow-sm transition-all"
                 >
                   <option value="Todos">Todos os Canais</option>
                   <option value="B2B Enterprise">B2B Enterprise</option>
@@ -433,7 +433,7 @@ export default function DashboardPage() {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-slate-200 dark:border-slate-700/50 py-6 text-center text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-auto shrink-0 bg-white dark:bg-[#0f172a]">
+        <footer className="border-t border-slate-200 dark:border-slate-700/50 py-6 text-center text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-auto shrink-0 bg-white dark:bg-slate-900">
           Análise Comercial &bull; RN Intelligence &bull; Desenvolvido por <span className="text-blue-500">Renan Nocelli</span> &bull; Arquitetura com DuckDB OLAP, FastAPI, Google Gemini e Next.js
         </footer>
       </div>
@@ -447,3 +447,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+ 

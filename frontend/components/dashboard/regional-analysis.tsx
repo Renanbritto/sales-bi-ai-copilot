@@ -67,7 +67,7 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
           return (
             <div
               key={reg.region}
-              className={`bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-xl p-5 border transition-all duration-300 relative ${
+              className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-xl p-5 border transition-all duration-300 relative ${
                 isSelected
                   ? "border-blue-400/70 shadow-md shadow-blue-900/10 bg-slate-50 dark:bg-slate-800/50"
                   : "border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50/50 hover:bg-slate-50 dark:bg-slate-800/50 hover:border-slate-200 dark:border-slate-700/50"
@@ -128,7 +128,7 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
               {/* Popover de Diagnóstico Regional */}
               {isSelected && (
                 <div
-                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-700 dark:text-slate-200 animate-in fade-in space-y-3"
+                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-700 dark:text-slate-200 animate-in fade-in space-y-3"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono">
@@ -168,3 +168,4 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
     </div>
   );
 }
+ 

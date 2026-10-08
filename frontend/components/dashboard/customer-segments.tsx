@@ -64,7 +64,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
   return (
     <div className="space-y-6">
       {/* Grid de Segmentos de Mercado */}
-      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-700/50">
           <div>
             <div className="flex items-center gap-2">
@@ -158,7 +158,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                 {/* Popover Expansível de Diagnóstico IA da Vertical */}
                 {isSelected && (
                   <div
-                    className="mt-3 p-3.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 text-xs text-slate-700 dark:text-slate-200 animate-in fade-in space-y-2.5"
+                    className="mt-3 p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 text-xs text-slate-700 dark:text-slate-200 animate-in fade-in space-y-2.5"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono">
@@ -198,7 +198,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
       </div>
 
       {/* Top 10 Contas Corporativas com Ações Táticas */}
-      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-700/50">
           <div>
             <div className="flex items-center gap-2">
@@ -301,7 +301,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                     {isSelected && (
                       <tr>
                         <td colSpan={9} className="p-0">
-                          <div className="p-4 bg-white dark:bg-[#0f172a] border-y border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+                          <div className="p-4 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
                             <div className="space-y-1">
                               <div className="flex items-center gap-2 text-xs font-mono text-blue-600 font-semibold">
                                 <Cpu className="w-3.5 h-3.5 text-blue-700" />
@@ -340,3 +340,4 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
     </div>
   );
 }
+ 

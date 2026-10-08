@@ -32,7 +32,7 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
   const d = payload[0].payload;
 
   return (
-    <div className="rounded-2xl p-3.5 bg-white dark:bg-[#0f172a]/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-700/50 shadow-lg text-xs text-slate-700 dark:text-slate-200 min-w-[220px]">
+    <div className="rounded-2xl p-3.5 bg-white dark:bg-slate-900/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-700/50 shadow-lg text-xs text-slate-700 dark:text-slate-200 min-w-[220px]">
       <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono text-blue-600">
         <Cpu className="w-3 h-3 text-blue-700" />
         <span>Radar Benchmark (RN Intelligence)</span>
@@ -66,7 +66,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Tabela Leaderboard (2 colunas) */}
-      <div className="lg:col-span-2 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
+      <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
             <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
@@ -176,7 +176,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
       </div>
 
       {/* Radar de Competências / Performance */}
-      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-base font-bold text-slate-700 dark:text-slate-200 tracking-tight flex items-center gap-1.5">
@@ -234,3 +234,4 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
     </div>
   );
 }
+ 

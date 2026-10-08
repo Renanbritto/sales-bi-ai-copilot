@@ -97,7 +97,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
   const [activeStage, setActiveStage] = useState<number | null>(null);
 
   return (
-    <div className="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border-0 shadow-xs space-y-6">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border-0 shadow-xs space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800/50">
         <div>
           <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
               key={stg.id}
               className={`p-3 rounded-xl transition-all duration-200 cursor-pointer ${
                 isSelected
-                  ? "bg-white dark:bg-[#0f172a] border-blue-500 shadow-md ring-2 ring-blue-500/10 shadow-blue-900/10"
+                  ? "bg-white dark:bg-slate-900 border-blue-500 shadow-md ring-2 ring-blue-500/10 shadow-blue-900/10"
                   : "bg-transparent hover:bg-slate-50 dark:bg-slate-800/50/80"
               }`}
               onClick={() => setActiveStage(isSelected ? null : stg.id)}
@@ -177,7 +177,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                   className={`mx-auto h-10 rounded-lg ${stg.color} transition-all duration-700 flex items-center justify-center shadow-md relative overflow-hidden group`}
                   style={{ width: `${widthPct}%` }}
                 >
-                  <div className="absolute inset-0 bg-white dark:bg-[#0f172a]/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-white dark:bg-slate-900/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <span className="text-sm font-bold text-slate-700 dark:text-slate-200 tracking-widest font-mono z-10 drop-shadow-sm">
                     {stg.count.toLocaleString("pt-BR")} DEALS
                   </span>
@@ -187,7 +187,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
               {/* Painel de Diagnóstico IA Expansível */}
               {isSelected && (
                 <div
-                  className="mt-3 p-4 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-700 dark:text-slate-200 animate-in fade-in zoom-in-95 space-y-3"
+                  className="mt-3 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-700 dark:text-slate-200 animate-in fade-in zoom-in-95 space-y-3"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800/50 text-[10px] font-mono">
@@ -213,7 +213,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 text-[12px] leading-relaxed text-slate-700 dark:text-slate-200">
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 text-[12px] leading-relaxed text-slate-700 dark:text-slate-200">
                     <p className="flex items-start gap-2">
                       <Cpu className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                       <span>{stg.aiDiagnosis}</span>
@@ -246,3 +246,4 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
     </div>
   );
 }
+ 

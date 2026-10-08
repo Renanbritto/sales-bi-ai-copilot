@@ -301,7 +301,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
     const p = payload[0].payload as BubbleProduct;
 
     return (
-      <div className="z-50 min-w-[310px] max-w-[360px] p-4 rounded-2xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-700 dark:text-slate-200 font-sans pointer-events-auto">
+      <div className="z-50 min-w-[310px] max-w-[360px] p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xl text-xs text-slate-700 dark:text-slate-200 font-sans pointer-events-auto">
         {/* Header HUD */}
         <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono">
           <span className="text-blue-600 flex items-center gap-1 font-semibold uppercase tracking-wider">
@@ -352,7 +352,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         </div>
 
         {/* Diagnóstico Executivo da IA */}
-        <div className="p-2.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 text-[11px] leading-relaxed text-slate-600 dark:text-slate-300 mb-3">
+        <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 text-[11px] leading-relaxed text-slate-600 dark:text-slate-300 mb-3">
           <p className="flex items-start gap-1.5">
             <Cpu className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
             <span>{p.aiDiagnosis}</span>
@@ -375,7 +375,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
   };
 
   return (
-    <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-6">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-6">
       {/* Top Header com Título e Filtros */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-700/50">
         <div>
@@ -616,3 +616,4 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
     </div>
   );
 }
+ 
