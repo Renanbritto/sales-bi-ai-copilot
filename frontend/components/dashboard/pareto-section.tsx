@@ -15,13 +15,13 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Classe A */}
-        <div className="glass-panel p-5 rounded-xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/30 to-slate-900/60 flex flex-col justify-between space-y-3">
+        <div className="glass-panel p-5 rounded-xl border border-slate-700 bg-gradient-to-br from-slate-900 to-slate-900/60 flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5 font-mono">
+              <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 flex items-center gap-1.5 font-mono">
                 <Award className="w-4 h-4" /> Classe A (Críticos)
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 font-mono">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 font-bold border border-slate-700 font-mono">
                 82.0% Receita
               </span>
             </div>
@@ -35,7 +35,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
             <button
               type="button"
               onClick={() => onOpenCopilot("Qual a concentração de receita nos produtos Classe A e quais clientes mais compram?")}
-              className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-[11px] font-mono transition-colors border border-cyan-500/30 cursor-pointer"
+              className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-slate-900/80 hover:bg-blue-500/15 text-blue-300 text-[11px] font-mono transition-colors border border-slate-700 cursor-pointer"
             >
               <span>Analisar Classe A na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
@@ -131,7 +131,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
               {products.map((p) => {
                 const badgeColor =
                   p.class === "A"
-                    ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40"
+                    ? "bg-blue-500/15 text-blue-300 border-slate-700"
                     : p.class === "B"
                     ? "bg-blue-500/20 text-blue-300 border-blue-500/40"
                     : "bg-slate-800 text-slate-400 border-slate-700";
@@ -144,7 +144,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                       </span>
                     </td>
                     <td className="py-3 px-3 font-semibold text-white">{p.name}</td>
-                    <td className="py-3 px-3 text-right font-mono text-cyan-300 font-bold">
+                    <td className="py-3 px-3 text-right font-mono text-blue-300 font-bold">
                       {formatCurrency(p.revenue)}
                     </td>
                     <td className="py-3 px-3 text-right font-mono text-slate-300">{p.pct}%</td>
@@ -164,7 +164,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                         <button
                           type="button"
                           onClick={() => onOpenCopilot(`Analise a performance de vendas, volume e margem do produto ${p.name}.`)}
-                          className="p-1 rounded-lg bg-slate-900 border border-cyan-500/30 text-cyan-400 hover:text-white hover:border-cyan-400 transition-colors"
+                          className="p-1 rounded-lg bg-slate-900 border border-slate-700 text-blue-400 hover:text-white hover:border-blue-400 transition-colors"
                           title="Analisar na RN Intelligence"
                         >
                           <Cpu className="w-3.5 h-3.5" />

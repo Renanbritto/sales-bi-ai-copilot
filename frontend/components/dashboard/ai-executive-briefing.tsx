@@ -9,15 +9,15 @@ interface AiExecutiveBriefingProps {
 
 export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps) {
   return (
-    <div className="glass-panel rounded-2xl p-6 border border-cyan-500/30 bg-gradient-to-br from-cyan-950/30 via-slate-900/80 to-blue-950/30 relative overflow-hidden">
+    <div className="glass-panel rounded-2xl p-6 border border-slate-800 bg-[#0d162b]/85 relative overflow-hidden">
       {/* Decorative cyber ambient glow */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-60 h-60 bg-blue-600/10 rounded-full blur-2xl pointer-events-none" />
+      
+      
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-cyan-500/20 gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-slate-800 gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/25">
-            <Brain className="w-4 h-4 text-slate-950" />
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/30">
+            <Brain className="w-4 h-4 text-white" />
           </div>
           <div>
             <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
@@ -31,7 +31,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
         </div>
 
         <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400 " />
           <span>Acurácia Analítica: 99.8%</span>
         </div>
       </div>
@@ -105,13 +105,13 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
         </div>
 
         {/* Pilar 3: Ação Tática */}
-        <div className="p-4 rounded-xl bg-slate-950/70 border border-cyan-500/30 hover:border-cyan-500/50 transition-all flex flex-col justify-between space-y-3">
+        <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-700 hover:border-slate-700 transition-all flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-cyan-400 flex items-center gap-1.5 uppercase tracking-wider font-mono">
+              <span className="text-xs font-semibold text-blue-400 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <Target className="w-3.5 h-3.5" /> 3. Ação Recomendada
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300">
                 Próximo Quarter
               </span>
             </div>
@@ -129,7 +129,7 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
                   "Como implementar o teto de 7.5% de desconto em parceiros sem reduzir o volume de vendas?"
                 )
               }
-              className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono font-medium transition-colors cursor-pointer"
+              className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-blue-300 text-[11px] font-mono font-medium transition-colors cursor-pointer"
             >
               <span>Simular Ação na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />

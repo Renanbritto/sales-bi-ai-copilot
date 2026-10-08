@@ -57,11 +57,11 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
           <div>
             <div className="flex items-center gap-2">
-              <Network className="w-5 h-5 text-cyan-400" />
+              <Network className="w-5 h-5 text-blue-400" />
               <h2 className="text-lg font-bold text-white tracking-tight">
                 Matriz de Performance & Erosão de Descontos por Canal
               </h2>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-blue-400">
                 Canal Comercial
               </span>
             </div>
@@ -108,7 +108,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                       onClick={() => setActiveChannel(isSelected ? null : c.channel)}
                     >
                       <td className="py-3.5 px-4 font-bold text-white flex items-center gap-2">
-                        <span className={`w-2 h-2 rounded-full ${discountAlert ? "bg-amber-400" : "bg-cyan-400"}`} />
+                        <span className={`w-2 h-2 rounded-full ${discountAlert ? "bg-amber-400" : "bg-blue-500"}`} />
                         {c.channel}
                       </td>
                       <td className="py-3.5 px-4 text-right font-mono text-slate-300">
@@ -128,7 +128,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                           {c.discount_pct.toFixed(1)}%
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 text-right font-mono text-cyan-300 font-bold">
+                      <td className="py-3.5 px-4 text-right font-mono text-blue-300 font-bold">
                         {formatCurrency(c.actual)}
                       </td>
                       <td className="py-3.5 px-4 text-right font-mono">
@@ -155,8 +155,8 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                           }}
                           className={`p-1 rounded-lg border text-[11px] font-mono transition-colors ${
                             isSelected
-                              ? "bg-cyan-500/20 text-cyan-300 border-cyan-400"
-                              : "bg-slate-900 text-cyan-400/80 border-cyan-500/30 hover:border-cyan-400"
+                              ? "bg-blue-500/15 text-blue-300 border-blue-400"
+                              : "bg-slate-900 text-blue-400/80 border-slate-700 hover:border-blue-400"
                           }`}
                           title="Ver Diagnóstico do Canal"
                         >
@@ -169,10 +169,10 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                     {isSelected && (
                       <tr>
                         <td colSpan={9} className="p-0">
-                          <div className="p-4 bg-[#0a1122] border-y border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+                          <div className="p-4 bg-[#0a1122] border-y border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
                             <div className="space-y-1">
-                              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-semibold">
-                                <Cpu className="w-3.5 h-3.5 text-cyan-300" />
+                              <div className="flex items-center gap-2 text-xs font-mono text-blue-400 font-semibold">
+                                <Cpu className="w-3.5 h-3.5 text-blue-300" />
                                 <span>DIAGNÓSTICO RN INTELLIGENCE: {c.channel.toUpperCase()}</span>
                                 {discountAlert && (
                                   <span className="flex items-center gap-1 text-[10px] text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800">
@@ -189,10 +189,10 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                               <button
                                 type="button"
                                 onClick={() => onOpenCopilot(insight.prompt)}
-                                className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
+                                className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-700 text-blue-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
                               >
                                 <span>Analisar Canal na RN Intelligence</span>
-                                <ExternalLink className="w-3 h-3 text-cyan-400" />
+                                <ExternalLink className="w-3 h-3 text-blue-400" />
                               </button>
                             )}
                           </div>

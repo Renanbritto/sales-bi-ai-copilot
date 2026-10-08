@@ -56,7 +56,7 @@ const SalesChart = dynamic(
     ssr: false,
     loading: () => (
       <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping mr-2" />
+        <span className="w-2 h-2 rounded-full bg-blue-400 mr-2" />
         Carregando gráfico mensal...
       </div>
     ),
@@ -69,7 +69,7 @@ const RepsLeaderboard = dynamic(
     ssr: false,
     loading: () => (
       <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
-        <span className="w-2 h-2 rounded-full bg-purple-400 animate-ping mr-2" />
+        <span className="w-2 h-2 rounded-full bg-purple-400 mr-2" />
         Carregando performance de equipe...
       </div>
     ),
@@ -85,7 +85,7 @@ const ProductDecisionMatrix = dynamic(
     ssr: false,
     loading: () => (
       <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2" />
+        <span className="w-2 h-2 rounded-full bg-emerald-400 mr-2" />
         Carregando matriz de decisão de portfólio...
       </div>
     ),
@@ -171,13 +171,13 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070a13] text-slate-100 flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-[#0a0f1d] text-slate-100 flex flex-col font-sans selection:bg-blue-600/30 selection:text-blue-200">
       {/* Top Header Navegação */}
-      <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-[#070b13]/85 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-[#0d1527]/85 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-              <BarChart3 className="w-5 h-5 text-slate-950 font-bold" />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/40">
+              <BarChart3 className="w-5 h-5 text-white font-bold" />
             </div>
             <div>
               <h1 className="text-lg font-bold text-white tracking-tight">Análise Comercial</h1>
@@ -188,11 +188,11 @@ export default function DashboardPage() {
           <button
             type="button"
             onClick={() => handleOpenCopilot("Olá RN Intelligence! Quais são os principais destaques executivos deste painel?")}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-xs shadow-lg shadow-cyan-500/25 transition-all transform hover:scale-[1.02] cursor-pointer"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs shadow-md shadow-blue-950/40 border border-blue-400/20 transition-all cursor-pointer"
           >
-            <Bot className="w-4 h-4 text-slate-950" />
+            <Bot className="w-4 h-4 text-white" />
             <span>Abrir RN Intelligence</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 ml-0.5" />
           </button>
         </div>
       </header>
@@ -202,7 +202,7 @@ export default function DashboardPage() {
         {/* Barra de Filtros Globais */}
         <div className="glass-panel rounded-xl p-3 px-4 border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2 text-slate-400 font-medium">
-            <Filter className="w-4 h-4 text-cyan-400" />
+            <Filter className="w-4 h-4 text-slate-400" />
             <span>Filtros Globais:</span>
           </div>
 
@@ -213,7 +213,7 @@ export default function DashboardPage() {
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-slate-200 outline-none cursor-pointer focus:border-cyan-500"
+                className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-slate-200 outline-none cursor-pointer focus:border-blue-500"
               >
                 <option value="Todas">Todas as Regiões</option>
                 <option value="Sudeste">Sudeste</option>
@@ -229,7 +229,7 @@ export default function DashboardPage() {
               <select
                 value={selectedChannel}
                 onChange={(e) => setSelectedChannel(e.target.value)}
-                className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-slate-200 outline-none cursor-pointer focus:border-cyan-500"
+                className="bg-slate-900 border border-slate-700/80 rounded-lg px-2.5 py-1 text-slate-200 outline-none cursor-pointer focus:border-blue-500"
               >
                 <option value="Todos">Todos os Canais</option>
                 <option value="B2B Enterprise">B2B Enterprise</option>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
                   setSelectedRegion("Todas");
                   setSelectedChannel("Todos");
                 }}
-                className="text-[11px] text-cyan-400 hover:underline cursor-pointer"
+                className="text-[11px] text-blue-400 hover:underline cursor-pointer"
               >
                 Limpar Filtros
               </button>
@@ -277,7 +277,7 @@ export default function DashboardPage() {
                   onClick={() => setActiveTab(tab.id as TabType)}
                   className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
                     isActive
-                      ? "bg-slate-800 text-cyan-400 border border-slate-700 shadow-sm"
+                      ? "bg-slate-800 text-blue-400 border border-slate-700 shadow-sm"
                       : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/60"
                   }`}
                 >
@@ -355,7 +355,7 @@ export default function DashboardPage() {
             href="https://renan-nocelli.vercel.app"
             target="_blank"
             rel="noreferrer"
-            className="text-cyan-400 hover:underline font-semibold"
+            className="text-blue-400 hover:underline font-semibold"
           >
             Renan Nocelli
           </a>{" "}

@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #070b13;
+  background-color: #0a0f1d;
   color: #f1f5f9;
   font-family: var(--font-comfortaa), Comfortaa, sans-serif;
   overflow-x: hidden;
@@ -19,7 +19,7 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #090e1a;
 }
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
@@ -31,7 +31,7 @@ body {
 
 /* Glassmorphism Classes */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(13, 21, 41, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -41,6 +41,6 @@ body {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .glass-panel-hover:hover {
-  border-color: rgba(56, 189, 248, 0.25);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.08);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }

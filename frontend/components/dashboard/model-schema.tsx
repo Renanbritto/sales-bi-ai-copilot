@@ -8,7 +8,7 @@ export function ModelSchema() {
     {
       name: "f_vendas",
       type: "Tabela Fato",
-      color: "border-cyan-500/50 bg-cyan-950/20",
+      color: "border-blue-500/50 bg-slate-900/20",
       badge: "13.7k+ Linhas",
       cols: [
         "venda_id (PK)",
@@ -70,7 +70,7 @@ export function ModelSchema() {
     <div className="space-y-6">
       <div className="glass-panel rounded-xl p-6 border border-slate-800">
         <div className="flex items-center gap-3 mb-2">
-          <Database className="w-5 h-5 text-cyan-400" />
+          <Database className="w-5 h-5 text-blue-400" />
           <h2 className="text-lg font-semibold text-white">Arquitetura de Dados: Star Schema Dimensional (DuckDB)</h2>
         </div>
         <p className="text-xs text-slate-400 max-w-3xl">
