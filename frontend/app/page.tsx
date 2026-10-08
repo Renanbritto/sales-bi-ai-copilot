@@ -11,6 +11,9 @@ import {
   Globe,
   Sliders,
   Building2,
+  PanelLeftClose,
+  PanelLeftOpen,
+  ChevronRight,
 } from "lucide-react";
 import {
   fetchKpis,
@@ -106,6 +109,7 @@ export default function DashboardPage() {
 
   const [activeTab, setActiveTab] = useState<TabType>("executivo");
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [copilotInitialPrompt, setCopilotInitialPrompt] = useState<string>("");
 
   // Filtros Globais
@@ -171,199 +175,232 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-700 flex flex-col font-sans selection:bg-blue-600/20 selection:text-blue-900">
-      {/* Top Header Navegação */}
-      <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-900/20">
-              <BarChart3 className="w-5 h-5 text-white font-bold" />
+    <div className="flex h-screen bg-[#f8fafc] text-slate-700 font-sans selection:bg-blue-600/20 selection:text-blue-900 overflow-hidden">
+      
+      {/* Sidebar Retrátil */}
+      <aside 
+        className={`flex flex-col bg-white border-r border-slate-200 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-64' : 'w-20'} shrink-0`}
+      >
+        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 shrink-0">
+          <div className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
+            <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 shadow-sm shadow-blue-900/10">
+              <BarChart3 className="w-4 h-4 text-white font-bold" />
             </div>
-            <div>
-              <h1 className="text-lg font-bold text-slate-700 tracking-tight">Análise Comercial</h1>
-            </div>
+            <h1 className="text-sm font-bold text-slate-700 tracking-tight">RN Intelligence</h1>
           </div>
-
-          {/* Botão de Abrir Copilot */}
-          <button
-            type="button"
-            onClick={() => handleOpenCopilot("Olá RN Intelligence! Quais são os principais destaques executivos deste painel?")}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-sm border border-blue-700/20 transition-all cursor-pointer"
+          <button 
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 transition-colors shrink-0"
           >
-            <Bot className="w-4 h-4 text-white" />
-            <span>Abrir RN Intelligence</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 ml-0.5" />
+            {isSidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
           </button>
         </div>
-      </header>
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        {/* Barra de Filtros Globais */}
-        <div className="glass-panel rounded-xl p-3 px-4 border border-slate-200 bg-white shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-slate-400 font-medium">
-            <Filter className="w-4 h-4 text-slate-400" />
-            <span>Filtros Globais:</span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Filtro Região */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-slate-400">Região:</span>
-              <select
-                value={selectedRegion}
-                onChange={(e) => setSelectedRegion(e.target.value)}
-                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs"
-              >
-                <option value="Todas">Todas as Regiões</option>
-                <option value="Sudeste">Sudeste</option>
-                <option value="Sul">Sul</option>
-                <option value="Nordeste">Nordeste</option>
-                <option value="Centro-Oeste">Centro-Oeste</option>
-              </select>
-            </div>
-
-            {/* Filtro Canal */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-slate-400">Canal:</span>
-              <select
-                value={selectedChannel}
-                onChange={(e) => setSelectedChannel(e.target.value)}
-                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs"
-              >
-                <option value="Todos">Todos os Canais</option>
-                <option value="B2B Enterprise">B2B Enterprise</option>
-                <option value="E-commerce Direto">E-commerce Direto</option>
-                <option value="Grandes Contas">Grandes Contas</option>
-                <option value="Canais & Parceiros">Canais & Parceiros</option>
-              </select>
-            </div>
-
-            {(selectedRegion !== "Todas" || selectedChannel !== "Todos") && (
+        <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1.5">
+          {[
+            { id: "executivo", label: "Visão Executiva", icon: BarChart3 },
+            { id: "produtos", label: "Portfólio & Matriz de Decisão", icon: PieIcon },
+            { id: "clientes", label: "Clientes & Segmentos", icon: Building2 },
+            { id: "geografia", label: "Regionais & Canais", icon: Globe },
+            { id: "simulador", label: "Simulador What-If", icon: Sliders },
+            { id: "equipe", label: "Equipe & Quotas", icon: Users },
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
               <button
                 type="button"
-                onClick={() => {
-                  setSelectedRegion("Todas");
-                  setSelectedChannel("Todos");
-                }}
-                className="text-[11px] text-blue-600 hover:underline cursor-pointer font-medium"
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as TabType)}
+                title={!isSidebarOpen ? tab.label : undefined}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-blue-50 text-blue-600 font-semibold shadow-sm border border-blue-100"
+                    : "text-slate-500 hover:text-slate-700 hover:bg-slate-100/70 border border-transparent"
+                }`}
               >
-                Limpar Filtros
+                <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-blue-600' : 'text-slate-400'}`} />
+                <span className={`whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
+                  {tab.label}
+                </span>
+                {isActive && isSidebarOpen && (
+                  <div className="ml-auto w-1 h-4 bg-blue-600 rounded-full" />
+                )}
               </button>
-            )}
-          </div>
+            );
+          })}
         </div>
 
-        {/* 4 Cards de KPI Executivos com Tooltips Inteligentes e Abertura Segura */}
-        <KpiSummary data={filteredKpis} onOpenCopilot={handleOpenCopilot} />
+        {/* User / Settings / Status na base da sidebar */}
+        <div className="p-4 border-t border-slate-200 shrink-0">
+          <div className={`flex items-center gap-3 transition-all duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>
+             <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center shrink-0">
+               <Users className="w-4 h-4 text-slate-500" />
+             </div>
+             <div className="flex flex-col text-left">
+               <span className="text-xs font-bold text-slate-700">Diretoria</span>
+               <span className="text-[10px] text-slate-500">Visão Consolidada</span>
+             </div>
+          </div>
+        </div>
+      </aside>
 
-        {/* Menu de Abas (6 Níveis de Análise Tática para Negócios & Diretoria) */}
-        <div className="flex items-center justify-between border-b border-slate-200 pb-2 overflow-x-auto">
-          <div className="flex gap-1.5">
-            {[
-              { id: "executivo", label: "Visão Executiva", icon: BarChart3 },
-              { id: "produtos", label: "Portfólio & Matriz de Decisão", icon: PieIcon },
-              { id: "clientes", label: "Clientes & Segmentos", icon: Building2 },
-              { id: "geografia", label: "Regionais & Canais", icon: Globe },
-              { id: "simulador", label: "Simulador What-If", icon: Sliders },
-              { id: "equipe", label: "Equipe & Quotas", icon: Users },
-            ].map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
-              return (
+      {/* Conteúdo Principal (Direita) */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto relative">
+        
+        {/* Top Header Navegação (Agora só tem título da aba e botão IA) */}
+        <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur-xl shrink-0">
+          <div className="px-6 h-16 flex items-center justify-between">
+            
+            <div className="flex items-center gap-2">
+               {/* Mobile menu toggle fallback could go here if we do mobile responsive, but keeping simple */}
+               <h2 className="text-base font-bold text-slate-700 tracking-tight hidden sm:block">
+                  {[
+                    { id: "executivo", label: "Visão Executiva" },
+                    { id: "produtos", label: "Portfólio & Matriz de Decisão" },
+                    { id: "clientes", label: "Clientes & Segmentos" },
+                    { id: "geografia", label: "Regionais & Canais" },
+                    { id: "simulador", label: "Simulador What-If" },
+                    { id: "equipe", label: "Equipe & Quotas" },
+                  ].find(t => t.id === activeTab)?.label}
+               </h2>
+            </div>
+
+            {/* Botão de Abrir Copilot */}
+            <div className="flex items-center gap-4">
+              <div className="hidden lg:flex items-center gap-2 text-xs text-slate-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span className="font-mono text-[11px]">13.747 transações faturadas</span>
+              </div>
+              <div className="w-px h-6 bg-slate-200 hidden lg:block" />
+              <button
+                type="button"
+                onClick={() => handleOpenCopilot("Olá RN Intelligence! Quais são os principais destaques executivos deste painel?")}
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
+              >
+                <Bot className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>Abrir RN Intelligence</span>
+                <div className="w-2 h-2 rounded-full bg-emerald-400 border border-blue-600 animate-pulse ml-1" />
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content Area */}
+        <main className="flex-1 w-full max-w-7xl mx-auto p-4 lg:p-6 pb-20">
+          
+          {/* Filtros Globais */}
+          <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-slate-500">
+              <Filter className="w-4 h-4" />
+              <span className="text-xs font-bold uppercase tracking-wider">Filtros Globais:</span>
+            </div>
+            
+            <div className="flex flex-wrap items-center gap-4">
+              {/* Filtro Região */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-slate-400 text-xs font-medium">Região:</span>
+                <select
+                  value={selectedRegion}
+                  onChange={(e) => setSelectedRegion(e.target.value)}
+                  className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs font-medium shadow-sm transition-all"
+                >
+                  <option value="Todas">Todas as Regiões</option>
+                  <option value="Sudeste">Sudeste</option>
+                  <option value="Sul">Sul</option>
+                  <option value="Nordeste">Nordeste</option>
+                  <option value="Centro-Oeste">Centro-Oeste</option>
+                </select>
+              </div>
+
+              {/* Filtro Canal */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-slate-400 text-xs font-medium">Canal:</span>
+                <select
+                  value={selectedChannel}
+                  onChange={(e) => setSelectedChannel(e.target.value)}
+                  className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs font-medium shadow-sm transition-all"
+                >
+                  <option value="Todos">Todos os Canais</option>
+                  <option value="B2B Enterprise">B2B Enterprise</option>
+                  <option value="E-commerce Direto">E-commerce Direto</option>
+                  <option value="Grandes Contas">Grandes Contas</option>
+                  <option value="Canais & Parceiros">Canais & Parceiros</option>
+                </select>
+              </div>
+
+              {(selectedRegion !== "Todas" || selectedChannel !== "Todos") && (
                 <button
                   type="button"
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as TabType)}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-                    isActive
-                      ? "bg-white text-blue-600 border border-slate-200 shadow-xs font-semibold"
-                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-100/70"
-                  }`}
+                  onClick={() => {
+                    setSelectedRegion("Todas");
+                    setSelectedChannel("Todos");
+                  }}
+                  className="text-[11px] text-blue-600 hover:underline cursor-pointer font-medium"
                 >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{tab.label}</span>
+                  Limpar Filtros
                 </button>
-              );
-            })}
+              )}
+            </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 text-xs text-slate-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span className="font-mono text-[11px]">13.747 transações faturadas</span>
+          {/* 4 Cards de KPI Executivos */}
+          <KpiSummary data={filteredKpis} onOpenCopilot={handleOpenCopilot} />
+
+          <div className="mt-6">
+            {/* Conteúdo da Aba Ativa */}
+            {activeTab === "executivo" && (
+              <div className="space-y-6">
+                <AiExecutiveBriefing onOpenCopilot={handleOpenCopilot} />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <SalesChart data={monthly} />
+                  <FunnelChart onOpenCopilot={handleOpenCopilot} />
+                </div>
+              </div>
+            )}
+
+            {activeTab === "produtos" && (
+              <div className="space-y-6">
+                <ProductDecisionMatrix onOpenCopilot={handleOpenCopilot} />
+                <ParetoSection products={pareto} onOpenCopilot={handleOpenCopilot} />
+                <BcgMatrix />
+              </div>
+            )}
+
+            {activeTab === "clientes" && (
+              <div className="space-y-6">
+                <CustomerSegments segments={segments} topClients={topClients} onOpenCopilot={handleOpenCopilot} />
+              </div>
+            )}
+
+            {activeTab === "geografia" && (
+              <div className="space-y-6">
+                <RegionalAnalysis regions={regions} onOpenCopilot={handleOpenCopilot} />
+                <ChannelPerformance channels={channels} onOpenCopilot={handleOpenCopilot} />
+              </div>
+            )}
+
+            {activeTab === "simulador" && (
+              <div className="space-y-6">
+                <WhatIfSimulator currentRevenue={filteredKpis.faturamento_total} currentMarginPct={filteredKpis.margem_contribuicao_pct} />
+              </div>
+            )}
+
+            {activeTab === "equipe" && (
+              <div className="space-y-6">
+                <RepsLeaderboard reps={reps} onOpenCopilot={handleOpenCopilot} />
+              </div>
+            )}
           </div>
-        </div>
+        </main>
 
-        {/* Conteúdo da Aba Ativa */}
-        {activeTab === "executivo" && (
-          <div className="space-y-6">
-            <AiExecutiveBriefing onOpenCopilot={handleOpenCopilot} />
-            <SalesChart data={monthly} />
-            <FunnelChart onOpenCopilot={handleOpenCopilot} />
-          </div>
-        )}
+        {/* Footer */}
+        <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto shrink-0 bg-white">
+          Análise Comercial &bull; RN Intelligence &bull; Desenvolvido por <span className="text-blue-500">Renan Nocelli</span> &bull; Arquitetura com DuckDB OLAP, FastAPI, Google Gemini e Next.js
+        </footer>
+      </div>
 
-        {activeTab === "produtos" && (
-          <div className="space-y-6">
-            {/* O Novo Gráfico de Bolhas Decisório com 20 Produtos e 4 Quadrantes Estratégicos */}
-            <ProductDecisionMatrix onOpenCopilot={handleOpenCopilot} />
-            {/* Matriz BCG e Curva ABC Complementares */}
-            <BcgMatrix products={pareto} onOpenCopilot={handleOpenCopilot} />
-            <ParetoSection products={pareto} onOpenCopilot={handleOpenCopilot} />
-          </div>
-        )}
-
-        {activeTab === "clientes" && (
-          <div className="space-y-6">
-            <CustomerSegments
-              segments={segments}
-              topClients={topClients}
-              onOpenCopilot={handleOpenCopilot}
-            />
-          </div>
-        )}
-
-        {activeTab === "geografia" && (
-          <div className="space-y-6">
-            <RegionalAnalysis regions={regions} onOpenCopilot={handleOpenCopilot} />
-            <ChannelPerformance channels={channels} onOpenCopilot={handleOpenCopilot} />
-          </div>
-        )}
-
-        {activeTab === "simulador" && (
-          <div className="space-y-6">
-            <WhatIfSimulator
-              baseRevenue={kpis.faturamento_total}
-              baseMarginPct={kpis.margem_contribuicao_pct}
-              onOpenCopilot={handleOpenCopilot}
-            />
-          </div>
-        )}
-
-        {activeTab === "equipe" && (
-          <div className="space-y-6">
-            <RepsLeaderboard reps={reps} onOpenCopilot={handleOpenCopilot} />
-          </div>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        <p>
-          Análise Comercial • RN Intelligence • Desenvolvido por{" "}
-          <a
-            href="https://renan-nocelli.vercel.app"
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-400 hover:underline font-semibold"
-          >
-            Renan Nocelli
-          </a>{" "}
-          • Arquitetura com DuckDB OLAP, FastAPI, Google Gemini e Next.js
-        </p>
-      </footer>
-
-      {/* Drawer da RN Intelligence */}
+      {/* Copilot Chat (Slide-over) */}
       <CopilotSidebar
         isOpen={isCopilotOpen}
         onClose={() => setIsCopilotOpen(false)}
