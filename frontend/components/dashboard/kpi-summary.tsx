@@ -162,33 +162,35 @@ export function KpiSummary({ data, onOpenCopilot }: KpiSummaryProps) {
               </span>
             </div>
 
-            {/* Botão de Gatilho do Insight da IA */}
-            <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between">
+                        {/* Botão de Gatilho do Insight da IA */}
+            <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center justify-between">
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   setPinnedCard(pinnedCard === idx ? null : idx);
                 }}
-                className={`flex items-center gap-1.5 text-[11px] font-mono px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                   isVisible
                     ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.3)]"
-                    : "bg-slate-900/80 text-cyan-400/90 border-cyan-500/30 hover:border-cyan-400 hover:text-cyan-200"
+                    : "bg-slate-900/60 text-slate-400 border-slate-800 hover:border-cyan-500/40 hover:text-cyan-300 hover:bg-slate-900"
                 }`}
-                title="Clique para fixar o diagnóstico da RN Intelligence"
+                title="Clique para abrir ou fixar diagnóstico da RN Intelligence"
               >
-                <Cpu className="w-3 h-3 text-cyan-300" />
+                <Cpu className="w-3.5 h-3.5 text-cyan-400" />
                 <span>RN Intelligence</span>
                 <ChevronDown
-                  className={`w-3 h-3 text-cyan-400 transition-transform duration-200 ${
-                    isVisible ? "rotate-180" : ""
+                  className={`w-3 h-3 transition-transform duration-200 ${
+                    isVisible ? "rotate-180 text-cyan-400" : "text-slate-500"
                   }`}
                 />
               </button>
 
-              <span className="text-[10px] font-mono text-slate-500 hidden sm:inline">
-                {isPinned ? "● Fixado" : "Passe o mouse ou clique"}
-              </span>
+              {isPinned && (
+                <span className="text-[10px] font-mono text-cyan-400 font-semibold flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" /> Fixado
+                </span>
+              )}
             </div>
 
             {/* AI Futuristic Popover Tooltip (Abre PARA BAIXO para nunca ser cortado pelo topo da tela) */}
