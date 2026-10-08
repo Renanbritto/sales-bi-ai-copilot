@@ -15,18 +15,18 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Classe A */}
-        <div className="bg-white border border-slate-200 shadow-xs p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 flex items-center gap-1.5 font-mono">
                 <Award className="w-4 h-4" /> Classe A (Críticos)
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-700 font-bold border border-slate-200 font-mono">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-700 font-bold border border-slate-200 dark:border-slate-700/50 font-mono">
                 82.0% Receita
               </span>
             </div>
-            <p className="text-2xl font-bold text-slate-700 mt-2">4 SKUs Estratégicos</p>
-            <p className="text-xs text-slate-600 mt-1">
+            <p className="text-2xl font-bold text-slate-700 dark:text-slate-200 mt-2">4 SKUs Estratégicos</p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
               Enterprise Analytics, Cloud Server, RN Intelligence Enterprise Add-on e Governance Suite concentram 82% da receita total.
             </p>
           </div>
@@ -35,7 +35,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
             <button
               type="button"
               onClick={() => onOpenCopilot("Qual a concentração de receita nos produtos Classe A e quais clientes mais compram?")}
-              className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-slate-50 hover:bg-blue-500/15 text-blue-700 text-[11px] font-mono transition-colors border border-slate-200 cursor-pointer"
+              className="flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-blue-500/15 text-blue-700 text-[11px] font-mono transition-colors border border-slate-200 dark:border-slate-700/50 cursor-pointer"
             >
               <span>Analisar Classe A na RN Intelligence</span>
               <ExternalLink className="w-3 h-3" />
@@ -44,7 +44,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
         </div>
 
         {/* Classe B */}
-        <div className="bg-white border border-slate-200 shadow-xs p-5 rounded-xl border border-blue-500/30 bg-slate-50 flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-blue-500/30 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 flex items-center gap-1.5 font-mono">
@@ -54,8 +54,8 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                 13.0% Receita
               </span>
             </div>
-            <p className="text-2xl font-bold text-slate-700 mt-2">6 SKUs em Crescimento</p>
-            <p className="text-xs text-slate-600 mt-1">
+            <p className="text-2xl font-bold text-slate-700 dark:text-slate-200 mt-2">6 SKUs em Crescimento</p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
               Soluções preditivas e consultoria de dados mantêm tração saudável e alto potencial de migração para Classe A.
             </p>
           </div>
@@ -73,7 +73,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
         </div>
 
         {/* Classe C */}
-        <div className="bg-white border border-slate-200 shadow-xs p-5 rounded-xl border border-amber-500/30 bg-slate-50 flex flex-col justify-between space-y-3">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs p-5 rounded-xl border border-amber-500/30 bg-slate-50 dark:bg-slate-800/50 flex flex-col justify-between space-y-3">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 font-mono">
@@ -83,8 +83,8 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                 5.0% Receita
               </span>
             </div>
-            <p className="text-2xl font-bold text-slate-700 mt-2">10 SKUs Dispersos</p>
-            <p className="text-xs text-slate-600 mt-1">
+            <p className="text-2xl font-bold text-slate-700 dark:text-slate-200 mt-2">10 SKUs Dispersos</p>
+            <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
               Produtos e cabos legados com alto custo de estocagem e baixo retorno. Recomendação: Racionalizar catálogo.
             </p>
           </div>
@@ -103,11 +103,11 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
       </div>
 
       {/* Tabela da Curva ABC */}
-      <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-lg font-bold text-slate-700 tracking-tight">Curva ABC de Faturamento e Margem</h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 tracking-tight">Curva ABC de Faturamento e Margem</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
               Classificação cumulativa dos produtos do portfólio de acordo com a regra de Pareto (80/20).
             </p>
           </div>
@@ -116,7 +116,7 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500 bg-slate-50 font-medium">
+              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800/50 font-medium">
                 <th className="py-3 px-3">Classe</th>
                 <th className="py-3 px-3">Produto</th>
                 <th className="py-3 px-3 text-right">Faturamento Total</th>
@@ -131,10 +131,10 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
               {products.map((p) => {
                 const badgeColor =
                   p.class === "A"
-                    ? "bg-blue-500/15 text-blue-700 border-slate-200"
+                    ? "bg-blue-500/15 text-blue-700 border-slate-200 dark:border-slate-700/50"
                     : p.class === "B"
                     ? "bg-blue-500/20 text-blue-700 border-blue-500/40"
-                    : "bg-slate-100 text-slate-600 border-slate-200";
+                    : "bg-slate-100 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700/50";
 
                 return (
                   <tr key={p.code} className="hover:bg-slate-100/30 transition-colors">
@@ -143,12 +143,12 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                         Classe {p.class}
                       </span>
                     </td>
-                    <td className="py-3 px-3 font-semibold text-slate-700">{p.name}</td>
+                    <td className="py-3 px-3 font-semibold text-slate-700 dark:text-slate-200">{p.name}</td>
                     <td className="py-3 px-3 text-right font-mono text-blue-700 font-bold">
                       {formatCurrency(p.revenue)}
                     </td>
-                    <td className="py-3 px-3 text-right font-mono text-slate-600">{p.pct}%</td>
-                    <td className="py-3 px-3 text-right font-mono text-slate-500">{p.cumPct}%</td>
+                    <td className="py-3 px-3 text-right font-mono text-slate-600 dark:text-slate-300">{p.pct}%</td>
+                    <td className="py-3 px-3 text-right font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">{p.cumPct}%</td>
                     <td className="py-3 px-3 text-right font-mono">
                       <span
                         className={`font-semibold ${
@@ -158,13 +158,13 @@ export function ParetoSection({ products, onOpenCopilot }: ParetoSectionProps) {
                         {p.margin}%
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-right font-mono text-slate-600">{formatNumber(p.volume)}</td>
+                    <td className="py-3 px-3 text-right font-mono text-slate-600 dark:text-slate-300">{formatNumber(p.volume)}</td>
                     <td className="py-3 px-3 text-center">
                       {onOpenCopilot && (
                         <button
                           type="button"
                           onClick={() => onOpenCopilot(`Analise a performance de vendas, volume e margem do produto ${p.name}.`)}
-                          className="p-1 rounded-lg bg-slate-50 border border-slate-200 text-blue-600 hover:text-slate-700 hover:border-blue-400 transition-colors"
+                          className="p-1 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-blue-600 hover:text-slate-700 dark:text-slate-200 hover:border-blue-400 transition-colors"
                           title="Analisar na RN Intelligence"
                         >
                           <Cpu className="w-3.5 h-3.5" />

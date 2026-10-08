@@ -32,12 +32,12 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
   const d = payload[0].payload;
 
   return (
-    <div className="rounded-2xl p-3.5 bg-white/98 backdrop-blur-2xl border border-slate-200 shadow-lg text-xs text-slate-700 min-w-[220px]">
-      <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-slate-200 text-[10px] font-mono text-blue-600">
+    <div className="rounded-2xl p-3.5 bg-white dark:bg-[#0f172a]/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-700/50 shadow-lg text-xs text-slate-700 dark:text-slate-200 min-w-[220px]">
+      <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono text-blue-600">
         <Cpu className="w-3 h-3 text-blue-700" />
         <span>Radar Benchmark (RN Intelligence)</span>
       </div>
-      <p className="font-bold text-slate-700 mb-2">{d.subject}</p>
+      <p className="font-bold text-slate-700 dark:text-slate-200 mb-2">{d.subject}</p>
       <div className="space-y-1 text-xs">
         <div className="flex items-center justify-between text-blue-700">
           <span>Sudeste:</span>
@@ -48,7 +48,7 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
           <span className="font-mono font-bold">{d.Sul} pts</span>
         </div>
       </div>
-      <div className="mt-2 pt-1.5 border-t border-slate-200 text-[10px] text-slate-500 flex items-center gap-1">
+      <div className="mt-2 pt-1.5 border-t border-slate-200 dark:border-slate-700/50 text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500 flex items-center gap-1">
         <Cpu className="w-3 h-3 text-blue-600 shrink-0" />
         <span>Sul supera Sudeste em quota por +8 pts.</span>
       </div>
@@ -66,13 +66,13 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Tabela Leaderboard (2 colunas) */}
-      <div className="lg:col-span-2 bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200">
+      <div className="lg:col-span-2 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
-            <h2 className="text-lg font-bold text-slate-700 flex items-center gap-2">
+            <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
               <Trophy className="w-5 h-5 text-amber-400" /> Leaderboard da Equipe Comercial
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
               Performance de vendas individuais com cálculo de atingimento de quota, margem e diagnósticos IA.
             </p>
           </div>
@@ -84,7 +84,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500 font-medium bg-slate-50">
+              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium bg-slate-50 dark:bg-slate-800/50">
                 <th className="py-3 pl-2">Pos</th>
                 <th className="py-3">Vendedor</th>
                 <th className="py-3">Região</th>
@@ -102,7 +102,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                 const isTop3 = rank <= 3;
                 const medalColors = [
                   "text-amber-400 bg-amber-500/10 border-amber-500/30",
-                  "text-slate-600 bg-slate-500/10 border-slate-400/30",
+                  "text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/500/10 border-slate-400/30",
                   "text-amber-600 bg-amber-700/10 border-amber-700/30",
                 ];
 
@@ -118,20 +118,20 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                           {rank}
                         </span>
                       ) : (
-                        <span className="text-slate-500 ml-2 font-mono">{rank}</span>
+                        <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500 ml-2 font-mono">{rank}</span>
                       )}
                     </td>
-                    <td className="py-3 font-semibold text-slate-700">
+                    <td className="py-3 font-semibold text-slate-700 dark:text-slate-200">
                       {rep.name}
                       {rank === 1 && (
                         <span className="ml-2 text-[10px] text-amber-400 font-mono">MVP</span>
                       )}
                     </td>
-                    <td className="py-3 text-slate-500">{rep.region}</td>
+                    <td className="py-3 text-slate-500 dark:text-slate-400 dark:text-slate-500">{rep.region}</td>
                     <td className="py-3 text-right font-mono text-blue-700 font-semibold">
                       {formatCurrency(rep.achieved)}
                     </td>
-                    <td className="py-3 text-right font-mono text-slate-500">
+                    <td className="py-3 text-right font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
                       {formatCurrency(rep.quota)}
                     </td>
                     <td className="py-3 text-right font-mono">
@@ -147,8 +147,8 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                         {rep.pct.toFixed(1)}%
                       </span>
                     </td>
-                    <td className="py-3 text-right font-mono text-slate-600">{rep.margin}%</td>
-                    <td className="py-3 text-right font-mono text-slate-500">
+                    <td className="py-3 text-right font-mono text-slate-600 dark:text-slate-300">{rep.margin}%</td>
+                    <td className="py-3 text-right font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
                       {formatNumber(rep.deals)}
                     </td>
                     <td className="py-3 text-center pr-2">
@@ -160,7 +160,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                               `Analise a performance individual do vendedor ${rep.name} (${rep.region}), atingimento de ${rep.pct.toFixed(1)}% da quota e margem de ${rep.margin}%.`
                             )
                           }
-                          className="p-1 rounded-lg bg-slate-50 border border-slate-200 text-blue-600 hover:text-slate-700 hover:border-blue-400 transition-colors"
+                          className="p-1 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-blue-600 hover:text-slate-700 dark:text-slate-200 hover:border-blue-400 transition-colors"
                           title="Analisar performance na RN Intelligence"
                         >
                           <Cpu className="w-3.5 h-3.5" />
@@ -176,24 +176,24 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
       </div>
 
       {/* Radar de Competências / Performance */}
-      <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200 flex flex-col justify-between">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-base font-bold text-slate-700 tracking-tight flex items-center gap-1.5">
+            <h3 className="text-base font-bold text-slate-700 dark:text-slate-200 tracking-tight flex items-center gap-1.5">
               <Trophy className="w-4 h-4 text-amber-400" /> Radar Regional
             </h3>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-50 border border-slate-200 text-blue-600">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-blue-600">
               RN Intelligence
             </span>
           </div>
-          <p className="text-xs text-slate-500 mb-4">
+          <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-4">
             Comparativo multidimensional entre as duas maiores regionais: Sudeste vs Sul.
           </p>
         </div>
 
         <div className="h-[280px] w-full flex items-center justify-center">
           {!mounted ? (
-            <div className="text-slate-500 text-xs">Carregando radar...</div>
+            <div className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-xs">Carregando radar...</div>
           ) : (
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="75%" data={RADAR_DATA}>
@@ -220,14 +220,14 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
           )}
         </div>
 
-        <div className="mt-4 pt-4 border-t border-slate-200 flex items-center justify-around text-xs font-mono">
+        <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700/50 flex items-center justify-around text-xs font-mono">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-blue-600" />
-            <span className="text-slate-600">Sudeste (50.4%)</span>
+            <span className="text-slate-600 dark:text-slate-300">Sudeste (50.4%)</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-emerald-500" />
-            <span className="text-slate-600">Sul (24.8%)</span>
+            <span className="text-slate-600 dark:text-slate-300">Sul (24.8%)</span>
           </div>
         </div>
       </div>

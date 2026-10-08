@@ -13,6 +13,8 @@ import {
   Building2,
   PanelLeftClose,
   PanelLeftOpen,
+  Moon,
+  Sun,
   ChevronRight,
 } from "lucide-react";
 import {
@@ -58,7 +60,7 @@ const SalesChart = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
+      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 dark:text-slate-400 dark:text-slate-500 text-xs">
         <span className="w-2 h-2 rounded-full bg-blue-400 mr-2" />
         Carregando gráfico mensal...
       </div>
@@ -71,7 +73,7 @@ const RepsLeaderboard = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
+      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 dark:text-slate-400 dark:text-slate-500 text-xs">
         <span className="w-2 h-2 rounded-full bg-purple-400 mr-2" />
         Carregando performance de equipe...
       </div>
@@ -87,7 +89,7 @@ const ProductDecisionMatrix = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
+      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 dark:text-slate-400 dark:text-slate-500 text-xs">
         <span className="w-2 h-2 rounded-full bg-emerald-400 mr-2" />
         Carregando matriz de decisão de portfólio...
       </div>
@@ -108,8 +110,35 @@ export default function DashboardPage() {
   const [topClients, setTopClients] = useState<TopClient[]>(FALLBACK_TOP_CLIENTS);
 
   const [activeTab, setActiveTab] = useState<TabType>("executivo");
-  const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+    const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check initial preference
+    if (typeof window !== 'undefined') {
+      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && isSystemDark)) {
+        setIsDark(true);
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    if (!isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
   const [copilotInitialPrompt, setCopilotInitialPrompt] = useState<string>("");
 
   // Filtros Globais
@@ -175,22 +204,22 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex h-screen bg-[#f8fafc] text-slate-700 font-sans selection:bg-blue-600/20 selection:text-blue-900 overflow-hidden">
+    <div className="flex h-screen bg-[#f8fafc] dark:bg-slate-950 text-slate-700 dark:text-slate-200 font-sans selection:bg-blue-600/20 selection:text-blue-900 overflow-hidden">
       
       {/* Sidebar Retrátil */}
       <aside 
-        className={`flex flex-col bg-white border-r border-slate-200 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-64' : 'w-20'} shrink-0`}
+        className={`flex flex-col bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-700/50 transition-all duration-300 z-50 ${isSidebarOpen ? 'w-64' : 'w-20'} shrink-0`}
       >
-        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 shrink-0">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
             <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 shadow-sm shadow-blue-900/10">
               <BarChart3 className="w-4 h-4 text-white font-bold" />
             </div>
-            <h1 className="text-sm font-bold text-slate-700 tracking-tight">RN Intelligence</h1>
+            <h1 className="text-sm font-bold text-slate-700 dark:text-slate-200 tracking-tight">RN Intelligence</h1>
           </div>
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 transition-colors shrink-0"
+            className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-blue-600 hover:bg-slate-100 transition-colors shrink-0"
           >
             {isSidebarOpen ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeftOpen className="w-5 h-5" />}
           </button>
@@ -216,10 +245,10 @@ export default function DashboardPage() {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                   isActive
                     ? "bg-blue-50 text-blue-600 font-semibold shadow-sm border border-blue-100"
-                    : "text-slate-500 hover:text-slate-700 hover:bg-slate-100/70 border border-transparent"
+                    : "text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200 hover:bg-slate-100/70 border border-transparent"
                 }`}
               >
-                <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-blue-600' : 'text-slate-400'}`} />
+                <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-blue-600' : 'text-slate-400 dark:text-slate-500'}`} />
                 <span className={`whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0 hidden'}`}>
                   {tab.label}
                 </span>
@@ -232,14 +261,14 @@ export default function DashboardPage() {
         </div>
 
         {/* User / Settings / Status na base da sidebar */}
-        <div className="p-4 border-t border-slate-200 shrink-0">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 transition-all duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>
              <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center shrink-0">
-               <Users className="w-4 h-4 text-slate-500" />
+               <Users className="w-4 h-4 text-slate-500 dark:text-slate-400 dark:text-slate-500" />
              </div>
              <div className="flex flex-col text-left">
-               <span className="text-xs font-bold text-slate-700">Diretoria</span>
-               <span className="text-[10px] text-slate-500">Visão Consolidada</span>
+               <span className="text-xs font-bold text-slate-700 dark:text-slate-200">Diretoria</span>
+               <span className="text-[10px] text-slate-500 dark:text-slate-400 dark:text-slate-500">Visão Consolidada</span>
              </div>
           </div>
         </div>
@@ -249,12 +278,12 @@ export default function DashboardPage() {
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto relative">
         
         {/* Top Header Navegação (Agora só tem título da aba e botão IA) */}
-        <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur-xl shrink-0">
+        <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-700/50 bg-white dark:bg-[#0f172a]/95 backdrop-blur-xl shrink-0">
           <div className="px-6 h-16 flex items-center justify-between">
             
             <div className="flex items-center gap-2">
                {/* Mobile menu toggle fallback could go here if we do mobile responsive, but keeping simple */}
-               <h2 className="text-base font-bold text-slate-700 tracking-tight hidden sm:block">
+               <h2 className="text-base font-bold text-slate-700 dark:text-slate-200 tracking-tight hidden sm:block">
                   {[
                     { id: "executivo", label: "Visão Executiva" },
                     { id: "produtos", label: "Portfólio & Matriz de Decisão" },
@@ -267,8 +296,17 @@ export default function DashboardPage() {
             </div>
 
             {/* Botão de Abrir Copilot */}
+            
             <div className="flex items-center gap-4">
-              <div className="hidden lg:flex items-center gap-2 text-xs text-slate-400">
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-slate-100 transition-colors"
+                title="Alternar Tema"
+              >
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+
+              <div className="hidden lg:flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
                 <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 <span className="font-mono text-[11px]">13.747 transações faturadas</span>
               </div>
@@ -290,8 +328,8 @@ export default function DashboardPage() {
         <main className="flex-1 w-full max-w-7xl mx-auto p-4 lg:p-6 pb-20">
           
           {/* Filtros Globais */}
-          <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-slate-500">
+          <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 dark:text-slate-500">
               <Filter className="w-4 h-4" />
               <span className="text-xs font-bold uppercase tracking-wider">Filtros Globais:</span>
             </div>
@@ -299,11 +337,11 @@ export default function DashboardPage() {
             <div className="flex flex-wrap items-center gap-4">
               {/* Filtro Região */}
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-400 text-xs font-medium">Região:</span>
+                <span className="text-slate-400 dark:text-slate-500 text-xs font-medium">Região:</span>
                 <select
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs font-medium shadow-sm transition-all"
+                  className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-blue-600 focus:bg-white dark:bg-[#0f172a] text-xs font-medium shadow-sm transition-all"
                 >
                   <option value="Todas">Todas as Regiões</option>
                   <option value="Sudeste">Sudeste</option>
@@ -315,11 +353,11 @@ export default function DashboardPage() {
 
               {/* Filtro Canal */}
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-400 text-xs font-medium">Canal:</span>
+                <span className="text-slate-400 dark:text-slate-500 text-xs font-medium">Canal:</span>
                 <select
                   value={selectedChannel}
                   onChange={(e) => setSelectedChannel(e.target.value)}
-                  className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 outline-none cursor-pointer focus:border-blue-600 focus:bg-white text-xs font-medium shadow-sm transition-all"
+                  className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-lg px-2.5 py-1.5 text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-blue-600 focus:bg-white dark:bg-[#0f172a] text-xs font-medium shadow-sm transition-all"
                 >
                   <option value="Todos">Todos os Canais</option>
                   <option value="B2B Enterprise">B2B Enterprise</option>
@@ -395,7 +433,7 @@ export default function DashboardPage() {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto shrink-0 bg-white">
+        <footer className="border-t border-slate-200 dark:border-slate-700/50 py-6 text-center text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-auto shrink-0 bg-white dark:bg-[#0f172a]">
           Análise Comercial &bull; RN Intelligence &bull; Desenvolvido por <span className="text-blue-500">Renan Nocelli</span> &bull; Arquitetura com DuckDB OLAP, FastAPI, Google Gemini e Next.js
         </footer>
       </div>

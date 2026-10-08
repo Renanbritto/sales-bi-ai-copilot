@@ -121,11 +121,11 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm transition-all duration-300">
       <div
-        className="w-full max-w-lg h-full bg-white border-l border-slate-200 flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
+        className="w-full max-w-lg h-full bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-slate-700/50 flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header do Copilot */}
-        <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+        <div className="p-4 border-b border-slate-200 dark:border-slate-700/50 flex items-center justify-between bg-slate-50 dark:bg-slate-800/50/50">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-950/40">
               <Bot className="w-4 h-4 text-slate-950" />
@@ -133,11 +133,11 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             <div>
               <h2 className="text-sm font-bold text-white flex items-center gap-2">
                 RN Intelligence
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-50 border border-slate-200 text-blue-600">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-blue-600">
                   DuckDB + Gemini
                 </span>
               </h2>
-              <p className="text-[11px] text-slate-500">Agente Analítico Autônomo com Text-to-SQL</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500">Agente Analítico Autônomo com Text-to-SQL</p>
             </div>
           </div>
 
@@ -145,7 +145,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             <button
               type="button"
               onClick={clearChat}
-              className="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
               title="Limpar Conversa"
             >
               <Trash2 className="w-4 h-4" />
@@ -153,7 +153,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-500 hover:text-white hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-white hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
               title="Fechar Painel"
             >
               <X className="w-5 h-5" />
@@ -162,7 +162,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
         </div>
 
         {/* Telemetria de Conexão */}
-        <div className="px-4 py-2 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-500">
+        <div className="px-4 py-2 bg-slate-50 dark:bg-slate-800/50/50 border-b border-slate-100 dark:border-slate-800/50 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
           <div className="flex items-center gap-1.5 text-blue-600">
             <Cpu className="w-3.5 h-3.5" />
             <span>Motor: DuckDB OLAP Columnar</span>
@@ -185,7 +185,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                 }`}
               >
                 {!isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 flex items-center justify-center shrink-0 mt-0.5">
                     <Bot className="w-3.5 h-3.5 text-blue-600" />
                   </div>
                 )}
@@ -194,14 +194,14 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                   className={`max-w-[85%] rounded-2xl p-3.5 space-y-2.5 ${
                     isUser
                       ? "bg-gradient-to-r bg-blue-600 text-white rounded-br-xs"
-                      : "bg-white/90 border border-slate-200 text-slate-800 rounded-bl-xs"
+                      : "bg-white dark:bg-[#0f172a]/90 border border-slate-200 dark:border-slate-700/50 text-slate-800 rounded-bl-xs"
                   }`}
                 >
                   <p className="whitespace-pre-line">{msg.content}</p>
 
                   {/* SQL Telemetry & Code Accordion */}
                   {msg.sql && (
-                    <div className="mt-2 pt-2 border-t border-slate-200/80 space-y-1.5">
+                    <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-700/50/80 space-y-1.5">
                       <div className="flex items-center justify-between">
                         <button
                           type="button"
@@ -218,7 +218,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                         </button>
 
                         {msg.executionTime && (
-                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500">
+                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
                             <Clock className="w-3 h-3 text-emerald-400" />
                             {msg.executionTime.toFixed(1)} ms
                           </span>
@@ -226,21 +226,21 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                       </div>
 
                       {expandedSql[msg.id] && (
-                        <pre className="p-2.5 rounded-lg bg-black/60 border border-slate-200 text-[11px] font-mono text-blue-600 overflow-x-auto">
+                        <pre className="p-2.5 rounded-lg bg-black/60 border border-slate-200 dark:border-slate-700/50 text-[11px] font-mono text-blue-600 overflow-x-auto">
                           {msg.sql}
                         </pre>
                       )}
                     </div>
                   )}
 
-                  <div className="text-[10px] text-right text-slate-500/60 font-mono">
+                  <div className="text-[10px] text-right text-slate-500 dark:text-slate-400 dark:text-slate-500/60 font-mono">
                     {msg.timestamp}
                   </div>
                 </div>
 
                 {isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-200 flex items-center justify-center shrink-0 mt-0.5">
-                    <User className="w-3.5 h-3.5 text-slate-700" />
+                  <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-200 dark:border-slate-700/50 flex items-center justify-center shrink-0 mt-0.5">
+                    <User className="w-3.5 h-3.5 text-slate-700 dark:text-slate-200" />
                   </div>
                 )}
               </div>
@@ -248,13 +248,13 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
           })}
 
           {isLoading && (
-            <div className="flex gap-3 text-xs items-center text-slate-500">
-              <div className="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+            <div className="flex gap-3 text-xs items-center text-slate-500 dark:text-slate-400 dark:text-slate-500">
+              <div className="w-7 h-7 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 flex items-center justify-center shrink-0">
                 <Bot className="w-3.5 h-3.5 text-blue-600 " />
               </div>
-              <div className="flex items-center gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200">
+              <div className="flex items-center gap-2 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50">
                 <div className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-                <span className="text-slate-700 font-mono text-[11px]">
+                <span className="text-slate-700 dark:text-slate-200 font-mono text-[11px]">
                   Executando consulta SQL no DuckDB...
                 </span>
               </div>
@@ -265,8 +265,8 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
         </div>
 
         {/* Perguntas Rápidas */}
-        <div className="p-3 border-t border-slate-200/80 bg-slate-50/40">
-          <p className="text-[10px] uppercase font-mono tracking-wider text-slate-500 mb-2">
+        <div className="p-3 border-t border-slate-200 dark:border-slate-700/50/80 bg-slate-50 dark:bg-slate-800/50/40">
+          <p className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-2">
             Perguntas Rápidas Sugeridas:
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -276,7 +276,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                 type="button"
                 onClick={() => handleSend(prompt)}
                 disabled={isLoading}
-                className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-slate-50/50 hover:text-blue-600 hover:border-slate-200 border border-slate-200 text-slate-700 transition-colors text-left cursor-pointer disabled:opacity-50"
+                className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-50 dark:bg-slate-800/50/50 hover:text-blue-600 hover:border-slate-200 dark:border-slate-700/50 border border-slate-200 dark:border-slate-700/50 text-slate-700 dark:text-slate-200 transition-colors text-left cursor-pointer disabled:opacity-50"
               >
                 {prompt}
               </button>
@@ -285,7 +285,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
         </div>
 
         {/* Input de Mensagem */}
-        <div className="p-4 border-t border-slate-200 bg-slate-50/60">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50/60">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -300,7 +300,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
               onChange={(e) => setInput(e.target.value)}
               placeholder="Pergunte ao RN Intelligence (ex: vendas por canal, ranking...)"
               disabled={isLoading}
-              className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-600 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              className="flex-1 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl px-3.5 py-2 text-xs text-slate-900 placeholder-slate-400 focus:bg-white dark:bg-[#0f172a] focus:border-blue-600 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
             />
             <button
               type="submit"
@@ -310,7 +310,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
               <Send className="w-3.5 h-3.5" />
             </button>
           </form>
-          <p className="text-[10px] text-center text-slate-500 mt-2 font-mono">
+          <p className="text-[10px] text-center text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-2 font-mono">
             RN Intelligence conectado ao banco colunar DuckDB em modo somente leitura.
           </p>
         </div>

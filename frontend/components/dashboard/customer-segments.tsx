@@ -64,23 +64,23 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
   return (
     <div className="space-y-6">
       {/* Grid de Segmentos de Mercado */}
-      <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-700/50">
           <div>
             <div className="flex items-center gap-2">
               <Building2 className="w-5 h-5 text-blue-600" />
-              <h2 className="text-lg font-bold text-slate-700 tracking-tight">
+              <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 tracking-tight">
                 Faturamento por Segmento de Mercado (B2B)
               </h2>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-blue-600">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-blue-600">
                 Segmentação Estratégica
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
               Análise de receita, margem de contribuição e ticket por vertical com diagnósticos da IA.
             </p>
           </div>
-          <span className="text-xs font-mono text-slate-500 hidden sm:inline">
+          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500 hidden sm:inline">
             Clique no card para ver RN Intelligence
           </span>
         </div>
@@ -99,38 +99,38 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                 key={idx}
                 className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? "bg-slate-50 border-slate-200 shadow-md shadow-blue-900/10"
-                    : "bg-slate-50 border-slate-200 hover:border-slate-200 hover:bg-slate-50"
+                    ? "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50 shadow-md shadow-blue-900/10"
+                    : "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50 hover:border-slate-200 dark:border-slate-700/50 hover:bg-slate-50 dark:bg-slate-800/50"
                 }`}
                 onClick={() => setActiveSegment(isSelected ? null : s.segment)}
               >
-                <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200">
-                  <span className="font-bold text-slate-700 text-sm">{s.segment}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 text-blue-700 border border-slate-200">
+                <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 dark:border-slate-700/50">
+                  <span className="font-bold text-slate-700 dark:text-slate-200 text-sm">{s.segment}</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 dark:bg-slate-800/50 text-blue-700 border border-slate-200 dark:border-slate-700/50">
                     {insight.priority}
                   </span>
                 </div>
 
                 <div className="space-y-1.5 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Receita Total:</span>
-                    <span className="font-bold text-slate-700 font-mono">{formatCurrency(s.revenue)}</span>
+                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Receita Total:</span>
+                    <span className="font-bold text-slate-700 dark:text-slate-200 font-mono">{formatCurrency(s.revenue)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Margem Média:</span>
+                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Margem Média:</span>
                     <span className="font-bold text-emerald-400 font-mono">{s.margin_pct.toFixed(1)}%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Ticket Médio:</span>
-                    <span className="font-medium text-slate-600 font-mono">{formatCurrency(s.avg_ticket)}</span>
+                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Ticket Médio:</span>
+                    <span className="font-medium text-slate-600 dark:text-slate-300 font-mono">{formatCurrency(s.avg_ticket)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Contas Ativas:</span>
-                    <span className="text-slate-600">{s.clients} clientes ({formatNumber(s.orders)} ped.)</span>
+                    <span className="text-slate-500 dark:text-slate-400 dark:text-slate-500">Contas Ativas:</span>
+                    <span className="text-slate-600 dark:text-slate-300">{s.clients} clientes ({formatNumber(s.orders)} ped.)</span>
                   </div>
                 </div>
 
-                <div className="mt-3 pt-2 border-t border-slate-200 flex items-center justify-between">
+                <div className="mt-3 pt-2 border-t border-slate-200 dark:border-slate-700/50 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={(e) => {
@@ -140,7 +140,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                     className={`flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-lg border transition-all cursor-pointer ${
                       isSelected
                         ? "bg-blue-500/15 text-blue-700 border-blue-500/40"
-                        : "bg-slate-50 text-blue-600/80 border-slate-200 hover:border-blue-400"
+                        : "bg-slate-50 dark:bg-slate-800/50 text-blue-600/80 border-slate-200 dark:border-slate-700/50 hover:border-blue-400"
                     }`}
                   >
                     <Cpu className="w-3 h-3 text-blue-700" />
@@ -150,7 +150,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                     />
                   </button>
 
-                  <span className="text-[10px] font-mono text-slate-500">
+                  <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 dark:text-slate-500">
                     {isSelected ? "Aberto" : "Ver Ação"}
                   </span>
                 </div>
@@ -158,10 +158,10 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                 {/* Popover Expansível de Diagnóstico IA da Vertical */}
                 {isSelected && (
                   <div
-                    className="mt-3 p-3.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-700 animate-in fade-in space-y-2.5"
+                    className="mt-3 p-3.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 text-xs text-slate-700 dark:text-slate-200 animate-in fade-in space-y-2.5"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="flex items-center justify-between pb-1.5 border-b border-slate-200 text-[10px] font-mono">
+                    <div className="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-700/50 text-[10px] font-mono">
                       <span className="text-blue-600 flex items-center gap-1 font-semibold uppercase">
                         <Cpu className="w-3 h-3 text-blue-700" />
                         Diagnóstico RN Intelligence
@@ -169,13 +169,13 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                       <button
                         type="button"
                         onClick={() => setActiveSegment(null)}
-                        className="text-slate-500 hover:text-slate-700"
+                        className="text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:text-slate-200"
                       >
                         <X className="w-3.5 h-3.5" />
                       </button>
                     </div>
 
-                    <p className="text-[11.5px] leading-relaxed text-slate-600">
+                    <p className="text-[11.5px] leading-relaxed text-slate-600 dark:text-slate-300">
                       {insight.diagnosis}
                     </p>
 
@@ -183,7 +183,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                       <button
                         type="button"
                         onClick={() => onOpenCopilot(insight.prompt)}
-                        className="w-full flex items-center justify-center gap-1 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-700 hover:text-slate-700 text-[11px] font-medium transition-all cursor-pointer"
+                        className="w-full flex items-center justify-center gap-1 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 dark:border-slate-700/50 text-blue-700 hover:text-slate-700 dark:text-slate-200 text-[11px] font-medium transition-all cursor-pointer"
                       >
                         <span>Perguntar à RN Intelligence sobre {s.segment}</span>
                         <ExternalLink className="w-3 h-3 text-blue-600" />
@@ -198,19 +198,19 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
       </div>
 
       {/* Top 10 Contas Corporativas com Ações Táticas */}
-      <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200 space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50 space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-700/50">
           <div>
             <div className="flex items-center gap-2">
               <Award className="w-5 h-5 text-amber-400" />
-              <h2 className="text-lg font-bold text-slate-700 tracking-tight">
+              <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 tracking-tight">
                 Top 10 Contas Corporativas (Maior LTV Acumulado)
               </h2>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
                 Key Accounts
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
               Clientes com maior participação na receita, margem de contribuição e diagnósticos de fidelização.
             </p>
           </div>
@@ -219,7 +219,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500 bg-slate-50 font-medium">
+              <tr className="border-b border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800/50 font-medium">
                 <th className="py-3 px-3">Ranking</th>
                 <th className="py-3 px-3">Cliente Corporativo</th>
                 <th className="py-3 px-3">Segmento</th>
@@ -250,18 +250,18 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                           className={`w-6 h-6 rounded-full inline-flex items-center justify-center font-bold text-xs ${
                             isTop3
                               ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                              : "bg-slate-100 text-slate-700"
+                              : "bg-slate-100 text-slate-700 dark:text-slate-200"
                           }`}
                         >
                           {rank}
                         </span>
                       </td>
-                      <td className="py-3 px-3 font-bold text-slate-700 flex items-center gap-2">
+                      <td className="py-3 px-3 font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
                         {c.client_name}
                         {isTop3 && <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
                       </td>
-                      <td className="py-3 px-3 text-slate-500">{c.segment}</td>
-                      <td className="py-3 px-3 text-slate-500">{c.region}</td>
+                      <td className="py-3 px-3 text-slate-500 dark:text-slate-400 dark:text-slate-500">{c.segment}</td>
+                      <td className="py-3 px-3 text-slate-500 dark:text-slate-400 dark:text-slate-500">{c.region}</td>
                       <td className="py-3 px-3 text-right font-mono text-blue-700 font-bold">
                         {formatCurrency(c.total_spent)}
                       </td>
@@ -274,8 +274,8 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                           {c.margin_pct.toFixed(1)}%
                         </span>
                       </td>
-                      <td className="py-3 px-3 text-right font-mono text-slate-600">{c.orders_count}</td>
-                      <td className="py-3 px-3 text-right font-mono text-slate-600">
+                      <td className="py-3 px-3 text-right font-mono text-slate-600 dark:text-slate-300">{c.orders_count}</td>
+                      <td className="py-3 px-3 text-right font-mono text-slate-600 dark:text-slate-300">
                         {formatCurrency(c.avg_ticket)}
                       </td>
                       <td className="py-3 px-3 text-center">
@@ -288,7 +288,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                           className={`p-1 rounded-lg border text-[11px] font-mono transition-colors ${
                             isSelected
                               ? "bg-blue-500/15 text-blue-700 border-blue-400"
-                              : "bg-slate-50 text-blue-600/80 border-slate-200 hover:border-blue-400"
+                              : "bg-slate-50 dark:bg-slate-800/50 text-blue-600/80 border-slate-200 dark:border-slate-700/50 hover:border-blue-400"
                           }`}
                           title="Ver Diagnóstico do Cliente"
                         >
@@ -301,13 +301,13 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                     {isSelected && (
                       <tr>
                         <td colSpan={9} className="p-0">
-                          <div className="p-4 bg-white border-y border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+                          <div className="p-4 bg-white dark:bg-[#0f172a] border-y border-slate-200 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
                             <div className="space-y-1">
                               <div className="flex items-center gap-2 text-xs font-mono text-blue-600 font-semibold">
                                 <Cpu className="w-3.5 h-3.5 text-blue-700" />
                                 <span>DIAGNÓSTICO RN INTELLIGENCE: {c.client_name.toUpperCase()}</span>
                               </div>
-                              <p className="text-xs text-slate-600">
+                              <p className="text-xs text-slate-600 dark:text-slate-300">
                                 Conta classe A com faturamento acumulado de <strong>{formatCurrency(c.total_spent)}</strong> ({c.orders_count} pedidos). Margem de {c.margin_pct.toFixed(1)}%. Recomenda-se agendar reunião trimestral de alinhamento executivo (QBR) com o Diretor de TI.
                               </p>
                             </div>
@@ -320,7 +320,7 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                                     `Analise o histórico completo de compras, faturamento e margem do cliente ${c.client_name}.`
                                   )
                                 }
-                                className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-700 hover:text-slate-700 text-xs font-semibold transition-all cursor-pointer"
+                                className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 dark:border-slate-700/50 text-blue-700 hover:text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all cursor-pointer"
                               >
                                 <span>Analisar Conta na RN Intelligence</span>
                                 <ExternalLink className="w-3 h-3 text-blue-600" />

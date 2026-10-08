@@ -15,7 +15,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
     {
       title: "Líderes de Mercado (Estrelas)",
       tag: "Alto Volume & Alta Margem",
-      color: "border-slate-200 bg-slate-50/20",
+      color: "border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/50/20",
       desc: "Produtos líderes de mercado com forte crescimento e alta rentabilidade. Exigem investimento contínuo para manter dominância.",
       action: "Investir para manter liderança e acelerar go-to-market.",
       prompt: "Quais produtos da categoria Estrelas têm o maior potencial de escala para o próximo trimestre?",
@@ -52,19 +52,19 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-2xl p-6 border border-slate-200 dark:border-slate-700/50">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
             <div className="flex items-center gap-2">
               <Award className="w-5 h-5 text-blue-600" />
-              <h2 className="text-lg font-bold text-slate-700 tracking-tight">
+              <h2 className="text-lg font-bold text-slate-700 dark:text-slate-200 tracking-tight">
                 Classificação BCG de Portfólio (Rentabilidade × Demanda)
               </h2>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-blue-600">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-blue-600">
                 Matriz Tática
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-0.5">
               Alocação dos SKUs nos quadrantes estratégicos de decisão para diretoria executiva.
             </p>
           </div>
@@ -75,21 +75,21 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
             <div key={idx} className={`p-5 rounded-xl border ${q.color} flex flex-col justify-between space-y-4`}>
               <div>
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
-                  <h3 className="font-bold text-slate-700 text-base">{q.title}</h3>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-slate-600 font-semibold">
+                  <h3 className="font-bold text-slate-700 dark:text-slate-200 text-base">{q.title}</h3>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white dark:bg-[#0f172a]/10 text-slate-600 dark:text-slate-300 font-semibold">
                     {q.tag}
                   </span>
                 </div>
-                <p className="text-xs text-slate-600 mb-3">{q.desc}</p>
+                <p className="text-xs text-slate-600 dark:text-slate-300 mb-3">{q.desc}</p>
 
                 {/* Lista de Produtos do Quadrante */}
                 <div className="space-y-2 mb-3">
                   {q.items.slice(0, 3).map((item) => (
                     <div
                       key={item.code}
-                      className="p-2 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between text-xs"
+                      className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 flex items-center justify-between text-xs"
                     >
-                      <span className="font-medium text-slate-700">{item.name}</span>
+                      <span className="font-medium text-slate-700 dark:text-slate-200">{item.name}</span>
                       <div className="flex items-center gap-2 font-mono">
                         <span className="text-blue-700 font-semibold">{formatCurrency(item.revenue)}</span>
                         <span className="text-emerald-400">({item.margin}%)</span>
@@ -97,13 +97,13 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
                     </div>
                   ))}
                   {q.items.length === 0 && (
-                    <div className="p-2 text-xs text-slate-500 font-mono">Nenhum SKU no critério restrito.</div>
+                    <div className="p-2 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 font-mono">Nenhum SKU no critério restrito.</div>
                   )}
                 </div>
               </div>
 
               <div className="pt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 dark:text-slate-500">
                   <strong className="text-blue-600">Diretriz:</strong> {q.action}
                 </span>
 
@@ -111,7 +111,7 @@ export function BcgMatrix({ products, onOpenCopilot }: BcgMatrixProps) {
                   <button
                     type="button"
                     onClick={() => onOpenCopilot(q.prompt)}
-                    className="shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-blue-500/15 text-blue-700 text-[11px] font-mono transition-colors cursor-pointer border border-slate-200"
+                    className="shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-blue-500/15 text-blue-700 text-[11px] font-mono transition-colors cursor-pointer border border-slate-200 dark:border-slate-700/50"
                   >
                     <span>Consultar RN Intelligence</span>
                     <ExternalLink className="w-3 h-3" />
