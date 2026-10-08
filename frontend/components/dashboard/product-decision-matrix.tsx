@@ -303,22 +303,22 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
     return (
       <div className="z-50 min-w-[310px] max-w-[360px] p-4 rounded-2xl bg-[#0a1122] border border-blue-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-100 font-sans pointer-events-auto">
         {/* Header HUD */}
-        <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-[10px] font-mono">
-          <span className="text-blue-400 flex items-center gap-1 font-semibold uppercase tracking-wider">
-            <Cpu className="w-3 h-3 text-blue-300" />
+        <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 text-[10px] font-mono">
+          <span className="text-blue-600 flex items-center gap-1 font-semibold uppercase tracking-wider">
+            <Cpu className="w-3 h-3 text-blue-700" />
             Decisão de Portfólio RN Intelligence
           </span>
-          <span className="px-2 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300">
+          <span className="px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-slate-600">
             {p.category}
           </span>
         </div>
 
         {/* Nome do Produto & Quadrante */}
-        <h4 className="text-sm font-bold text-white mb-1">{p.name}</h4>
+        <h4 className="text-sm font-bold text-slate-900 mb-1">{p.name}</h4>
         <span
           className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold mb-3 border ${
             p.margin >= 40 && p.volume >= 1500
-              ? "bg-blue-500/15 text-blue-300 border-slate-700"
+              ? "bg-blue-500/15 text-blue-700 border-slate-200"
               : p.margin >= 40
               ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
               : p.volume >= 1500
@@ -331,12 +331,12 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
 
         {/* Grid de 3 Métricas */}
         <div className="grid grid-cols-3 gap-2 mb-3 text-center">
-          <div className="p-2 rounded-xl bg-slate-900/90 border border-slate-800">
-            <span className="text-[10px] text-slate-400 font-mono block">Faturamento</span>
-            <span className="font-bold text-blue-300 font-mono text-xs">{formatCurrency(p.revenue)}</span>
+          <div className="p-2 rounded-xl bg-slate-50 border border-slate-200">
+            <span className="text-[10px] text-slate-500 font-mono block">Faturamento</span>
+            <span className="font-bold text-blue-700 font-mono text-xs">{formatCurrency(p.revenue)}</span>
           </div>
-          <div className="p-2 rounded-xl bg-slate-900/90 border border-slate-800">
-            <span className="text-[10px] text-slate-400 font-mono block">Margem %</span>
+          <div className="p-2 rounded-xl bg-slate-50 border border-slate-200">
+            <span className="text-[10px] text-slate-500 font-mono block">Margem %</span>
             <span
               className={`font-bold font-mono text-xs ${
                 p.margin >= 40 ? "text-emerald-400" : "text-amber-400"
@@ -345,16 +345,16 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
               {p.margin.toFixed(1)}%
             </span>
           </div>
-          <div className="p-2 rounded-xl bg-slate-900/90 border border-slate-800">
-            <span className="text-[10px] text-slate-400 font-mono block">Volume</span>
-            <span className="font-bold text-slate-200 font-mono text-xs">{p.volume.toLocaleString("pt-BR")} un</span>
+          <div className="p-2 rounded-xl bg-slate-50 border border-slate-200">
+            <span className="text-[10px] text-slate-500 font-mono block">Volume</span>
+            <span className="font-bold text-slate-700 font-mono text-xs">{p.volume.toLocaleString("pt-BR")} un</span>
           </div>
         </div>
 
         {/* Diagnóstico Executivo da IA */}
-        <div className="p-2.5 rounded-xl bg-[#0f172a] border border-slate-800 text-[11px] leading-relaxed text-slate-300 mb-3">
+        <div className="p-2.5 rounded-xl bg-[#0f172a] border border-slate-200 text-[11px] leading-relaxed text-slate-600 mb-3">
           <p className="flex items-start gap-1.5">
-            <Cpu className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
+            <Cpu className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
             <span>{p.aiDiagnosis}</span>
           </p>
         </div>
@@ -364,10 +364,10 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
           <button
             type="button"
             onClick={() => onOpenCopilot(p.copilotPrompt)}
-            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-700 text-blue-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-700 hover:text-slate-900 text-[11px] font-medium transition-all cursor-pointer"
           >
             <span>Perguntar à RN Intelligence no Chat</span>
-            <ExternalLink className="w-3 h-3 text-blue-400" />
+            <ExternalLink className="w-3 h-3 text-blue-600" />
           </button>
         )}
       </div>
@@ -375,22 +375,22 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
+    <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 border border-slate-200 space-y-6">
       {/* Top Header com Título e Filtros */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-600 flex items-center justify-center shadow-lg shadow-blue-950/30">
               <Layers className="w-4 h-4 text-slate-950 font-bold" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
                 Matriz Estratégica de Decisão de Portfólio (Gráfico de Bolhas)
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-blue-400">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200 text-blue-600">
                   Volume × Margem × Receita
                 </span>
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Mapeamento tático de 20 produtos por volume de vendas (X), rentabilidade (Y) e tamanho da receita (Raio).
               </p>
             </div>
@@ -399,10 +399,10 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
 
         {/* Filtros por Categoria de Produto */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-slate-400 flex items-center gap-1">
-            <Filter className="w-3.5 h-3.5 text-blue-400" /> Categoria:
+          <span className="text-xs text-slate-500 flex items-center gap-1">
+            <Filter className="w-3.5 h-3.5 text-blue-600" /> Categoria:
           </span>
-          <div className="flex flex-wrap p-1 rounded-xl bg-slate-900 border border-slate-800 gap-1 text-xs">
+          <div className="flex flex-wrap p-1 rounded-xl bg-slate-50 border border-slate-200 gap-1 text-xs">
             {["Todas", "Software / SaaS", "IA & Automação", "Consultoria & Dados", "Hardware & Infra"].map(
               (cat) => (
                 <button
@@ -411,8 +411,8 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-2.5 py-1 rounded-lg transition-colors font-medium cursor-pointer ${
                     selectedCategory === cat
-                      ? "bg-blue-500/15 text-blue-300 border border-slate-700 shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
+                      ? "bg-blue-500/15 text-blue-700 border border-slate-200 shadow-sm"
+                      : "text-slate-500 hover:text-slate-700"
                   }`}
                 >
                   {cat}
@@ -425,14 +425,14 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
 
       {/* 4 Cards de Síntese Tática dos Quadrantes (Decisão Executiva) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-700">
-          <div className="flex items-center justify-between text-xs font-semibold text-blue-300 mb-1">
+        <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <div className="flex items-center justify-between text-xs font-semibold text-blue-700 mb-1">
             <span>💎 Core Lucrativo (Líderes de Mercado)</span>
             <span className="font-mono text-[10px]">4 SKUs</span>
           </div>
-          <p className="text-xs text-slate-300 font-medium">R$ 26.5M • Margem 59.8%</p>
-          <p className="text-[11px] text-slate-400 mt-1">
-            <strong className="text-blue-400">Decisão:</strong> Blindar contas chave e incentivar vendas de pacotes plurianuais.
+          <p className="text-xs text-slate-600 font-medium">R$ 26.5M • Margem 59.8%</p>
+          <p className="text-[11px] text-slate-500 mt-1">
+            <strong className="text-blue-600">Decisão:</strong> Blindar contas chave e incentivar vendas de pacotes plurianuais.
           </p>
         </div>
 
@@ -441,8 +441,8 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <span>🚀 Oportunidades de Alto Retorno</span>
             <span className="font-mono text-[10px]">6 SKUs</span>
           </div>
-          <p className="text-xs text-slate-300 font-medium">R$ 11.6M • Margem 56.8%</p>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 font-medium">R$ 11.6M • Margem 56.8%</p>
+          <p className="text-[11px] text-slate-500 mt-1">
             <strong className="text-emerald-400">Decisão:</strong> Aumentar comissão e incentivar cross-sell na base corporativa.
           </p>
         </div>
@@ -452,8 +452,8 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <span>⚠️ Volume sem Margem (Hardware)</span>
             <span className="font-mono text-[10px]">4 SKUs</span>
           </div>
-          <p className="text-xs text-slate-300 font-medium">R$ 15.8M • Margem 17.8%</p>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 font-medium">R$ 15.8M • Margem 17.8%</p>
+          <p className="text-[11px] text-slate-500 mt-1">
             <strong className="text-amber-400">Decisão:</strong> Limitar descontos a 5% e atrelar a contratos obrigatórios de SaaS.
           </p>
         </div>
@@ -463,8 +463,8 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <span>🛑 Revisão / Baixo Retorno</span>
             <span className="font-mono text-[10px]">6 SKUs</span>
           </div>
-          <p className="text-xs text-slate-300 font-medium">R$ 4.3M • Margem 24.5%</p>
-          <p className="text-[11px] text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 font-medium">R$ 4.3M • Margem 24.5%</p>
+          <p className="text-[11px] text-slate-500 mt-1">
             <strong className="text-rose-400">Decisão:</strong> Reajustar preços de manutenção ou programar descontinuação.
           </p>
         </div>
@@ -480,7 +480,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
         ) : (
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart margin={{ top: 25, right: 30, bottom: 25, left: 15 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis
                 type="number"
                 dataKey="volume"
@@ -567,37 +567,37 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
       </div>
 
       {/* Legenda de Categorias com Contagem */}
-      <div className="flex flex-wrap items-center justify-between pt-2 border-t border-slate-800 text-xs font-mono">
+      <div className="flex flex-wrap items-center justify-between pt-2 border-t border-slate-200 text-xs font-mono">
         <div className="flex flex-wrap items-center gap-4">
           {Object.entries(CATEGORY_COLORS).map(([cat, color]) => (
             <div key={cat} className="flex items-center gap-1.5">
               <span className="w-3 h-3 rounded-full border border-white/20 shadow-sm" style={{ backgroundColor: color }} />
-              <span className="text-slate-300">{cat}</span>
+              <span className="text-slate-600">{cat}</span>
             </div>
           ))}
         </div>
 
-        <div className="text-slate-400 text-[11px] flex items-center gap-1">
-          <Info className="w-3.5 h-3.5 text-blue-400" />
+        <div className="text-slate-500 text-[11px] flex items-center gap-1">
+          <Info className="w-3.5 h-3.5 text-blue-600" />
           <span>Tamanho da bolha = Faturamento Total (R$). Passe o mouse para inspecionar.</span>
         </div>
       </div>
 
       {/* Ficha Tática do Produto Selecionado (Quando clicado) */}
       {selectedProduct && (
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
+        <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-blue-300 border border-slate-700">
+              <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-blue-700 border border-slate-200">
                 {selectedProduct.category}
               </span>
-              <h3 className="text-base font-bold text-white">{selectedProduct.name}</h3>
+              <h3 className="text-base font-bold text-slate-900">{selectedProduct.name}</h3>
               <span className="text-xs font-mono text-emerald-400 font-bold">
                 {selectedProduct.margin.toFixed(1)}% margem
               </span>
             </div>
-            <p className="text-xs text-slate-300 max-w-3xl">
-              <strong className="text-blue-400">Diagnóstico RN Intelligence:</strong> {selectedProduct.aiDiagnosis}
+            <p className="text-xs text-slate-600 max-w-3xl">
+              <strong className="text-blue-600">Diagnóstico RN Intelligence:</strong> {selectedProduct.aiDiagnosis}
             </p>
           </div>
 
@@ -605,7 +605,7 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <button
               type="button"
               onClick={() => onOpenCopilot(selectedProduct.copilotPrompt)}
-              className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-bold text-xs shadow-md shadow-blue-950/30 transition-all cursor-pointer"
+              className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-600 text-slate-900 font-bold text-xs shadow-md shadow-blue-950/30 transition-all cursor-pointer"
             >
               <Cpu className="w-3.5 h-3.5" />
               <span>Explorar na RN Intelligence</span>
