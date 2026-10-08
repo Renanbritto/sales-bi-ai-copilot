@@ -180,15 +180,7 @@ export default function DashboardPage() {
               <BarChart3 className="w-5 h-5 text-slate-950 font-bold" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-base font-bold text-white tracking-tight">Sales BI & RN Intelligence</h1>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400">
-                  Painel Tático Executivo
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400">
-                Plataforma Analítica para Tomada de Decisão Comercial & Diretoria
-              </p>
+              <h1 className="text-lg font-bold text-white tracking-tight">Análise Comercial</h1>
             </div>
           </div>
 
@@ -358,7 +350,7 @@ export default function DashboardPage() {
       {/* Footer */}
       <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
         <p>
-          Sales BI & RN Intelligence • Desenvolvido por{" "}
+          Análise Comercial • RN Intelligence • Desenvolvido por{" "}
           <a
             href="https://renan-nocelli.vercel.app"
             target="_blank"

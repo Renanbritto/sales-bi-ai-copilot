@@ -22,12 +22,10 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
           <div>
             <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
               Briefing Executivo Diário • RN Intelligence
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                SÍNTESE EXECUTIVA
-              </span>
+              
             </h2>
             <p className="text-[11px] text-slate-400">
-              Diagnóstico autônomo gerado a partir do processamento colunar de 13.747 transações no DuckDB.
+              Diagnóstico executivo automatizado gerado pela RN Intelligence.
             </p>
           </div>
         </div>
