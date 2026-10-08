@@ -10,8 +10,8 @@ const comfortaa = Comfortaa({
 });
 
 export const metadata = {
-  title: "Sales BI & AI Copilot | Painel Comercial Executivo",
-  description: "Plataforma analítica executiva de BI Comercial integrada com DuckDB OLAP e Agente de IA Conversacional (Google Gemini).",
+  title: "Sales BI & RN Intelligence | Painel Comercial Executivo",
+  description: "Plataforma analítica executiva de BI Comercial integrada com DuckDB OLAP e RN Intelligence (Google Gemini).",
 };
 
 export default function RootLayout({

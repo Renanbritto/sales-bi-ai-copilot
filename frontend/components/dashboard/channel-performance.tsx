@@ -9,8 +9,8 @@ import {
   AlertTriangle,
   ArrowUpRight,
   DollarSign,
-  Sparkles,
   Cpu,
+  Bot,
   ChevronDown,
   X,
   ExternalLink,
@@ -43,7 +43,7 @@ const CHANNEL_AI_INSIGHTS: Record<string, { diagnosis: string; prompt: string; a
   "Canais & Parceiros": {
     diagnosis:
       "Ponto de atenção executivo: taxa de desconto excessiva de 12.4%, comprimindo a margem para 38.6% (abaixo da meta de 40.0%). Ação imediata: Limitar alçada de desconto de parceiros a 7.5%.",
-    prompt: "Qual a recomendação da IA para recuperar a margem de contribuição no canal de Parceiros?",
+    prompt: "Qual a recomendação da RN Intelligence para recuperar a margem de contribuição no canal de Parceiros?",
     alert: true,
   },
 };
@@ -86,7 +86,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                 <th className="py-3 px-4 text-right">Margem %</th>
                 <th className="py-3 px-4 text-right">Volume Pedidos</th>
                 <th className="py-3 px-4 text-right">Ticket Médio</th>
-                <th className="py-3 px-4 text-center">IA Insight</th>
+                <th className="py-3 px-4 text-center">RN Intelligence</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60">
@@ -160,7 +160,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                           }`}
                           title="Ver Diagnóstico do Canal"
                         >
-                          <Sparkles className="w-3.5 h-3.5" />
+                          <Cpu className="w-3.5 h-3.5" />
                         </button>
                       </td>
                     </tr>
@@ -172,8 +172,8 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                           <div className="p-4 bg-[#0a1122] border-y border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
                             <div className="space-y-1">
                               <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-semibold">
-                                <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-                                <span>DIAGNÓSTICO COMERCIAL: {c.channel.toUpperCase()}</span>
+                                <Cpu className="w-3.5 h-3.5 text-cyan-300" />
+                                <span>DIAGNÓSTICO RN INTELLIGENCE: {c.channel.toUpperCase()}</span>
                                 {discountAlert && (
                                   <span className="flex items-center gap-1 text-[10px] text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800">
                                     <AlertTriangle className="w-3 h-3" /> Alerta de Erosão
@@ -191,7 +191,7 @@ export function ChannelPerformance({ channels, onOpenCopilot }: ChannelPerforman
                                 onClick={() => onOpenCopilot(insight.prompt)}
                                 className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
                               >
-                                <span>Analisar Canal no Copilot</span>
+                                <span>Analisar Canal na RN Intelligence</span>
                                 <ExternalLink className="w-3 h-3 text-cyan-400" />
                               </button>
                             )}

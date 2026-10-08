@@ -6,8 +6,8 @@ import {
   FileText,
   Handshake,
   CheckCircle2,
-  Sparkles,
   Cpu,
+  Bot,
   ChevronDown,
   X,
   ExternalLink,
@@ -118,7 +118,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
             Conversão Global MQL → Venda: 6.27%
           </span>
           <span className="hidden md:inline-block text-[11px] font-mono text-slate-500">
-            Clique no estágio para ver IA Insight
+            Clique no estágio para ver RN Intelligence
           </span>
         </div>
       </div>
@@ -164,8 +164,8 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                         : "bg-slate-900 text-cyan-400/80 border-cyan-500/30 hover:border-cyan-400"
                     }`}
                   >
-                    <Sparkles className="w-3 h-3 text-cyan-300" />
-                    <span>IA Insight</span>
+                    <Cpu className="w-3 h-3 text-cyan-300" />
+                    <span>RN Intelligence</span>
                     <ChevronDown
                       className={`w-3 h-3 transition-transform ${isSelected ? "rotate-180" : ""}`}
                     />
@@ -193,9 +193,9 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-cyan-500/20 text-[10px] font-mono">
                     <div className="flex items-center gap-1.5 text-cyan-400">
-                      <Sparkles className="w-3.5 h-3.5 text-cyan-300 animate-pulse" />
+                      <Cpu className="w-3.5 h-3.5 text-cyan-300" />
                       <span className="font-bold tracking-wider uppercase">
-                        AI Copilot • Diagnóstico de Pipeline
+                        RN Intelligence • Diagnóstico de Pipeline
                       </span>
                     </div>
 
@@ -233,7 +233,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                         onClick={() => onOpenCopilot(stg.copilotPrompt)}
                         className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
                       >
-                        <span>Perguntar ao Copilot no Chat</span>
+                        <span>Perguntar à RN Intelligence no Chat</span>
                         <ExternalLink className="w-3 h-3 text-cyan-400" />
                       </button>
                     )}

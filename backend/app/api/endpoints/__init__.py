@@ -1,1 +1,1 @@
-"""Sales BI AI Copilot Package."""
+"""Sales BI RN Intelligence Package."""

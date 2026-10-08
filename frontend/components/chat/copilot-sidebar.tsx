@@ -2,18 +2,17 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import {
-  Sparkles,
+  Bot,
   Send,
   X,
   Code2,
   ChevronDown,
   ChevronUp,
   Cpu,
-  Bot,
   User,
   Trash2,
   Clock,
-  CheckCircle2,
+  CheckCircle2
 } from "lucide-react";
 import { ChatMessage, sendChatMessage } from "@/lib/api";
 
@@ -36,7 +35,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
       id: "1",
       role: "assistant",
       content:
-        "Olá! Sou o seu **Sales BI AI Copilot**, integrado diretamente à base analítica DuckDB via Google Gemini.\n\nVocê pode me fazer qualquer pergunta sobre faturamento, atingimento de metas, curva ABC de produtos ou performance de vendedores!",
+        "Olá! Sou o seu **RN Intelligence**, integrado diretamente à base analítica DuckDB via Google Gemini.\n\nVocê pode me fazer qualquer pergunta sobre faturamento, atingimento de metas, curva ABC de produtos ou performance de vendedores!",
       timestamp: "Agora",
     },
   ]);
@@ -129,11 +128,11 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
         <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/25">
-              <Sparkles className="w-4 h-4 text-slate-950" />
+              <Bot className="w-4 h-4 text-slate-950" />
             </div>
             <div>
               <h2 className="text-sm font-bold text-white flex items-center gap-2">
-                Sales AI Copilot
+                RN Intelligence
                 <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-950 border border-cyan-800 text-cyan-400">
                   DuckDB + Gemini
                 </span>
@@ -299,7 +298,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Pergunte ao Copilot (ex: vendas por canal, ranking...)"
+              placeholder="Pergunte ao RN Intelligence (ex: vendas por canal, ranking...)"
               disabled={isLoading}
               className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
             />
@@ -312,7 +311,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             </button>
           </form>
           <p className="text-[10px] text-center text-slate-400 mt-2 font-mono">
-            Copilot conectado ao banco colunar DuckDB em modo somente leitura.
+            RN Intelligence conectado ao banco colunar DuckDB em modo somente leitura.
           </p>
         </div>
       </div>
