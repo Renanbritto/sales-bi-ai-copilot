@@ -6,7 +6,6 @@ import {
   BarChart3,
   Filter,
   Sparkles,
-  Database,
   Users,
   PieChart as PieIcon,
   Globe,
@@ -48,7 +47,6 @@ import { RegionalAnalysis } from "@/components/dashboard/regional-analysis";
 import { CustomerSegments } from "@/components/dashboard/customer-segments";
 import { WhatIfSimulator } from "@/components/dashboard/what-if-simulator";
 import { ChannelPerformance } from "@/components/dashboard/channel-performance";
-import { ModelSchema } from "@/components/dashboard/model-schema";
 import { CopilotSidebar } from "@/components/chat/copilot-sidebar";
 
 // Carregamento dinâmico sem SSR para gráficos Recharts
@@ -78,14 +76,23 @@ const RepsLeaderboard = dynamic(
   }
 );
 
-type TabType =
-  | "executivo"
-  | "produtos"
-  | "clientes"
-  | "geografia"
-  | "simulador"
-  | "equipe"
-  | "modelagem";
+const ProductDecisionMatrix = dynamic(
+  () =>
+    import("@/components/dashboard/product-decision-matrix").then(
+      (mod) => mod.ProductDecisionMatrix
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="glass-panel rounded-xl p-6 h-[420px] flex items-center justify-center text-slate-500 text-xs">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2" />
+        Carregando matriz de decisão de portfólio...
+      </div>
+    ),
+  }
+);
+
+type TabType = "executivo" | "produtos" | "clientes" | "geografia" | "simulador" | "equipe";
 
 export default function DashboardPage() {
   const [kpis, setKpis] = useState<KpiData>(FALLBACK_KPIS);
@@ -176,11 +183,11 @@ export default function DashboardPage() {
               <div className="flex items-center gap-2">
                 <h1 className="text-base font-bold text-white tracking-tight">Sales BI & AI Copilot</h1>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400">
-                  Modern Data Stack
+                  Painel Tático Executivo
                 </span>
               </div>
               <p className="text-[11px] text-slate-400">
-                Plataforma Analítica Executiva • DuckDB OLAP • Google Gemini
+                Plataforma Analítica para Tomada de Decisão Comercial & Diretoria
               </p>
             </div>
           </div>
@@ -258,17 +265,16 @@ export default function DashboardPage() {
         {/* 4 Cards de KPI Executivos com Tooltips Inteligentes e Abertura Segura */}
         <KpiSummary data={filteredKpis} onOpenCopilot={handleOpenCopilot} />
 
-        {/* Menu de Abas (7 Níveis de Análise) */}
+        {/* Menu de Abas (6 Níveis de Análise Tática para Negócios & Diretoria) */}
         <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 overflow-x-auto">
           <div className="flex gap-1.5">
             {[
               { id: "executivo", label: "Visão Executiva", icon: BarChart3 },
-              { id: "produtos", label: "Produtos & Matriz BCG", icon: PieIcon },
+              { id: "produtos", label: "Portfólio & Matriz de Decisão", icon: PieIcon },
               { id: "clientes", label: "Clientes & Segmentos", icon: Building2 },
               { id: "geografia", label: "Regionais & Canais", icon: Globe },
               { id: "simulador", label: "Simulador What-If", icon: Sliders },
               { id: "equipe", label: "Equipe & Quotas", icon: Users },
-              { id: "modelagem", label: "Modelagem DuckDB", icon: Database },
             ].map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -299,29 +305,36 @@ export default function DashboardPage() {
         {/* Conteúdo da Aba Ativa */}
         {activeTab === "executivo" && (
           <div className="space-y-6">
-            <AiExecutiveBriefing />
+            <AiExecutiveBriefing onOpenCopilot={handleOpenCopilot} />
             <SalesChart data={monthly} />
-            <FunnelChart />
+            <FunnelChart onOpenCopilot={handleOpenCopilot} />
           </div>
         )}
 
         {activeTab === "produtos" && (
           <div className="space-y-6">
-            <ParetoSection products={pareto} />
-            <BcgMatrix products={pareto} />
+            {/* O Novo Gráfico de Bolhas Decisório com 20 Produtos e 4 Quadrantes Estratégicos */}
+            <ProductDecisionMatrix onOpenCopilot={handleOpenCopilot} />
+            {/* Matriz BCG e Curva ABC Complementares */}
+            <BcgMatrix products={pareto} onOpenCopilot={handleOpenCopilot} />
+            <ParetoSection products={pareto} onOpenCopilot={handleOpenCopilot} />
           </div>
         )}
 
         {activeTab === "clientes" && (
           <div className="space-y-6">
-            <CustomerSegments segments={segments} topClients={topClients} />
+            <CustomerSegments
+              segments={segments}
+              topClients={topClients}
+              onOpenCopilot={handleOpenCopilot}
+            />
           </div>
         )}
 
         {activeTab === "geografia" && (
           <div className="space-y-6">
-            <RegionalAnalysis regions={regions} />
-            <ChannelPerformance channels={channels} />
+            <RegionalAnalysis regions={regions} onOpenCopilot={handleOpenCopilot} />
+            <ChannelPerformance channels={channels} onOpenCopilot={handleOpenCopilot} />
           </div>
         )}
 
@@ -330,19 +343,14 @@ export default function DashboardPage() {
             <WhatIfSimulator
               baseRevenue={kpis.faturamento_total}
               baseMarginPct={kpis.margem_contribuicao_pct}
+              onOpenCopilot={handleOpenCopilot}
             />
           </div>
         )}
 
         {activeTab === "equipe" && (
           <div className="space-y-6">
-            <RepsLeaderboard reps={reps} />
-          </div>
-        )}
-
-        {activeTab === "modelagem" && (
-          <div className="space-y-6">
-            <ModelSchema />
+            <RepsLeaderboard reps={reps} onOpenCopilot={handleOpenCopilot} />
           </div>
         )}
       </main>
