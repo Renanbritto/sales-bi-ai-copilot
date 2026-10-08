@@ -363,7 +363,7 @@ export default function DashboardPage() {
               <div className="space-y-6">
                 <ProductDecisionMatrix onOpenCopilot={handleOpenCopilot} />
                 <ParetoSection products={pareto} onOpenCopilot={handleOpenCopilot} />
-                <BcgMatrix />
+                <BcgMatrix products={pareto} onOpenCopilot={handleOpenCopilot} />
               </div>
             )}
 
