@@ -172,8 +172,8 @@ export function SalesChart({ data }: SalesChartProps) {
             >
               <defs>
                 <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#4f46e5" stopOpacity={0.9} />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.2} />
+                  <stop offset="0%" stopColor="#93c5fd" stopOpacity={0.9} />
+                  <stop offset="100%" stopColor="#6ee7b7" stopOpacity={0.2} />
                 </linearGradient>
                 <linearGradient id="marginGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#0f766e" stopOpacity={0.3} />

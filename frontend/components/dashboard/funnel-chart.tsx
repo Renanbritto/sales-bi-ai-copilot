@@ -28,7 +28,7 @@ const FUNNEL_STAGES = [
     value: "R$ 48.5M",
     convRate: "100.0%",
     dropOff: "0%",
-    color: "bg-gradient-to-r from-slate-800 to-slate-700",
+    color: "bg-gradient-to-r from-emerald-200 to-teal-200",
     icon: Users,
     avgCycleDays: "2 dias",
     aiDiagnosis:
@@ -42,7 +42,7 @@ const FUNNEL_STAGES = [
     value: "R$ 26.2M",
     convRate: "36.6%",
     dropOff: "-63.4%",
-    color: "bg-gradient-to-r from-slate-700 to-slate-600",
+    color: "bg-gradient-to-r from-teal-200 to-cyan-200",
     icon: FileText,
     avgCycleDays: "5 dias",
     aiDiagnosis:
@@ -56,7 +56,7 @@ const FUNNEL_STAGES = [
     value: "R$ 16.4M",
     convRate: "47.1%",
     dropOff: "-52.9%",
-    color: "bg-gradient-to-r from-slate-600 to-blue-800",
+    color: "bg-gradient-to-r from-cyan-200 to-sky-200",
     icon: FileText,
     avgCycleDays: "12 dias",
     aiDiagnosis:
@@ -70,7 +70,7 @@ const FUNNEL_STAGES = [
     value: "R$ 11.8M",
     convRate: "60.4%",
     dropOff: "-39.6%",
-    color: "bg-gradient-to-r from-blue-800 to-blue-600",
+    color: "bg-gradient-to-r from-sky-200 to-blue-200",
     icon: Handshake,
     avgCycleDays: "22 dias",
     aiDiagnosis:
@@ -84,7 +84,7 @@ const FUNNEL_STAGES = [
     value: "R$ 8.95M",
     convRate: "60.1%",
     dropOff: "-39.9%",
-    color: "bg-gradient-to-r from-blue-600 to-blue-500",
+    color: "bg-gradient-to-r from-blue-200 to-indigo-200",
     icon: CheckCircle2,
     avgCycleDays: "Faturado",
     aiDiagnosis:
@@ -178,7 +178,7 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                   style={{ width: `${widthPct}%` }}
                 >
                   <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <span className="text-sm font-bold text-white tracking-widest font-mono z-10 drop-shadow-sm">
+                  <span className="text-sm font-bold text-slate-700 tracking-widest font-mono z-10 drop-shadow-sm">
                     {stg.count.toLocaleString("pt-BR")} DEALS
                   </span>
                 </div>
