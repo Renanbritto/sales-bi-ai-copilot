@@ -45,15 +45,15 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
   }
 
   return (
-    <div className="relative z-50 min-w-[300px] rounded-2xl p-4 bg-[#070e1b]/98 backdrop-blur-2xl border border-cyan-500/50 shadow-[0_12px_40px_rgba(6,182,212,0.35)] text-slate-100 font-sans">
+    <div className="relative z-50 min-w-[300px] rounded-2xl p-4 bg-[#0a1122]/98 backdrop-blur-2xl border border-slate-700 shadow-xl shadow-black/80 text-slate-100 font-sans">
       {/* Glow corner effects */}
-      <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-24 h-24 bg-slate-800 rounded-full blur-2xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-20 h-20 bg-blue-600/10 rounded-full blur-xl pointer-events-none" />
 
       {/* Header do Agente IA */}
-      <div className="flex items-center justify-between pb-2 mb-3 border-b border-cyan-500/20 text-[11px] font-mono">
-        <div className="flex items-center gap-1.5 text-cyan-400">
-          <Cpu className="w-3.5 h-3.5 text-cyan-300" />
+      <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-800 text-[11px] font-mono">
+        <div className="flex items-center gap-1.5 text-blue-400">
+          <Cpu className="w-3.5 h-3.5 text-blue-300" />
           <span className="font-semibold tracking-wider uppercase text-[10px]">RN Intelligence • Telemetria</span>
         </div>
         <div className="flex items-center gap-1.5 text-[10px] text-emerald-400">
@@ -84,7 +84,7 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
       <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
         <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
           <p className="text-[10px] text-slate-400 font-mono">Faturamento</p>
-          <p className="font-bold text-cyan-300 text-sm mt-0.5">{formatCurrency(item.revenue)}</p>
+          <p className="font-bold text-blue-300 text-sm mt-0.5">{formatCurrency(item.revenue)}</p>
         </div>
         <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800">
           <p className="text-[10px] text-slate-400 font-mono">Meta Orçada</p>
@@ -101,9 +101,9 @@ function AiFuturisticSalesTooltip({ active, payload }: any) {
       </div>
 
       {/* Micro-insight do Agente de IA */}
-      <div className="p-2.5 rounded-xl bg-gradient-to-r from-cyan-950/60 to-blue-950/40 border border-cyan-500/30 text-[11px] leading-relaxed text-slate-200">
+      <div className="p-2.5 rounded-xl bg-gradient-to-r from-slate-900 to-blue-950/40 border border-slate-800 text-[11px] leading-relaxed text-slate-200">
         <p className="flex items-start gap-1.5">
-          <Cpu className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+          <Cpu className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
           <span>{aiInsight}</span>
         </p>
       </div>
@@ -135,7 +135,7 @@ export function SalesChart({ data }: SalesChartProps) {
             <h2 className="text-base font-bold text-white tracking-tight">
               Evolução Temporal: Faturamento vs Metas & Margem
             </h2>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-blue-400">
               DuckDB Analytics
             </span>
           </div>
@@ -155,7 +155,7 @@ export function SalesChart({ data }: SalesChartProps) {
                 onClick={() => setSelectedQuarter(q)}
                 className={`px-2.5 py-1 rounded-md transition-colors font-medium cursor-pointer ${
                   selectedQuarter === q
-                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm"
+                    ? "bg-blue-500/20 text-blue-300 border border-blue-500/40 shadow-sm"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
               >
@@ -164,8 +164,8 @@ export function SalesChart({ data }: SalesChartProps) {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-950/40 border border-cyan-800/40 text-[11px] font-mono text-cyan-300">
-            <Activity className="w-2.5 h-2.5 text-cyan-400" /> Telemetria Ativa
+          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono text-blue-300">
+            <Activity className="w-2.5 h-2.5 text-blue-400" /> Telemetria Ativa
           </div>
         </div>
       </div>
@@ -173,7 +173,7 @@ export function SalesChart({ data }: SalesChartProps) {
       <div className="h-[380px] w-full">
         {!mounted ? (
           <div className="h-full flex items-center justify-center text-slate-500 text-xs">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping mr-2" />
+            <span className="w-2 h-2 rounded-full bg-blue-400 mr-2" />
             Carregando telemetria gráfica...
           </div>
         ) : (
@@ -184,7 +184,7 @@ export function SalesChart({ data }: SalesChartProps) {
             >
               <defs>
                 <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.8} />
+                  <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.8} />
                   <stop offset="100%" stopColor="#0284c7" stopOpacity={0.2} />
                 </linearGradient>
                 <linearGradient id="marginGrad" x1="0" y1="0" x2="0" y2="1">
@@ -222,7 +222,7 @@ export function SalesChart({ data }: SalesChartProps) {
               {/* Tooltip Futurista de IA */}
               <Tooltip
                 content={<AiFuturisticSalesTooltip />}
-                cursor={{ stroke: "#06b6d4", strokeWidth: 1.5, strokeDasharray: "4 4" }}
+                cursor={{ stroke: "#3b82f6", strokeWidth: 1.5, strokeDasharray: "4 4" }}
               />
 
               <Legend

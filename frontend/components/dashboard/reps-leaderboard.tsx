@@ -32,14 +32,14 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
   const d = payload[0].payload;
 
   return (
-    <div className="rounded-2xl p-3.5 bg-[#070e1b]/98 backdrop-blur-2xl border border-cyan-500/50 shadow-[0_12px_40px_rgba(6,182,212,0.3)] text-xs text-slate-100 min-w-[220px]">
-      <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-cyan-500/20 text-[10px] font-mono text-cyan-400">
-        <Cpu className="w-3 h-3 text-cyan-300" />
+    <div className="rounded-2xl p-3.5 bg-[#0a1122]/98 backdrop-blur-2xl border border-blue-500/50 shadow-[0_12px_40px_rgba(6,182,212,0.3)] text-xs text-slate-100 min-w-[220px]">
+      <div className="flex items-center gap-1.5 pb-1.5 mb-1.5 border-b border-slate-800 text-[10px] font-mono text-blue-400">
+        <Cpu className="w-3 h-3 text-blue-300" />
         <span>Radar Benchmark (RN Intelligence)</span>
       </div>
       <p className="font-bold text-white mb-2">{d.subject}</p>
       <div className="space-y-1 text-xs">
-        <div className="flex items-center justify-between text-cyan-300">
+        <div className="flex items-center justify-between text-blue-300">
           <span>Sudeste:</span>
           <span className="font-mono font-bold">{d.Sudeste} pts</span>
         </div>
@@ -49,7 +49,7 @@ function AiFuturisticRadarTooltip({ active, payload }: any) {
         </div>
       </div>
       <div className="mt-2 pt-1.5 border-t border-slate-800 text-[10px] text-slate-400 flex items-center gap-1">
-        <Cpu className="w-3 h-3 text-cyan-400 shrink-0" />
+        <Cpu className="w-3 h-3 text-blue-400 shrink-0" />
         <span>Sul supera Sudeste em quota por +8 pts.</span>
       </div>
     </div>
@@ -128,7 +128,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                       )}
                     </td>
                     <td className="py-3 text-slate-400">{rep.region}</td>
-                    <td className="py-3 text-right font-mono text-cyan-300 font-semibold">
+                    <td className="py-3 text-right font-mono text-blue-300 font-semibold">
                       {formatCurrency(rep.achieved)}
                     </td>
                     <td className="py-3 text-right font-mono text-slate-400">
@@ -140,7 +140,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                           rep.pct >= 130
                             ? "bg-emerald-500/20 text-emerald-400"
                             : rep.pct >= 100
-                            ? "bg-cyan-500/20 text-cyan-400"
+                            ? "bg-blue-500/15 text-blue-400"
                             : "bg-amber-500/20 text-amber-400"
                         }`}
                       >
@@ -160,7 +160,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                               `Analise a performance individual do vendedor ${rep.name} (${rep.region}), atingimento de ${rep.pct.toFixed(1)}% da quota e margem de ${rep.margin}%.`
                             )
                           }
-                          className="p-1 rounded-lg bg-slate-900 border border-cyan-500/30 text-cyan-400 hover:text-white hover:border-cyan-400 transition-colors"
+                          className="p-1 rounded-lg bg-slate-900 border border-slate-700 text-blue-400 hover:text-white hover:border-blue-400 transition-colors"
                           title="Analisar performance na RN Intelligence"
                         >
                           <Cpu className="w-3.5 h-3.5" />
@@ -182,7 +182,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
             <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-1.5">
               <Trophy className="w-4 h-4 text-amber-400" /> Radar Regional
             </h3>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 border border-cyan-800 text-cyan-400">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-blue-400">
               RN Intelligence
             </span>
           </div>
@@ -203,8 +203,8 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                 <Radar
                   name="Sudeste"
                   dataKey="Sudeste"
-                  stroke="#06b6d4"
-                  fill="#06b6d4"
+                  stroke="#3b82f6"
+                  fill="#3b82f6"
                   fillOpacity={0.35}
                 />
                 <Radar
@@ -222,7 +222,7 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
 
         <div className="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-around text-xs font-mono">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-cyan-500" />
+            <span className="w-3 h-3 rounded-full bg-blue-600" />
             <span className="text-slate-300">Sudeste (50.4%)</span>
           </div>
           <div className="flex items-center gap-2">
