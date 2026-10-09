@@ -160,10 +160,12 @@ export function RepsLeaderboard({ reps, onOpenCopilot }: RepsLeaderboardProps) {
                               `Analise a performance individual do vendedor ${rep.name} (${rep.region}), atingimento de ${rep.pct.toFixed(1)}% da quota e margem de ${rep.margin}%.`
                             )
                           }
-                          className="p-1 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 text-blue-600 hover:text-slate-700 dark:text-slate-200 hover:border-blue-400 transition-colors"
+                          className="group p-1.5 rounded-lg bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500 transition-all cursor-pointer shadow-2xs"
                           title="Analisar performance na RN Intelligence"
                         >
-                          <Cpu className="w-3.5 h-3.5" />
+                          <div className="w-4 h-4 rounded bg-slate-950 dark:bg-black border border-blue-500/40 group-hover:border-blue-400 flex items-center justify-center p-0.5 shrink-0 transition-colors">
+                            <img src="/logo_badge_sm.png" alt="RN" className="w-full h-full object-contain rounded" />
+                          </div>
                         </button>
                       )}
                     </td>

@@ -9,6 +9,7 @@ import {
   ChevronDown,
   X,
   ExternalLink,
+  ChevronRight,
 } from "lucide-react";
 
 interface RegionalAnalysisProps {
@@ -176,10 +177,13 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                     <button
                       type="button"
                       onClick={() => onOpenCopilot(insight.prompt)}
-                      className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-medium transition-all cursor-pointer shadow-sm"
+                      className="w-full group flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-300 text-[11px] font-semibold transition-all cursor-pointer shadow-xs hover:shadow-sm"
                     >
+                      <div className="w-4 h-4 rounded bg-slate-950 dark:bg-black border border-blue-500/40 flex items-center justify-center p-0.5 shrink-0">
+                        <img src="/logo_badge_sm.png" alt="RN" className="w-full h-full object-contain rounded" />
+                      </div>
                       <span>Perguntar à RN Intelligence sobre {reg.region}</span>
-                      <ExternalLink className="w-3 h-3" />
+                      <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                     </button>
                   )}
                 </div>

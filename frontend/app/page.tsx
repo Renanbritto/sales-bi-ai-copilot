@@ -231,7 +231,7 @@ export default function DashboardPage() {
 
       {/* Sidebar Retrátil / Drawer Mobile */}
       <aside
-        className={`flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-300 z-50 shrink-0 ${
+        className={`flex flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 shrink-0 ${
           isSidebarOpen
             ? 'fixed inset-y-0 left-0 w-72 shadow-2xl md:relative md:shadow-none'
             : 'hidden md:flex md:w-20'
@@ -460,7 +460,7 @@ export default function DashboardPage() {
           <div className="mt-6">
             {/* Conteúdo da Aba Ativa */}
             {activeTab === "executivo" && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-in fade-in-50 duration-300 ease-out">
                 <AiExecutiveBriefing onOpenCopilot={handleOpenCopilot} />
                 <div className="flex flex-col gap-6">
                   <SalesChart data={monthly} />
@@ -470,7 +470,7 @@ export default function DashboardPage() {
             )}
 
             {activeTab === "produtos" && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-in fade-in-50 duration-300 ease-out">
                 <ProductDecisionMatrix onOpenCopilot={handleOpenCopilot} />
                 <ParetoSection products={pareto} onOpenCopilot={handleOpenCopilot} />
                 <BcgMatrix products={pareto} onOpenCopilot={handleOpenCopilot} />
@@ -478,26 +478,26 @@ export default function DashboardPage() {
             )}
 
             {activeTab === "clientes" && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-in fade-in-50 duration-300 ease-out">
                 <CustomerSegments segments={segments} topClients={topClients} onOpenCopilot={handleOpenCopilot} />
               </div>
             )}
 
             {activeTab === "geografia" && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-in fade-in-50 duration-300 ease-out">
                 <RegionalAnalysis regions={regions} onOpenCopilot={handleOpenCopilot} />
                 <ChannelPerformance channels={channels} onOpenCopilot={handleOpenCopilot} />
               </div>
             )}
 
             {activeTab === "simulador" && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-in fade-in-50 duration-300 ease-out">
                 <WhatIfSimulator baseRevenue={filteredKpis.faturamento_total} baseMarginPct={filteredKpis.margem_contribuicao_pct} currentRevenue={filteredKpis.faturamento_total} currentMarginPct={filteredKpis.margem_contribuicao_pct} onOpenCopilot={handleOpenCopilot} />
               </div>
             )}
 
             {activeTab === "equipe" && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-in fade-in-50 duration-300 ease-out">
                 <RepsLeaderboard reps={reps} onOpenCopilot={handleOpenCopilot} />
               </div>
             )}

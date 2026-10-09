@@ -105,6 +105,17 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
     setExpandedSql((prev) => ({ ...prev, [msgId]: !prev[msgId] }));
   };
 
+  // Atalho Escape para fechar suavemente
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   const clearChat = () => {
     setMessages([
       {
@@ -116,12 +127,21 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
     ]);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm transition-all duration-300">
+    <div
+      className={`fixed inset-0 z-50 flex justify-end transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isOpen
+          ? "pointer-events-auto bg-black/50 dark:bg-black/70 backdrop-blur-sm opacity-100"
+          : "pointer-events-none bg-black/0 backdrop-blur-none opacity-0"
+      }`}
+      onClick={onClose}
+    >
       <div
-        className="w-full max-w-lg h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col shadow-2xl animate-in slide-in-from-right duration-300"
+        className={`w-full max-w-lg h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isOpen
+            ? "translate-x-0 opacity-100 shadow-2xl"
+            : "translate-x-full opacity-0 shadow-none"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header do Copilot */}

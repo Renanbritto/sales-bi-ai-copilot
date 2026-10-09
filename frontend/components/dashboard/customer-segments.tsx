@@ -16,6 +16,7 @@ import {
   ExternalLink,
   Target,
   AlertTriangle,
+  ChevronRight,
 } from "lucide-react";
 
 interface CustomerSegmentsProps {
@@ -183,10 +184,13 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                       <button
                         type="button"
                         onClick={() => onOpenCopilot(insight.prompt)}
-                        className="w-full flex items-center justify-center gap-1 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 dark:border-slate-700/50 text-blue-700 hover:text-slate-700 dark:text-slate-200 text-[11px] font-medium transition-all cursor-pointer"
+                        className="w-full group flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-300 text-[11px] font-semibold transition-all cursor-pointer shadow-2xs"
                       >
+                        <div className="w-4 h-4 rounded bg-slate-950 dark:bg-black border border-blue-500/40 flex items-center justify-center p-0.5 shrink-0">
+                          <img src="/logo_badge_sm.png" alt="RN" className="w-full h-full object-contain rounded" />
+                        </div>
                         <span>Perguntar à RN Intelligence sobre {s.segment}</span>
-                        <ExternalLink className="w-3 h-3 text-blue-600" />
+                        <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                       </button>
                     )}
                   </div>
@@ -320,10 +324,13 @@ export function CustomerSegments({ segments, topClients, onOpenCopilot }: Custom
                                     `Analise o histórico completo de compras, faturamento e margem do cliente ${c.client_name}.`
                                   )
                                 }
-                                className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 dark:border-slate-700/50 text-blue-700 hover:text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all cursor-pointer"
+                                className="shrink-0 group flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                               >
+                                <div className="w-4 h-4 rounded bg-slate-950 dark:bg-black border border-blue-500/40 flex items-center justify-center p-0.5 shrink-0">
+                                  <img src="/logo_badge_sm.png" alt="RN" className="w-full h-full object-contain rounded" />
+                                </div>
                                 <span>Analisar Conta na RN Intelligence</span>
-                                <ExternalLink className="w-3 h-3 text-blue-600" />
+                                <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                               </button>
                             )}
                           </div>

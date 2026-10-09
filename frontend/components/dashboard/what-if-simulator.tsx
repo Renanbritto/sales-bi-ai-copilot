@@ -10,6 +10,7 @@ import {
   DollarSign,
   Target,
   ShieldCheck,
+  ChevronRight,
 } from "lucide-react";
 
 interface WhatIfSimulatorProps {
@@ -263,10 +264,13 @@ export function WhatIfSimulator({
             <button
               type="button"
               onClick={() => onOpenCopilot(copilotSimPrompt)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md shadow-blue-900/20 transition-all cursor-pointer"
+              className="w-full group flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-300 font-semibold text-xs shadow-xs hover:shadow-md hover:shadow-blue-500/10 transition-all cursor-pointer"
             >
-              <Zap className="w-4 h-4 text-white" />
+              <div className="w-5 h-5 rounded-md bg-slate-950 dark:bg-black border border-blue-500/40 group-hover:border-blue-400 flex items-center justify-center p-0.5 shadow-2xs transition-colors shrink-0">
+                <img src="/logo_badge_sm.png" alt="RN" className="w-full h-full object-contain rounded" />
+              </div>
               <span>Consultar Viabilidade na RN Intelligence</span>
+              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
             </button>
           )}
         </div>

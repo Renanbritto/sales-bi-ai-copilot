@@ -24,7 +24,8 @@ import {
   ExternalLink,
   Filter,
   CheckCircle2,
-  Info
+  Info,
+  ChevronRight,
 } from "lucide-react";
 
 export interface BubbleProduct {
@@ -364,10 +365,13 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
           <button
             type="button"
             onClick={() => onOpenCopilot(p.copilotPrompt)}
-            className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-[11px] font-medium transition-all cursor-pointer"
+            className="w-full group flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-300 text-[11px] font-semibold transition-all cursor-pointer shadow-2xs"
           >
+            <div className="w-4 h-4 rounded bg-slate-950 dark:bg-black border border-blue-500/40 flex items-center justify-center p-0.5 shrink-0">
+              <img src="/logo_badge_sm.png" alt="RN" className="w-full h-full object-contain rounded" />
+            </div>
             <span>Perguntar à RN Intelligence no Chat</span>
-            <ExternalLink className="w-3 h-3 text-blue-600" />
+            <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
           </button>
         )}
       </div>
@@ -605,10 +609,18 @@ export function ProductDecisionMatrix({ onOpenCopilot }: ProductDecisionMatrixPr
             <button
               type="button"
               onClick={() => onOpenCopilot(selectedProduct.copilotPrompt)}
-              className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-600 text-slate-700 dark:text-slate-200 font-bold text-xs shadow-md shadow-blue-900/10 transition-all cursor-pointer"
+              className="group shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200/90 hover:border-blue-400 dark:border-slate-700/80 dark:hover:border-blue-500/60 shadow-xs hover:shadow-md hover:shadow-blue-500/10 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-300 font-semibold text-xs transition-all duration-200 cursor-pointer"
+              title="Explorar na RN Intelligence"
             >
-              <Cpu className="w-3.5 h-3.5" />
+              <div className="w-5 h-5 rounded-md bg-slate-950 dark:bg-black border border-blue-500/40 group-hover:border-blue-400 flex items-center justify-center p-0.5 shadow-2xs transition-colors shrink-0">
+                <img
+                  src="/logo_badge_sm.png"
+                  alt="RN"
+                  className="w-full h-full object-contain rounded"
+                />
+              </div>
               <span>Explorar na RN Intelligence</span>
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
             </button>
           )}
         </div>
