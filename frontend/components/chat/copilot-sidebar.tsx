@@ -127,7 +127,7 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
         <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-slate-900">
           <div className="flex items-center gap-3">
             <div className="h-9 px-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center shadow-md shadow-blue-900/20 shrink-0">
-              <img src="/logo_transparent.png" alt="RN Intelligence" className="h-5 w-auto object-contain" />
+              <img src="/logo_transparent.png" alt="RN Intelligence" style={{ height: "20px", maxHeight: "20px", width: "auto" }} className="object-contain" />
             </div>
             <div>
               <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100">
@@ -171,8 +171,8 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
                 }`}
               >
                 {!isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 mt-0.5 p-1 shadow-xs">
-                    <img src="/logo_transparent.png" alt="RN" className="h-3.5 w-auto object-contain" />
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 flex items-center justify-center shrink-0 mt-0.5">
+                    <Bot className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                   </div>
                 )}
 
@@ -235,8 +235,8 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
 
           {isLoading && (
             <div className="flex gap-3 text-xs items-center text-slate-500 dark:text-slate-400">
-              <div className="w-7 h-7 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 p-1 shadow-xs">
-                <img src="/logo_transparent.png" alt="RN" className="h-3.5 w-auto object-contain" />
+              <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 flex items-center justify-center shrink-0">
+                <Bot className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               </div>
               <div className="flex items-center gap-2 p-3 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80">
                 <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />

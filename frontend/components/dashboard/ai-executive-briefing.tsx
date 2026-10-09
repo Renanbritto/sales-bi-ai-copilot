@@ -16,8 +16,8 @@ export function AiExecutiveBriefing({ onOpenCopilot }: AiExecutiveBriefingProps)
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-slate-100 dark:border-slate-800/50 gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="h-8 px-2 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center shadow-sm shadow-blue-900/20 shrink-0">
-            <img src="/logo_transparent.png" alt="RN Intelligence" className="h-4.5 w-auto object-contain" />
+          <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-900/20 shrink-0">
+            <Brain className="w-4 h-4 text-white" />
           </div>
           <div>
             <h2 className="text-base font-bold text-slate-700 dark:text-slate-200 tracking-tight flex items-center gap-2">
