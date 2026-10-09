@@ -226,8 +226,8 @@ export default function DashboardPage() {
       >
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
-            <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 shadow-sm shadow-blue-900/10">
-              <BarChart3 className="w-4 h-4 text-white font-bold" />
+            <div className="h-8 px-2 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 shadow-sm shadow-blue-900/20">
+              <img src="/logo_transparent.png" alt="RN" className="h-4.5 w-auto object-contain" />
             </div>
             <h1 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight">RN Intelligence</h1>
           </div>
@@ -340,9 +340,11 @@ export default function DashboardPage() {
               <button
                 type="button"
                 onClick={() => handleOpenCopilot()}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
               >
-                <Bot className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" />
+                <div className="w-5 h-5 rounded-md bg-slate-950/90 border border-blue-400/40 flex items-center justify-center p-0.5 shrink-0 group-hover:scale-110 transition-transform">
+                  <img src="/logo_transparent.png" alt="RN" className="h-3 w-auto object-contain" />
+                </div>
                 <span className="hidden sm:inline">Abrir RN Intelligence</span>
                 <span className="sm:hidden font-medium">Copilot</span>
                 <div className="w-2 h-2 rounded-full bg-emerald-400 border border-blue-600 animate-pulse ml-0.5 sm:ml-1 shrink-0" />
