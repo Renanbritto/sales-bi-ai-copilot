@@ -16,7 +16,6 @@ import {
   Moon,
   Sun,
   ChevronRight,
-  Sparkles,
 } from "lucide-react";
 import {
   fetchKpis,
@@ -383,9 +382,8 @@ export default function DashboardPage() {
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                     </span>
                   </div>
-                  <span className="text-[10px] text-slate-400 font-mono tracking-tight flex items-center gap-1">
-                    <Sparkles className="w-2.5 h-2.5 text-blue-400 shrink-0" />
-                    Copilot IA
+                  <span className="text-[10px] text-slate-400 font-medium tracking-tight">
+                    Abrir chat
                   </span>
                 </div>
 
