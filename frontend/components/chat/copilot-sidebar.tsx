@@ -8,11 +8,9 @@ import {
   Code2,
   ChevronDown,
   ChevronUp,
-  Cpu,
   User,
   Trash2,
   Clock,
-  CheckCircle2,
 } from "lucide-react";
 import { ChatMessage, sendChatMessage } from "@/lib/api";
 
@@ -29,13 +27,15 @@ const QUICK_PROMPTS = [
   "Quantos pedidos foram faturados no total?",
 ];
 
-export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSidebarProps) {
+const INITIAL_WELCOME_TEXT = `Bem vindo ao RN Intelligence!
+Você pode me fazer qualquer pergunta sobre faturamento, atingimento de metas, curva ABC de produtos ou performance de vendedores`;
+
+export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "1",
       role: "assistant",
-      content:
-        "Olá! Sou o seu **RN Intelligence**, integrado diretamente à base analítica DuckDB via Google Gemini.\n\nVocê pode me fazer qualquer pergunta sobre faturamento, atingimento de metas, curva ABC de produtos ou performance de vendedores!",
+      content: INITIAL_WELCOME_TEXT,
       timestamp: "Agora",
     },
   ]);
@@ -45,15 +45,15 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto preenche o prompt quando o usuário clica a partir de um card ou KPI
+  // Mantém o campo de texto sempre em branco ao abrir
   useEffect(() => {
-    if (isOpen && initialPrompt) {
-      setInput(initialPrompt);
+    if (isOpen) {
+      setInput("");
       setTimeout(() => {
         inputRef.current?.focus();
       }, 150);
     }
-  }, [isOpen, initialPrompt]);
+  }, [isOpen]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -109,8 +109,7 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
       {
         id: "1",
         role: "assistant",
-        content:
-          "Histórico limpo! Pronto para uma nova análise sobre os dados de vendas.",
+        content: INITIAL_WELCOME_TEXT,
         timestamp: "Agora",
       },
     ]);
@@ -131,11 +130,8 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
               <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+              <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100">
                 RN Intelligence
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 text-blue-600 dark:text-blue-400 font-medium">
-                  DuckDB + Gemini
-                </span>
               </h2>
               <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Agente Analítico Autônomo com Text-to-SQL
@@ -160,18 +156,6 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
             >
               <X className="w-5 h-5" />
             </button>
-          </div>
-        </div>
-
-        {/* Telemetria de Conexão */}
-        <div className="px-4 py-2.5 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] font-mono">
-          <div className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400">
-            <Cpu className="w-3.5 h-3.5" />
-            <span>Motor: DuckDB OLAP Columnar</span>
-          </div>
-          <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
-            <CheckCircle2 className="w-3 h-3" />
-            <span>13.747 Linhas Prontas</span>
           </div>
         </div>
 

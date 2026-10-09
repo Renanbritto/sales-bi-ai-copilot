@@ -145,7 +145,6 @@ export default function DashboardPage() {
     }
   };
 
-  const [copilotInitialPrompt, setCopilotInitialPrompt] = useState<string>("");
 
   // Filtros Globais
   const [selectedRegion, setSelectedRegion] = useState<string>("Todas");
@@ -202,10 +201,7 @@ export default function DashboardPage() {
     };
   }, [kpis, selectedRegion, selectedChannel]);
 
-  const handleOpenCopilot = (prompt?: string) => {
-    if (prompt) {
-      setCopilotInitialPrompt(prompt);
-    }
+  const handleOpenCopilot = () => {
     setIsCopilotOpen(true);
   };
 
@@ -343,7 +339,7 @@ export default function DashboardPage() {
               <div className="w-px h-6 bg-slate-200 hidden lg:block" />
               <button
                 type="button"
-                onClick={() => handleOpenCopilot("Olá RN Intelligence! Quais são os principais destaques executivos deste painel?")}
+                onClick={() => handleOpenCopilot()}
                 className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
               >
                 <Bot className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" />
@@ -473,7 +469,7 @@ export default function DashboardPage() {
       <CopilotSidebar
         isOpen={isCopilotOpen}
         onClose={() => setIsCopilotOpen(false)}
-        initialPrompt={copilotInitialPrompt}
+        
       />
     </div>
   );
