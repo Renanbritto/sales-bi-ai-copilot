@@ -297,9 +297,6 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
               <Send className="w-3.5 h-3.5" />
             </button>
           </form>
-          <p className="text-[10px] text-center text-slate-400 dark:text-slate-500 mt-2 font-mono">
-            RN Intelligence conectado ao banco colunar DuckDB em modo somente leitura.
-          </p>
         </div>
       </div>
     </div>
