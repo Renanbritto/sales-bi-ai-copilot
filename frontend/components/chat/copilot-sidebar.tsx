@@ -22,6 +22,7 @@ interface CopilotSidebarProps {
 
 const QUICK_PROMPTS = [
   "Quem é o vendedor com maior faturamento?",
+  "Quantos leads foram gerados no funil?",
   "Qual o produto da Classe A mais vendido?",
   "Qual a margem de contribuição geral?",
   "Quantos pedidos foram faturados no total?",
@@ -183,7 +184,7 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
                       : "bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 text-slate-800 dark:text-slate-100 rounded-bl-xs"
                   }`}
                 >
-                  <p className="whitespace-pre-line leading-relaxed">{msg.content}</p>
+                  <p className="whitespace-pre-line leading-relaxed">{msg.content.replace(/\*\*(.*?)\*\*/g, "$1")}</p>
 
                   {/* SQL Telemetry & Code Accordion */}
                   {msg.sql && (
