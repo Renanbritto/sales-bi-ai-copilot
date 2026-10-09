@@ -16,6 +16,7 @@ import {
   Moon,
   Sun,
   ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import {
   fetchKpis,
@@ -205,6 +206,19 @@ export default function DashboardPage() {
     setIsCopilotOpen(true);
   };
 
+  // Atalho global de teclado Ctrl+K para abrir/fechar o RN Intelligence
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCopilotOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+
   return (
     <div className="flex h-screen bg-[#f8fafc] dark:bg-slate-900 text-slate-700 dark:text-slate-200 font-sans selection:bg-blue-600/20 selection:text-blue-900 overflow-hidden">
       
@@ -326,25 +340,59 @@ export default function DashboardPage() {
 
             {/* Botão de Abrir Copilot */}
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              {/* Botão de Tema */}
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-slate-100 transition-colors"
-                title="Alternar Tema"
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors cursor-pointer"
+                title="Alternar Tema (Claro / Escuro)"
               >
-                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600" />}
               </button>
+
+              {/* Divisor sutil */}
+              <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
+
+              {/* Botão Executivo RN Intelligence Copilot */}
               <button
                 type="button"
                 onClick={() => handleOpenCopilot()}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white pl-2 pr-3.5 py-1.5 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
+                className="group relative flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-xl bg-slate-900/90 dark:bg-slate-950/90 hover:bg-slate-800 dark:hover:bg-slate-900 border border-slate-700/60 dark:border-slate-800/90 hover:border-blue-500/50 shadow-sm shadow-black/20 hover:shadow-md hover:shadow-blue-500/20 backdrop-blur-md transition-all duration-300 cursor-pointer overflow-hidden"
+                title="Abrir RN Intelligence Copilot (Ctrl + K)"
               >
-                <div className="w-6 h-6 rounded-lg bg-slate-950 border border-blue-400/40 flex items-center justify-center overflow-hidden shrink-0 group-hover:scale-105 transition-transform p-0.5">
-                  <img src="/logo_badge_sm.png" alt="RN Intelligence" className="w-5 h-5 rounded object-contain" />
+                {/* Glow de fundo sutil no hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                {/* Badge do Logo RN com moldura e neon */}
+                <div className="relative w-7 h-7 rounded-lg bg-black border border-blue-500/40 group-hover:border-blue-400 flex items-center justify-center p-1 shadow-inner group-hover:shadow-[0_0_10px_rgba(59,130,246,0.4)] transition-all shrink-0">
+                  <img
+                    src="/logo_badge_sm.png"
+                    alt="RN Intelligence"
+                    className="w-full h-full object-contain rounded"
+                  />
                 </div>
-                <span className="hidden sm:inline">Abrir RN Intelligence</span>
-                <span className="sm:hidden font-medium">Copilot</span>
-                <div className="w-2 h-2 rounded-full bg-emerald-400 border border-blue-600 animate-pulse ml-0.5 shrink-0" />
+
+                {/* Textos de Identidade */}
+                <div className="flex flex-col text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-white tracking-tight group-hover:text-blue-200 transition-colors">
+                      RN Intelligence
+                    </span>
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-mono tracking-tight flex items-center gap-1">
+                    <Sparkles className="w-2.5 h-2.5 text-blue-400 shrink-0" />
+                    Copilot IA
+                  </span>
+                </div>
+
+                {/* Atalho de Teclado Elegante */}
+                <kbd className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-800/90 dark:bg-slate-900 border border-slate-700/70 px-1.5 py-0.5 rounded shadow-2xs group-hover:text-slate-200 group-hover:border-slate-600 transition-colors ml-1">
+                  <span className="text-[9px]">Ctrl</span> K
+                </kbd>
               </button>
             </div>
           </div>
