@@ -7,13 +7,9 @@ import {
   Handshake,
   CheckCircle2,
   Cpu,
-  Bot,
   ChevronDown,
   X,
-  ExternalLink,
-  Pin,
   Clock,
-  AlertTriangle,
 } from "lucide-react";
 
 interface FunnelChartProps {
@@ -28,7 +24,7 @@ const FUNNEL_STAGES = [
     value: "R$ 48.5M",
     convRate: "100.0%",
     dropOff: "0%",
-    color: "bg-sky-500",
+    color: "bg-gradient-to-r from-emerald-700 via-teal-700 to-teal-800",
     icon: Users,
     avgCycleDays: "2 dias",
     aiDiagnosis:
@@ -42,7 +38,7 @@ const FUNNEL_STAGES = [
     value: "R$ 26.2M",
     convRate: "36.6%",
     dropOff: "-63.4%",
-    color: "bg-blue-600",
+    color: "bg-gradient-to-r from-teal-700 via-cyan-800 to-sky-800",
     icon: FileText,
     avgCycleDays: "5 dias",
     aiDiagnosis:
@@ -56,7 +52,7 @@ const FUNNEL_STAGES = [
     value: "R$ 16.4M",
     convRate: "47.1%",
     dropOff: "-52.9%",
-    color: "bg-indigo-600",
+    color: "bg-gradient-to-r from-cyan-800 via-blue-800 to-indigo-800",
     icon: FileText,
     avgCycleDays: "12 dias",
     aiDiagnosis:
@@ -70,7 +66,7 @@ const FUNNEL_STAGES = [
     value: "R$ 11.8M",
     convRate: "60.4%",
     dropOff: "-39.6%",
-    color: "bg-purple-600",
+    color: "bg-gradient-to-r from-blue-800 via-indigo-800 to-violet-800",
     icon: Handshake,
     avgCycleDays: "22 dias",
     aiDiagnosis:
@@ -84,7 +80,7 @@ const FUNNEL_STAGES = [
     value: "R$ 8.95M",
     convRate: "60.1%",
     dropOff: "-39.9%",
-    color: "bg-emerald-500",
+    color: "bg-gradient-to-r from-indigo-800 via-violet-800 to-purple-900",
     icon: CheckCircle2,
     avgCycleDays: "Faturado",
     aiDiagnosis:
@@ -97,27 +93,24 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
   const [activeStage, setActiveStage] = useState<number | null>(null);
 
   return (
-    <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800/50">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-slate-900 tracking-tight">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight">
               Funil de Vendas Corporativo (B2B Pipeline)
             </h2>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-blue-400">
-              Pipeline Velocity
-            </span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Taxas de conversão, dispersão e diagnósticos da IA por estágio do ciclo comercial.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20 font-mono font-bold">
+        <div className="flex items-center gap-3">
+          <span className="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 text-xs border border-emerald-200 dark:border-emerald-800/80 font-mono font-bold">
             Conversão Global MQL → Venda: 6.27%
           </span>
-          <span className="hidden md:inline-block text-[11px] font-mono text-slate-500">
+          <span className="text-[11px] text-slate-400 dark:text-slate-500 hidden md:inline font-mono">
             Clique no estágio para ver RN Intelligence
           </span>
         </div>
@@ -125,30 +118,29 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
 
       <div className="space-y-4">
         {FUNNEL_STAGES.map((stg) => {
-          const widthPct = Math.max(28, 100 - stg.id * 16);
+          const widthPct = Math.max(38, 100 - stg.id * 14);
           const isSelected = activeStage === stg.id;
 
           return (
             <div
               key={stg.id}
-              className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer ${
+              className={`p-3 rounded-xl transition-all duration-200 cursor-pointer ${
                 isSelected
-                  ? "bg-white border-blue-500 shadow-md ring-2 ring-blue-500/10 shadow-blue-950/30"
-                  : "bg-slate-950/40 border-slate-800/80 hover:border-slate-700 hover:bg-slate-900/40"
+                  ? "bg-slate-50 dark:bg-slate-800/80 border border-blue-500/50 shadow-md ring-1 ring-blue-500/20"
+                  : "bg-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50"
               }`}
               onClick={() => setActiveStage(isSelected ? null : stg.id)}
             >
               {/* Top Row: Estágio e Métricas */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                <span className="font-semibold text-xs text-white flex items-center gap-2">
-                  <span className={`w-2.5 h-2.5 rounded-full ${stg.color}`} />
+                <span className="font-semibold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                  <span className={`w-3 h-3 rounded-full ${stg.color} shadow-xs`} />
                   {stg.stage}
                 </span>
 
                 <div className="flex items-center gap-3 text-xs">
-                  <span className="text-slate-500 font-mono">{stg.count.toLocaleString("pt-BR")} deals</span>
-                  <span className="font-bold text-white font-mono">{stg.value}</span>
-                  <span className="text-blue-400 font-mono text-[11px] bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                  <span className="font-bold text-slate-800 dark:text-slate-100 font-mono">{stg.value}</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-mono text-[11px] bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800/80 font-medium">
                     Conv: {stg.convRate}
                   </span>
 
@@ -158,13 +150,13 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                       e.stopPropagation();
                       setActiveStage(isSelected ? null : stg.id);
                     }}
-                    className={`flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded-lg border transition-all cursor-pointer ${
+                    className={`flex items-center gap-1 text-[11px] font-mono px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-blue-500/15 text-blue-300 border-blue-500/40"
-                        : "bg-slate-50 text-slate-700 border border-slate-200 hover:border-blue-400 hover:text-blue-600"
+                        ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+                        : "bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400"
                     }`}
                   >
-                    <Cpu className="w-3 h-3 text-blue-300" />
+                    <Cpu className="w-3 h-3 text-blue-600 dark:text-blue-400" />
                     <span>RN Intelligence</span>
                     <ChevronDown
                       className={`w-3 h-3 transition-transform ${isSelected ? "rotate-180" : ""}`}
@@ -174,13 +166,14 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
               </div>
 
               {/* Barra do Funil */}
-              <div className="w-full bg-slate-900/80 rounded-lg h-8 p-1 border border-slate-800/80">
+              <div className="w-full py-1 mt-1">
                 <div
-                  className={`h-full rounded-md ${stg.color} opacity-90 transition-all duration-500 flex items-center justify-end px-3 shadow-inner`}
+                  className={`mx-auto h-11 rounded-xl ${stg.color} transition-all duration-700 flex items-center justify-center shadow-md relative overflow-hidden group border border-white/10`}
                   style={{ width: `${widthPct}%` }}
                 >
-                  <span className="text-[11px] font-bold text-white drop-shadow-sm font-mono">
-                    {stg.count.toLocaleString("pt-BR")}
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <span className="text-xs sm:text-sm font-bold text-white tracking-wider sm:tracking-widest font-mono z-10 drop-shadow-md">
+                    {stg.count.toLocaleString("pt-BR")} DEALS
                   </span>
                 </div>
               </div>
@@ -188,25 +181,25 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
               {/* Painel de Diagnóstico IA Expansível */}
               {isSelected && (
                 <div
-                  className="mt-3 p-4 rounded-xl bg-white border border-slate-200 shadow-xl text-xs text-slate-700 animate-in fade-in zoom-in-95 space-y-3"
+                  className="mt-3 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-xl text-xs text-slate-800 dark:text-slate-200 animate-in fade-in zoom-in-95 space-y-3"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex items-center justify-between pb-2 border-b border-slate-100 text-[10px] font-mono">
-                    <div className="flex items-center gap-1.5 text-blue-400">
-                      <Cpu className="w-3.5 h-3.5 text-blue-300" />
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800/80 text-[10px] font-mono">
+                    <div className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400">
+                      <Cpu className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                       <span className="font-bold tracking-wider uppercase">
                         RN Intelligence • Diagnóstico de Pipeline
                       </span>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="flex items-center gap-1 text-slate-500">
-                        <Clock className="w-3 h-3 text-blue-400" /> Ciclo Médio: {stg.avgCycleDays}
+                      <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+                        <Clock className="w-3 h-3 text-blue-600 dark:text-blue-400" /> Ciclo Médio: {stg.avgCycleDays}
                       </span>
                       <button
                         type="button"
                         onClick={() => setActiveStage(null)}
-                        className="text-slate-500 hover:text-white p-0.5 rounded hover:bg-slate-800"
+                        className="text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 p-0.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="Fechar insight"
                       >
                         <X className="w-3.5 h-3.5" />
@@ -214,30 +207,24 @@ export function FunnelChart({ onOpenCopilot }: FunnelChartProps) {
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-[#0f172a] border border-slate-800 text-[12px] leading-relaxed text-slate-200">
+                  <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-[12px] leading-relaxed text-slate-700 dark:text-slate-300">
                     <p className="flex items-start gap-2">
-                      <Cpu className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                      <Cpu className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                       <span>{stg.aiDiagnosis}</span>
                     </p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
-                    <div className="text-[10px] font-mono text-slate-500 flex items-center gap-2">
-                      <span className="text-emerald-400">● DuckDB Pipeline Stream</span>
-                      <span>• Taxa de Perda: {stg.dropOff}</span>
-                    </div>
-
-                    {onOpenCopilot && (
+                  {onOpenCopilot && (
+                    <div className="pt-1 flex justify-end">
                       <button
                         type="button"
                         onClick={() => onOpenCopilot(stg.copilotPrompt)}
-                        className="flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600/30 hover:to-blue-600/30 border border-blue-500/40 text-blue-300 hover:text-white text-[11px] font-medium transition-all cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-mono transition-colors cursor-pointer shadow-sm"
                       >
-                        <span>Perguntar à RN Intelligence no Chat</span>
-                        <ExternalLink className="w-3 h-3 text-blue-400" />
+                        <span>Aprofundar Análise no Copilot</span>
                       </button>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

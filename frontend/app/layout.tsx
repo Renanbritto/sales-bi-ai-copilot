@@ -10,6 +10,11 @@ const comfortaa = Comfortaa({
 });
 
 export const metadata = {
+  icons: {
+    icon: '/logo_transparent.png',
+    shortcut: '/logo_transparent.png',
+    apple: '/logo_transparent.png',
+  },
   title: "Análise Comercial | RN Intelligence",
   description: "Plataforma analítica executiva de BI Comercial integrada com DuckDB OLAP e RN Intelligence (Google Gemini).",
 };

@@ -8,7 +8,7 @@ export function ModelSchema() {
     {
       name: "f_vendas",
       type: "Tabela Fato",
-      color: "border-blue-500/50 bg-slate-50/20",
+      color: "border-slate-200 dark:border-slate-700/50 bg-slate-50 dark:bg-slate-800/60",
       badge: "13.7k+ Linhas",
       cols: [
         "venda_id (PK)",
@@ -68,32 +68,32 @@ export function ModelSchema() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white border border-slate-200 shadow-xs rounded-xl p-6 border border-slate-200">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs rounded-xl p-6 border border-slate-200 dark:border-slate-700/50">
         <div className="flex items-center gap-3 mb-2">
           <Database className="w-5 h-5 text-blue-600" />
-          <h2 className="text-lg font-semibold text-slate-900">Arquitetura de Dados: Star Schema Dimensional (DuckDB)</h2>
+          <h2 className="text-lg font-semibold text-slate-700 dark:text-slate-200">Arquitetura de Dados: Star Schema Dimensional (DuckDB)</h2>
         </div>
-        <p className="text-xs text-slate-500 max-w-3xl">
+        <p className="text-xs text-slate-500 dark:text-slate-400 max-w-3xl">
           Modelagem em Modelo Estrela (Kimball) otimizada para consultas analíticas colunares.
           O Agente de IA utiliza esta estrutura para gerar consultas SQL Text-to-SQL em milissegundos.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
           {tables.map((t) => (
-            <div key={t.name} className={`p-4 rounded-xl border ${t.color} bg-white border border-slate-200 shadow-xs`}>
+            <div key={t.name} className={`p-4 rounded-xl border ${t.color} bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 shadow-xs`}>
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/5">
                 <div>
-                  <h3 className="font-mono font-bold text-slate-900 text-sm">{t.name}</h3>
-                  <p className="text-[11px] text-slate-500">{t.type}</p>
+                  <h3 className="font-mono font-bold text-slate-700 dark:text-slate-200 text-sm">{t.name}</h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">{t.type}</p>
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 text-slate-600 border border-white/10">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white dark:bg-slate-900/5 text-slate-600 dark:text-slate-300 border border-white/10">
                   {t.badge}
                 </span>
               </div>
               <ul className="space-y-1">
                 {t.cols.map((col, i) => (
-                  <li key={i} className="text-[11px] font-mono text-slate-600 flex items-center gap-1.5">
-                    <span className="w-1 h-1 rounded-full bg-slate-500" />
+                  <li key={i} className="text-[11px] font-mono text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
+                    <span className="w-1 h-1 rounded-full bg-slate-50 dark:bg-slate-800/500" />
                     {col}
                   </li>
                 ))}
@@ -105,3 +105,4 @@ export function ModelSchema() {
     </div>
   );
 }
+ 

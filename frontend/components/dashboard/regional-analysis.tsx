@@ -1,20 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { formatCurrency, formatNumber } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 import { RegionBreakdown } from "@/lib/api";
 import {
   MapPin,
-  Globe,
-  TrendingUp,
-  Users,
-  ArrowUpRight,
-  DollarSign,
   Cpu,
-  Bot,
   ChevronDown,
   X,
   ExternalLink,
+  ChevronRight,
 } from "lucide-react";
 
 interface RegionalAnalysisProps {
@@ -25,14 +20,14 @@ interface RegionalAnalysisProps {
 const REGION_AI_INSIGHTS: Record<string, { diagnosis: string; prompt: string; strategy: string }> = {
   Sudeste: {
     diagnosis:
-      "Concentra 50.4% da receita corporativa (R$ 19.6M) com a maior margem bruta (44.3%). Polo com mais de 20 contas corporativas maduras. Ação: Foco em expansão de licenças (upsell) e retenção.",
-    prompt: "Quais são os principais fatores que sustentam a liderança da regional Sudeste em receita e margem?",
+      "Concentra 50.4% do faturamento total (R$ 19.68M) com margem saudável de 44.3%. Mercado maduro e altamente competitivo. Recomendação: Focar em cross-selling de IA e módulos de analytics para clientes existentes.",
+    prompt: "Quais são as melhores oportunidades de cross-sell para os clientes da Região Sudeste?",
     strategy: "Polo Consolidado & Upsell",
   },
   Sul: {
     diagnosis:
-      "Segunda maior praça com 24.8% de participação (R$ 9.6M) e margem de 43.8%. Crescimento de +22% YoY, puxado por indústrias e cooperativas agrícolas de tecnologia. Ação: Alocar mais 2 SDRs dedicados.",
-    prompt: "Qual é o potencial de crescimento da regional Sul e quais setores estão comprando mais?",
+      "Segunda maior regional: 24.8% da receita (R$ 9.68M) com a maior margem líquida da empresa (45.1%). Alta adesão a contratos de Cloud dedicada. Ação recomendada: Aumentar quota de novos SDRs em Curitiba e Porto Alegre.",
+    prompt: "Como expandir a equipe comercial na Região Sul mantendo a margem de 45.1%?",
     strategy: "Alta Tração (+22% YoY)",
   },
   Nordeste: {
@@ -67,85 +62,114 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
           return (
             <div
               key={reg.region}
-              className={`bg-white border border-slate-200 shadow-xs rounded-xl p-5 border transition-all duration-300 relative ${
+              className={`bg-white dark:bg-slate-900 border rounded-2xl p-5 shadow-xs transition-all duration-300 relative flex flex-col justify-between h-full ${
                 isSelected
-                  ? "border-blue-400/70 shadow-md shadow-blue-950/40 bg-slate-50"
-                  : "border-slate-200 bg-gradient-to-br from-slate-900/60 to-slate-950 hover:border-slate-200"
+                  ? "border-blue-500 dark:border-blue-500 shadow-md ring-1 ring-blue-500/20"
+                  : "border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
               }`}
             >
-              <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-200">
-                <span className="font-bold text-slate-900 text-base flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-blue-600" />
-                  Região {reg.region}
-                </span>
-                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-700 border border-slate-200">
-                  {reg.share_pct}% do Total
-                </span>
+              <div>
+                {/* Header do Card Regional */}
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 flex items-center justify-center shrink-0">
+                      <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 dark:text-slate-500 block leading-none">
+                        Região
+                      </span>
+                      <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm leading-tight mt-0.5 truncate">
+                        {reg.region}
+                      </h3>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/80 shrink-0">
+                    {reg.share_pct}%
+                  </span>
+                </div>
+
+                {/* Métricas Regionais */}
+                <div className="space-y-2 text-xs py-1">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500 dark:text-slate-400">Faturamento:</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-100 font-mono">
+                      {formatCurrency(reg.revenue)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500 dark:text-slate-400">Margem Bruta:</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400 font-mono">
+                      {reg.margin_pct}%
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500 dark:text-slate-400">Ticket Médio:</span>
+                    <span className="font-medium text-slate-700 dark:text-slate-200 font-mono">
+                      {formatCurrency(reg.avg_ticket)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500 dark:text-slate-400">Clientes Ativos:</span>
+                    <span className="font-medium text-slate-600 dark:text-slate-300 font-mono">
+                      {reg.clients_count} contas B2B
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-2 text-xs">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-500">Faturamento:</span>
-                  <span className="font-bold text-slate-900 font-mono">{formatCurrency(reg.revenue)}</span>
+              {/* Seção Inferior: Foco Estratégico + Botão Copilot */}
+              <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-[10px] uppercase font-mono text-slate-400 dark:text-slate-500">
+                    Foco Estratégico
+                  </span>
+                  <span
+                    className="font-semibold text-slate-700 dark:text-slate-300 font-mono text-[10px] truncate max-w-[130px]"
+                    title={insight.strategy}
+                  >
+                    {insight.strategy}
+                  </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-500">Margem Bruta:</span>
-                  <span className="font-bold text-emerald-400 font-mono">{reg.margin_pct}%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-500">Ticket Médio:</span>
-                  <span className="font-medium text-slate-700 font-mono">{formatCurrency(reg.avg_ticket)}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-500">Clientes Ativos:</span>
-                  <span className="font-medium text-slate-600">{reg.clients_count} contas B2B</span>
-                </div>
-              </div>
 
-              {/* Botão de Gatilho IA */}
-              <div className="mt-3 pt-2 border-t border-slate-200 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setActiveRegion(isSelected ? null : reg.region)}
-                  className={`flex items-center gap-1.5 text-[11px] font-mono px-2 py-0.5 rounded-lg border transition-all cursor-pointer ${
+                  className={`w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg text-[11px] font-mono transition-all cursor-pointer border ${
                     isSelected
-                      ? "bg-blue-500/15 text-blue-700 border-blue-400"
-                      : "bg-slate-50 text-blue-600/80 border-slate-200 hover:border-blue-400"
+                      ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+                      : "bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 text-blue-600 dark:text-blue-400 border-slate-200 dark:border-slate-700"
                   }`}
                 >
-                  <Cpu className="w-3 h-3 text-blue-700" />
-                  <span>RN Intelligence</span>
+                  <Cpu className="w-3.5 h-3.5" />
+                  <span>Análise RN Intelligence</span>
                   <ChevronDown
                     className={`w-3 h-3 transition-transform ${isSelected ? "rotate-180" : ""}`}
                   />
                 </button>
-
-                <span className="text-[10px] font-mono text-slate-500">
-                  {insight.strategy}
-                </span>
               </div>
 
               {/* Popover de Diagnóstico Regional */}
               {isSelected && (
                 <div
-                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-[#0a1122] border border-blue-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.3)] text-xs text-slate-700 animate-in fade-in space-y-3"
+                  className="absolute left-0 right-0 top-full mt-2 z-50 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl text-xs text-slate-800 dark:text-slate-200 animate-in fade-in space-y-3"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex items-center justify-between pb-1.5 border-b border-slate-200 text-[10px] font-mono">
-                    <span className="text-blue-600 flex items-center gap-1 font-semibold uppercase">
-                      <Cpu className="w-3 h-3 text-blue-700" />
+                  <div className="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800 text-[10px] font-mono">
+                    <span className="text-blue-600 dark:text-blue-400 flex items-center gap-1 font-semibold uppercase">
+                      <Cpu className="w-3.5 h-3.5" />
                       Diagnóstico Regional RN Intelligence
                     </span>
                     <button
                       type="button"
                       onClick={() => setActiveRegion(null)}
-                      className="text-slate-500 hover:text-slate-900"
+                      className="text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 p-0.5 rounded transition-colors cursor-pointer"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <p className="text-[11.5px] leading-relaxed text-slate-600">
+                  <p className="text-[11.5px] leading-relaxed text-slate-600 dark:text-slate-300">
                     {insight.diagnosis}
                   </p>
 
@@ -153,10 +177,13 @@ export function RegionalAnalysis({ regions, onOpenCopilot }: RegionalAnalysisPro
                     <button
                       type="button"
                       onClick={() => onOpenCopilot(insight.prompt)}
-                      className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-600/30 hover:to-blue-600/30 border border-slate-200 text-blue-700 hover:text-slate-900 text-[11px] font-medium transition-all cursor-pointer"
+                      className="w-full group flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-300 text-[11px] font-semibold transition-all cursor-pointer shadow-xs hover:shadow-sm"
                     >
+                      <div className="w-4 h-4 rounded bg-slate-950 dark:bg-black border border-blue-500/40 flex items-center justify-center p-0.5 shrink-0">
+                        <img src="/logo_badge_sm.png" alt="RN" className="w-full h-full object-contain rounded" />
+                      </div>
                       <span>Perguntar à RN Intelligence sobre {reg.region}</span>
-                      <ExternalLink className="w-3 h-3 text-blue-600" />
+                      <ChevronRight className="w-3 h-3 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
                     </button>
                   )}
                 </div>
