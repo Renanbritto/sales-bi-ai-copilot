@@ -8,22 +8,17 @@ from app.db.session import execute_safe_query
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Verificação de integridade do DuckDB ao inicializar
-    db_path = settings.get_resolved_db_path()
-    if os.path.exists(db_path):
-        try:
-            res = execute_safe_query("SELECT COUNT(*) AS total FROM f_vendas;")
-            print(f"🚀 [DuckDB Conectado] {db_path} ({res[0]['total']} transações)")
-        except Exception as e:
-            print(f"⚠️ [Aviso DuckDB] Erro ao testar query: {e}")
-    else:
-        print(f"⚠️ [Aviso DuckDB] Banco não encontrado em: {db_path}. Execute o gerador de dados.")
+    try:
+        res = execute_safe_query("SELECT COUNT(*) AS total FROM f_vendas;")
+        print(f"[Base Analítica Conectada] ({res[0]['total']} transações)")
+    except Exception as e:
+        print(f"[Aviso DB] Erro ao testar query: {e}")
     yield
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Backend analítico com DuckDB e RN Intelligence (Gemini) para Business Intelligence Comercial.",
+    description="Backend analítico com DuckDB / SQLite e RN Intelligence (Gemini) para Business Intelligence Comercial.",
     lifespan=lifespan
 )
 
