@@ -331,12 +331,6 @@ export default function DashboardPage() {
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
-
-              <div className="hidden lg:flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                <span className="font-mono text-[11px]">13.747 transações faturadas</span>
-              </div>
-              <div className="w-px h-6 bg-slate-200 hidden lg:block" />
               <button
                 type="button"
                 onClick={() => handleOpenCopilot()}
