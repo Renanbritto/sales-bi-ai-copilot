@@ -171,8 +171,8 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
                 }`}
               >
                 {!isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 flex items-center justify-center shrink-0 mt-0.5">
-                    <Bot className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                  <div className="w-7 h-7 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 mt-0.5 overflow-hidden p-0.5 shadow-xs">
+                    <img src="/logo_badge_sm.png" alt="RN Intelligence" className="w-5 h-5 rounded object-contain" />
                   </div>
                 )}
 
@@ -235,8 +235,8 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
 
           {isLoading && (
             <div className="flex gap-3 text-xs items-center text-slate-500 dark:text-slate-400">
-              <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 flex items-center justify-center shrink-0">
-                <Bot className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <div className="w-7 h-7 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 overflow-hidden p-0.5 shadow-xs animate-pulse">
+                <img src="/logo_badge_sm.png" alt="RN Intelligence" className="w-5 h-5 rounded object-contain" />
               </div>
               <div className="flex items-center gap-2 p-3 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80">
                 <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />

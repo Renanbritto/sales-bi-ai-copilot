@@ -226,10 +226,13 @@ export default function DashboardPage() {
       >
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700/50 shrink-0">
           <div className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ${isSidebarOpen ? 'w-auto opacity-100' : 'w-0 opacity-0'}`}>
-            <div className="w-12 h-8 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 shadow-sm overflow-hidden px-1">
-              <img src="/logo_transparent.png" alt="RN" style={{ height: "18px", maxHeight: "18px", width: "auto" }} className="object-contain" />
+            <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 shadow-sm shadow-blue-900/10">
+              <BarChart3 className="w-4 h-4 text-white font-bold" />
             </div>
-            <h1 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight">RN Intelligence</h1>
+            <div className="flex flex-col">
+              <h1 className="text-sm font-bold text-slate-800 dark:text-slate-100 tracking-tight leading-tight">Sales BI</h1>
+              <span className="text-[10px] text-slate-400 font-medium">Analytics & Performance</span>
+            </div>
           </div>
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -334,12 +337,14 @@ export default function DashboardPage() {
               <button
                 type="button"
                 onClick={() => handleOpenCopilot()}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white pl-2 pr-3.5 py-1.5 rounded-xl text-xs font-bold shadow-sm shadow-blue-900/10 transition-all cursor-pointer group"
               >
-                <Bot className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" />
+                <div className="w-6 h-6 rounded-lg bg-slate-950 border border-blue-400/40 flex items-center justify-center overflow-hidden shrink-0 group-hover:scale-105 transition-transform p-0.5">
+                  <img src="/logo_badge_sm.png" alt="RN Intelligence" className="w-5 h-5 rounded object-contain" />
+                </div>
                 <span className="hidden sm:inline">Abrir RN Intelligence</span>
                 <span className="sm:hidden font-medium">Copilot</span>
-                <div className="w-2 h-2 rounded-full bg-emerald-400 border border-blue-600 animate-pulse ml-0.5 sm:ml-1 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-emerald-400 border border-blue-600 animate-pulse ml-0.5 shrink-0" />
               </button>
             </div>
           </div>
