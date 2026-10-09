@@ -244,7 +244,7 @@ export default function DashboardPage() {
 
         <div className="flex-1 overflow-y-auto overflow-x-hidden py-4 px-3 space-y-1.5">
           {[
-            { id: "executivo", label: "Visão Executiva", icon: BarChart3 },
+            { id: "executivo", label: "Visão Geral", icon: BarChart3 },
             { id: "produtos", label: "Portfólio & Matriz de Decisão", icon: PieIcon },
             { id: "clientes", label: "Clientes & Segmentos", icon: Building2 },
             { id: "geografia", label: "Regionais & Canais", icon: Globe },
@@ -314,7 +314,7 @@ export default function DashboardPage() {
                </button>
                <h2 className="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-100 tracking-tight truncate">
                   {[
-                    { id: "executivo", label: "Visão Executiva" },
+                    { id: "executivo", label: "Visão Geral" },
                     { id: "produtos", label: "Portfólio & Matriz de Decisão" },
                     { id: "clientes", label: "Clientes & Segmentos" },
                     { id: "geografia", label: "Regionais & Canais" },
