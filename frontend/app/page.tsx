@@ -356,14 +356,14 @@ export default function DashboardPage() {
               <button
                 type="button"
                 onClick={() => handleOpenCopilot()}
-                className="group relative flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-xl bg-slate-900/90 dark:bg-slate-950/90 hover:bg-slate-800 dark:hover:bg-slate-900 border border-slate-700/60 dark:border-slate-800/90 hover:border-blue-500/50 shadow-sm shadow-black/20 hover:shadow-md hover:shadow-blue-500/20 backdrop-blur-md transition-all duration-300 cursor-pointer overflow-hidden"
+                className="group relative flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-xl bg-slate-50/80 hover:bg-white dark:bg-slate-950/90 dark:hover:bg-slate-900 border border-slate-200/90 hover:border-blue-400/60 dark:border-slate-800/90 dark:hover:border-blue-500/50 shadow-xs hover:shadow-md hover:shadow-blue-500/10 dark:shadow-black/20 dark:hover:shadow-blue-500/20 backdrop-blur-md transition-all duration-300 cursor-pointer overflow-hidden"
                 title="Abrir RN Intelligence Copilot (Ctrl + K)"
               >
                 {/* Glow de fundo sutil no hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/8 via-cyan-500/8 to-transparent dark:from-blue-600/10 dark:via-cyan-500/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                 {/* Badge do Logo RN com moldura e neon */}
-                <div className="relative w-7 h-7 rounded-lg bg-black border border-blue-500/40 group-hover:border-blue-400 flex items-center justify-center p-1 shadow-inner group-hover:shadow-[0_0_10px_rgba(59,130,246,0.4)] transition-all shrink-0">
+                <div className="relative w-7 h-7 rounded-lg bg-slate-950 dark:bg-black border border-blue-500/30 dark:border-blue-500/40 group-hover:border-blue-400 flex items-center justify-center p-1 shadow-xs group-hover:shadow-[0_0_10px_rgba(59,130,246,0.35)] transition-all shrink-0">
                   <img
                     src="/logo_badge_sm.png"
                     alt="RN Intelligence"
@@ -374,21 +374,21 @@ export default function DashboardPage() {
                 {/* Textos de Identidade */}
                 <div className="flex flex-col text-left">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-xs font-bold text-white tracking-tight group-hover:text-blue-200 transition-colors">
+                    <span className="text-xs font-bold text-slate-800 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-200 transition-colors">
                       RN Intelligence
                     </span>
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                     </span>
                   </div>
-                  <span className="text-[10px] text-slate-400 font-medium tracking-tight">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-tight">
                     Abrir chat
                   </span>
                 </div>
 
                 {/* Atalho de Teclado Elegante */}
-                <kbd className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-800/90 dark:bg-slate-900 border border-slate-700/70 px-1.5 py-0.5 rounded shadow-2xs group-hover:text-slate-200 group-hover:border-slate-600 transition-colors ml-1">
+                <kbd className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-mono font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/70 px-1.5 py-0.5 rounded shadow-2xs group-hover:text-slate-700 dark:group-hover:text-slate-200 group-hover:border-slate-300 dark:group-hover:border-slate-600 transition-colors ml-1">
                   <span className="text-[9px]">Ctrl</span> K
                 </kbd>
               </button>
