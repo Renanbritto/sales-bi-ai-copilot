@@ -1,18 +1,26 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
-  Bot,
   Send,
   X,
+  User,
+  Trash2,
+  MessageSquare,
   Code2,
   ChevronDown,
   ChevronUp,
-  User,
-  Trash2,
   Clock,
+  Database,
 } from "lucide-react";
-import { ChatMessage, sendChatMessage } from "@/lib/api";
+import {
+  ChatMessage,
+  ChatHistoryItem,
+  ProjectMetadata,
+  fetchProjectMetadata,
+  streamChatMessage,
+  FALLBACK_SALES_BI_METADATA,
+} from "@/lib/rn-intelligence";
 
 interface CopilotSidebarProps {
   isOpen: boolean;
@@ -20,92 +28,32 @@ interface CopilotSidebarProps {
   initialPrompt?: string;
 }
 
-const QUICK_PROMPTS = [
-  "Quem é o vendedor com maior faturamento?",
-  "Quantos leads foram gerados no funil?",
-  "Qual o produto da Classe A mais vendido?",
-  "Qual a margem de contribuição geral?",
-  "Quantos pedidos foram faturados no total?",
-];
-
-const INITIAL_WELCOME_TEXT = `Bem vindo ao RN Intelligence!
-Você pode me fazer qualquer pergunta sobre faturamento, atingimento de metas, curva ABC de produtos ou performance de vendedores`;
-
-export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: "1",
-      role: "assistant",
-      content: INITIAL_WELCOME_TEXT,
-      timestamp: "Agora",
-    },
-  ]);
+export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSidebarProps) {
+  const [projectMeta, setProjectMeta] = useState<ProjectMetadata>(FALLBACK_SALES_BI_METADATA);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const [expandedSql, setExpandedSql] = useState<Record<string, boolean>>({});
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Mantém o campo de texto sempre em branco ao abrir
+  // Carrega metadados e perguntas sugeridas do projeto ao montar
   useEffect(() => {
-    if (isOpen) {
-      setInput("");
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 150);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isLoading]);
-
-  const handleSend = async (textToSend?: string) => {
-    const query = textToSend || input;
-    if (!query.trim() || isLoading) return;
-
-    const userMsg: ChatMessage = {
-      id: Date.now().toString(),
-      role: "user",
-      content: query,
-      timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
+    let mounted = true;
+    fetchProjectMetadata().then((meta) => {
+      if (mounted) {
+        setProjectMeta(meta);
+      }
+    });
+    return () => {
+      mounted = false;
     };
+  }, []);
 
-    setMessages((prev) => [...prev, userMsg]);
-    if (!textToSend) setInput("");
-    setIsLoading(true);
-
-    try {
-      const response = await sendChatMessage(query);
-      const assistantMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: response.reply,
-        sql: response.sql_query,
-        data: response.query_results,
-        executionTime: response.execution_time_ms,
-        timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-      };
-      setMessages((prev) => [...prev, assistantMsg]);
-    } catch {
-      const errorMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content:
-          "Desculpe, ocorreu uma instabilidade ao consultar o backend analítico DuckDB. Verifique se o serviço FastAPI está em execução.",
-        timestamp: new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-      };
-      setMessages((prev) => [...prev, errorMsg]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const toggleSql = (msgId: string) => {
-    setExpandedSql((prev) => ({ ...prev, [msgId]: !prev[msgId] }));
-  };
-
-  // Atalho Escape para fechar suavemente
+  // Atalhos de teclado: Escape para fechar
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -116,46 +64,181 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Foco no input ao abrir
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 150);
+    }
+  }, [isOpen]);
+
+  // Rolagem suave com novas mensagens ou streaming
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
+
+  // Executa prompt inicial quando fornecido externamente
+  useEffect(() => {
+    if (initialPrompt && isOpen) {
+      handleSend(initialPrompt);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialPrompt, isOpen]);
+
   const clearChat = () => {
-    setMessages([
-      {
-        id: "1",
-        role: "assistant",
-        content: INITIAL_WELCOME_TEXT,
-        timestamp: "Agora",
-      },
-    ]);
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    setMessages([]);
+    setHasStarted(false);
+    setIsLoading(false);
+    setExpandedSql({});
   };
+
+  const toggleSql = (msgId: string) => {
+    setExpandedSql((prev) => ({ ...prev, [msgId]: !prev[msgId] }));
+  };
+
+  const handleSend = useCallback(
+    async (textToSend?: string) => {
+      const query = (textToSend || input).trim();
+      if (!query || isLoading) return;
+
+      const userMsgId = Date.now().toString();
+      const assistantMsgId = (Date.now() + 1).toString();
+      const nowTimestamp = new Date().toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const userMsg: ChatMessage = {
+        id: userMsgId,
+        role: "user",
+        content: query,
+        timestamp: nowTimestamp,
+      };
+
+      // Mensagem inicial do assistente para streaming
+      const assistantMsg: ChatMessage = {
+        id: assistantMsgId,
+        role: "assistant",
+        content: "",
+        timestamp: nowTimestamp,
+      };
+
+      setMessages((prev) => [...prev, userMsg, assistantMsg]);
+      setHasStarted(true);
+      if (!textToSend) setInput("");
+      setIsLoading(true);
+
+      const historyPayload: ChatHistoryItem[] = messages.slice(-6).map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
+
+      abortControllerRef.current = new AbortController();
+
+      try {
+        await streamChatMessage({
+          projectId: projectMeta.project_id,
+          message: query,
+          history: historyPayload,
+          signal: abortControllerRef.current.signal,
+          onMetadata: (meta) => {
+            setMessages((prev) =>
+              prev.map((msg) =>
+                msg.id === assistantMsgId
+                  ? {
+                      ...msg,
+                      sql: meta.sql_query,
+                      data: meta.query_results,
+                      mode: meta.mode,
+                    }
+                  : msg
+              )
+            );
+          },
+          onChunk: (delta) => {
+            setMessages((prev) =>
+              prev.map((msg) =>
+                msg.id === assistantMsgId
+                  ? {
+                      ...msg,
+                      content: msg.content + delta,
+                    }
+                  : msg
+              )
+            );
+          },
+          onDone: (telemetry) => {
+            setMessages((prev) =>
+              prev.map((msg) =>
+                msg.id === assistantMsgId
+                  ? {
+                      ...msg,
+                      executionTime: telemetry.execution_time_ms,
+                      mode: telemetry.mode || msg.mode,
+                    }
+                  : msg
+              )
+            );
+            setIsLoading(false);
+          },
+          onError: () => {
+            setIsLoading(false);
+          },
+        });
+      } catch {
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [input, isLoading, messages, projectMeta.project_id]
+  );
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex justify-end transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed inset-0 z-50 flex justify-end transition-all duration-300 ease-out ${
         isOpen
-          ? "pointer-events-auto bg-black/50 dark:bg-black/70 backdrop-blur-sm opacity-100"
+          ? "pointer-events-auto bg-black/60 backdrop-blur-sm opacity-100"
           : "pointer-events-none bg-black/0 backdrop-blur-none opacity-0"
       }`}
       onClick={onClose}
     >
       <div
-        className={`w-full max-w-lg h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          isOpen
-            ? "translate-x-0 opacity-100 shadow-2xl"
-            : "translate-x-full opacity-0 shadow-none"
+        className={`w-full max-w-lg md:max-w-xl h-full bg-[#0b0f1a] border-l border-white/10 flex flex-col shadow-2xl transition-all duration-300 ease-out relative overflow-hidden ${
+          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header do Copilot */}
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-white dark:bg-slate-900">
+        {/* Ambient Glow */}
+        <div className="pointer-events-none absolute top-0 right-0 w-80 h-40 bg-gradient-to-b from-cyan-500/10 via-blue-500/5 to-transparent blur-3xl" />
+
+        {/* HEADER DO DRAWER */}
+        <div className="p-4 px-5 border-b border-white/10 flex items-center justify-between bg-[#0b0f1a]/95 backdrop-blur-md relative z-10">
           <div className="flex items-center gap-3">
-            <div className="h-9 px-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center shadow-md shadow-blue-900/20 shrink-0">
-              <img src="/logo_transparent.png" alt="RN Intelligence" style={{ height: "20px", maxHeight: "20px", width: "auto" }} className="object-contain" />
+            <div className="relative">
+              <div className="h-10 w-10 rounded-2xl bg-[#0c101d] border border-cyan-500/30 flex items-center justify-center shadow-lg shadow-cyan-500/10 overflow-hidden shrink-0">
+                <img
+                  src="/rn_logo_emblem.jpg"
+                  alt="RN Intelligence"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
+
             <div>
-              <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100">
-                RN Intelligence
-              </h2>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                Agente Analítico Autônomo com Text-to-SQL
+              <div className="flex items-center gap-2">
+                <h2 className="text-sm font-bold text-white tracking-wide">RN Intelligence</h2>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 font-medium truncate max-w-[240px] sm:max-w-[300px]">
+                {projectMeta.name}
               </p>
             </div>
           </div>
@@ -164,56 +247,146 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
             <button
               type="button"
               onClick={clearChat}
-              className="p-1.5 text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
+              className="p-2 text-slate-400 hover:text-white hover:bg-white/[0.06] rounded-xl transition-colors cursor-pointer border border-transparent hover:border-white/5"
               title="Limpar Conversa"
+              aria-label="Limpar Conversa"
             >
               <Trash2 className="w-4 h-4" />
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-              title="Fechar Painel"
+              className="p-2 text-slate-400 hover:text-white hover:bg-white/[0.06] rounded-xl transition-colors cursor-pointer border border-transparent hover:border-white/5"
+              title="Fechar Painel (Esc)"
+              aria-label="Fechar Painel"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Mensagens do Chat */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/40 dark:bg-slate-950/50">
+        {/* CORPO DAS MENSAGENS */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-[#090d16]/70 relative">
+          {/* Empty State / Boas-vindas quando o chat está limpo */}
+          {!hasStarted && messages.length === 0 && (
+            <div className="my-auto py-6 flex flex-col items-center text-center space-y-5 animate-in fade-in duration-300">
+              <div className="h-16 w-16 rounded-3xl bg-[#0c101d] border border-cyan-500/30 flex items-center justify-center shadow-xl shadow-cyan-500/10 overflow-hidden shrink-0">
+                <img
+                  src="/rn_logo_emblem.jpg"
+                  alt="RN Intelligence"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="space-y-1.5 max-w-md">
+                <h3 className="text-base font-bold text-white">
+                  Bem-vindo ao RN Intelligence
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Assistente analítico executivo integrado ao DuckDB OLAP. Pergunte sobre decomposição de receita, margem de contribuição, curva ABC de produtos ou performance de vendedores.
+                </p>
+              </div>
+
+              {/* Tags do projeto */}
+              <div className="flex flex-wrap items-center justify-center gap-1.5 max-w-sm">
+                {projectMeta.tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="px-2 py-0.5 rounded-lg text-[10px] font-mono bg-white/[0.03] text-slate-300 border border-white/5"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Perguntas Sugeridas do Catálogo */}
+              <div className="w-full text-left space-y-2 pt-2">
+                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 px-1">
+                  Perguntas Sugeridas para Começar:
+                </span>
+                <div className="flex flex-col gap-2">
+                  {projectMeta.suggested_questions.map((question, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleSend(question)}
+                      className="group flex items-start gap-2.5 p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 hover:border-cyan-500/30 text-left transition-all cursor-pointer shadow-sm hover:shadow-cyan-500/5"
+                    >
+                      <MessageSquare className="h-4 w-4 text-cyan-400 group-hover:scale-110 shrink-0 mt-0.5 transition-transform" />
+                      <span className="text-xs text-slate-300 group-hover:text-white font-medium leading-relaxed">
+                        {question}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Renderização das mensagens */}
           {messages.map((msg) => {
             const isUser = msg.role === "user";
             return (
               <div
                 key={msg.id}
-                className={`flex gap-3 text-xs leading-relaxed ${
+                className={`flex gap-3 text-xs leading-relaxed animate-in fade-in duration-200 ${
                   isUser ? "justify-end" : "justify-start"
                 }`}
               >
                 {!isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 mt-0.5 overflow-hidden p-0.5 shadow-xs">
-                    <img src="/logo_badge_sm.png" alt="RN Intelligence" className="w-5 h-5 rounded object-contain" />
+                  <div className="w-7 h-7 rounded-xl bg-[#0c101d] border border-cyan-500/30 flex items-center justify-center shrink-0 mt-0.5 shadow-sm overflow-hidden">
+                    <img
+                      src="/rn_logo_emblem.jpg"
+                      alt="RN"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 )}
 
                 <div
-                  className={`max-w-[85%] rounded-2xl p-3.5 space-y-2.5 shadow-xs ${
+                  className={`max-w-[85%] rounded-2xl p-4 space-y-2.5 shadow-lg relative border ${
                     isUser
-                      ? "bg-blue-600 text-white rounded-br-xs"
-                      : "bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 text-slate-800 dark:text-slate-100 rounded-bl-xs"
+                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-500/40 rounded-br-xs"
+                      : "bg-[#0f1422] border-white/10 text-slate-200 rounded-bl-xs"
                   }`}
                 >
-                  <p className="whitespace-pre-line leading-relaxed">{msg.content.replace(/\*\*(.*?)\*\*/g, "$1")}</p>
+                  {/* Conteúdo com suporte a formatação executiva */}
+                  <div className="whitespace-pre-line leading-relaxed space-y-2">
+                    {msg.content ? (
+                      <div>
+                        {msg.content.split("\n\n").map((paragraph, pIdx) => (
+                          <p key={pIdx} className="mb-2 last:mb-0">
+                            {paragraph.split("**").map((chunk, cIdx) =>
+                              cIdx % 2 === 1 ? (
+                                <strong key={cIdx} className="font-semibold text-white">
+                                  {chunk}
+                                </strong>
+                              ) : (
+                                chunk
+                              )
+                            )}
+                          </p>
+                        ))}
+                      </div>
+                    ) : (
+                      // Efeito de digitação suave enquanto aguarda o primeiro chunk
+                      <div className="flex items-center gap-2 text-slate-400 py-1">
+                        <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                        <span className="text-[11px] font-mono">
+                          Processando consulta com DuckDB...
+                        </span>
+                      </div>
+                    )}
+                  </div>
 
                   {/* SQL Telemetry & Code Accordion */}
                   {msg.sql && (
-                    <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-700/60 space-y-1.5">
+                    <div className="mt-2 pt-2 border-t border-white/10 space-y-1.5">
                       <div className="flex items-center justify-between">
                         <button
                           type="button"
                           onClick={() => toggleSql(msg.id)}
-                          className="flex items-center gap-1 text-[11px] font-mono text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                          className="flex items-center gap-1.5 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
                         >
                           <Code2 className="w-3.5 h-3.5" />
                           <span>{expandedSql[msg.id] ? "Ocultar SQL" : "Inspecionar SQL DuckDB"}</span>
@@ -225,28 +398,40 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
                         </button>
 
                         {msg.executionTime && (
-                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-500 dark:text-slate-400">
-                            <Clock className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
+                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-400">
+                            <Clock className="w-3 h-3 text-emerald-400" />
                             {msg.executionTime.toFixed(1)} ms
                           </span>
                         )}
                       </div>
 
                       {expandedSql[msg.id] && (
-                        <pre className="p-2.5 rounded-lg bg-slate-900 dark:bg-black/80 border border-slate-700/70 text-[11px] font-mono text-emerald-400 overflow-x-auto">
-                          {msg.sql}
-                        </pre>
+                        <div className="space-y-2 animate-in fade-in duration-150">
+                          <pre className="p-3 rounded-xl bg-black/80 border border-white/10 text-[11px] font-mono text-emerald-300 overflow-x-auto">
+                            {msg.sql}
+                          </pre>
+                          {msg.data && msg.data.length > 0 && (
+                            <div className="p-2.5 rounded-xl bg-black/60 border border-white/5 text-[10px] font-mono text-slate-300 overflow-x-auto">
+                              <span className="text-cyan-400 font-bold block mb-1">Resultado:</span>
+                              <pre className="whitespace-pre">{JSON.stringify(msg.data, null, 2)}</pre>
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
                   )}
 
-                  <div className={`text-[10px] text-right font-mono ${isUser ? "text-blue-200" : "text-slate-400 dark:text-slate-500"}`}>
+                  <div
+                    className={`text-[10px] text-right font-mono pt-1 ${
+                      isUser ? "text-blue-200/80" : "text-slate-400"
+                    }`}
+                  >
                     {msg.timestamp}
                   </div>
                 </div>
 
                 {isUser && (
-                  <div className="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                  <div className="w-7 h-7 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-md shadow-blue-900/30">
                     <User className="w-3.5 h-3.5" />
                   </div>
                 )}
@@ -254,15 +439,16 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
             );
           })}
 
-          {isLoading && (
-            <div className="flex gap-3 text-xs items-center text-slate-500 dark:text-slate-400">
-              <div className="w-7 h-7 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center shrink-0 overflow-hidden p-0.5 shadow-xs animate-pulse">
-                <img src="/logo_badge_sm.png" alt="RN Intelligence" className="w-5 h-5 rounded object-contain" />
+          {/* Loading Indicator */}
+          {isLoading && messages.length > 0 && !messages[messages.length - 1].content && (
+            <div className="flex gap-3 text-xs items-center text-slate-400">
+              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 flex items-center justify-center shrink-0 p-0.5 animate-pulse">
+                <Database className="h-3.5 w-3.5 text-cyan-400" />
               </div>
-              <div className="flex items-center gap-2 p-3 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80">
-                <div className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-                <span className="text-slate-700 dark:text-slate-200 font-mono text-[11px]">
-                  Executando consulta SQL no DuckDB...
+              <div className="flex items-center gap-2 p-3 rounded-2xl bg-[#0f1422] border border-white/10">
+                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                <span className="text-slate-300 font-mono text-[11px]">
+                  Executando consulta SQL colunar no DuckDB...
                 </span>
               </div>
             </div>
@@ -271,50 +457,54 @@ export function CopilotSidebar({ isOpen, onClose }: CopilotSidebarProps) {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Perguntas Rápidas */}
-        <div className="p-3.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-          <p className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-            Perguntas Rápidas Sugeridas:
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {QUICK_PROMPTS.map((prompt, i) => (
+        {/* PERGUNTAS RÁPIDAS (CHIPS) */}
+        {hasStarted && (
+          <div className="p-3 border-t border-white/5 bg-[#0b0f1a] overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 shrink-0 px-1">
+              Sugestões:
+            </span>
+            {projectMeta.suggested_questions.slice(0, 3).map((prompt, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => handleSend(prompt)}
                 disabled={isLoading}
-                className="text-[11px] px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-200 dark:hover:border-slate-600 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 transition-colors text-left cursor-pointer disabled:opacity-50"
+                className="text-[11px] px-2.5 py-1 rounded-xl bg-white/[0.04] hover:bg-cyan-500/15 text-slate-300 hover:text-cyan-200 border border-white/5 hover:border-cyan-500/30 transition-all text-left whitespace-nowrap cursor-pointer disabled:opacity-40"
               >
-                {prompt}
+                {prompt.length > 38 ? prompt.substring(0, 35) + "..." : prompt}
               </button>
             ))}
           </div>
-        </div>
+        )}
 
-        {/* Input de Mensagem */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+        {/* INPUT DE MENSAGEM */}
+        <div className="p-4 border-t border-white/10 bg-[#0b0f1a]/95 backdrop-blur-md relative z-10">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSend();
             }}
-            className="flex gap-2"
+            className="flex items-center gap-2"
           >
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Pergunte ao RN Intelligence (ex: vendas por canal, ranking...)"
-              disabled={isLoading}
-              className="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-blue-500 dark:focus:border-blue-400 outline-none focus:ring-1 focus:ring-blue-500 transition-all"
-            />
+            <div className="relative flex-1">
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Pergunte ao RN Intelligence (ex: vendas, ranking, margem...)"
+                disabled={isLoading}
+                className="w-full bg-[#090d16] border border-white/10 rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-400 outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/40 transition-all disabled:opacity-50"
+              />
+            </div>
+
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md shadow-blue-900/20 disabled:opacity-50 transition-all flex items-center justify-center cursor-pointer shrink-0"
+              className="px-4 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-lg shadow-blue-900/30 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer shrink-0"
+              aria-label="Enviar Pergunta"
             >
-              <Send className="w-3.5 h-3.5" />
+              <Send className="w-4 h-4" />
             </button>
           </form>
         </div>
