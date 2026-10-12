@@ -138,6 +138,27 @@ function resolveSalesBiOfflineResponse(question: string): {
     };
   }
 
+  if (
+    q.includes("enterprise analytics") ||
+    q.includes("analytics platform") ||
+    q.includes("estrategia") ||
+    q.includes("estratégia") ||
+    q.includes("expandir") ||
+    q.includes("contrato") ||
+    q.includes("2026")
+  ) {
+    return {
+      reply:
+        "Estratégia Executiva para expansão da **Enterprise Analytics Platform (SKU-902)**:\n\n" +
+        "• **Diagnóstico de Tração:** É o carro-chefe da empresa, respondendo por **R$ 15,04M (38,5% do faturamento total)** com margem saudável de **49,7%**.\n" +
+        "• **Alavanca de Expansão para 2026:** Cross-selling direto nos 40 clientes corporativos ativos, migrando contratos legados de suporte para o módulo avançado de governança e IA.\n" +
+        "• **Foco Regional:** Priorizar grandes contas no Sudeste (50,4% da receita) e expandir tração no Sul através do canal B2B Enterprise.\n" +
+        "• **Governança de Descontos:** Limitar concessões a 7,5% para preservar mais de R$ 260K em margem mensal recorrente.",
+      sql: "SELECT p.nome_produto, ROUND(SUM(f.valor_liquido), 2) AS receita, ROUND(AVG(f.margem_contribuicao_pct), 1) AS margem_pct, COUNT(f.pedido_id) AS transacoes FROM f_vendas f JOIN d_produtos p ON f.produto_id = p.produto_id WHERE p.nome_produto LIKE '%Enterprise Analytics%' GROUP BY p.nome_produto;",
+      data: [{ nome_produto: "Enterprise Analytics Platform", receita: 15038740.0, margem_pct: 49.7, transacoes: 3665 }],
+    };
+  }
+
   if (q.includes("produto") || q.includes("classe a") || q.includes("pareto") || q.includes("curva abc")) {
     return {
       reply:
@@ -253,7 +274,8 @@ export async function streamChatMessage({
               mode: payload.mode,
             });
           } else if (payload.type === "chunk" && onChunk) {
-            onChunk(payload.delta || "");
+            const delta = (payload.delta || "").replace(/\\n/g, "\n");
+            onChunk(delta);
           } else if (payload.type === "done" && onDone) {
             onDone({
               execution_time_ms: payload.execution_time_ms,
@@ -271,7 +293,8 @@ export async function streamChatMessage({
         const jsonStr = buffer.trim().replace(/^data:\s*/, "");
         const payload = JSON.parse(jsonStr);
         if (payload.type === "chunk" && onChunk) {
-          onChunk(payload.delta || "");
+          const delta = (payload.delta || "").replace(/\\n/g, "\n");
+          onChunk(delta);
         } else if (payload.type === "done" && onDone) {
           onDone({
             execution_time_ms: payload.execution_time_ms,

@@ -7,10 +7,6 @@ import {
   User,
   Trash2,
   MessageSquare,
-  Code2,
-  ChevronDown,
-  ChevronUp,
-  Clock,
   Database,
 } from "lucide-react";
 import {
@@ -28,13 +24,62 @@ interface CopilotSidebarProps {
   initialPrompt?: string;
 }
 
+function formatMessageContent(content: string) {
+  const clean = content
+    .replace(/\\r\\n/g, "\n")
+    .replace(/\\n/g, "\n")
+    .replace(/\r/g, "");
+
+  const paragraphs = clean.split("\n\n");
+
+  return (
+    <div className="space-y-2">
+      {paragraphs.map((p, pIdx) => {
+        const lines = p.split("\n");
+        return (
+          <div key={pIdx} className="space-y-1">
+            {lines.map((line, lIdx) => {
+              const trimmed = line.trim();
+              if (!trimmed) return null;
+
+              const isBullet = trimmed.startsWith("•") || trimmed.startsWith("-");
+              const textContent = isBullet ? trimmed.replace(/^[•-]\s*/, "") : trimmed;
+
+              return (
+                <div
+                  key={lIdx}
+                  className={isBullet ? "flex items-start gap-2 pl-1.5 my-0.5" : "my-0.5"}
+                >
+                  {isBullet && (
+                    <span className="text-cyan-400 font-bold select-none shrink-0">•</span>
+                  )}
+                  <span className="text-slate-200 leading-relaxed">
+                    {textContent.split("**").map((chunk, cIdx) =>
+                      cIdx % 2 === 1 ? (
+                        <strong key={cIdx} className="font-semibold text-white">
+                          {chunk}
+                        </strong>
+                      ) : (
+                        chunk
+                      )
+                    )}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSidebarProps) {
   const [projectMeta, setProjectMeta] = useState<ProjectMetadata>(FALLBACK_SALES_BI_METADATA);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
-  const [expandedSql, setExpandedSql] = useState<Record<string, boolean>>({});
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -93,11 +138,6 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
     setMessages([]);
     setHasStarted(false);
     setIsLoading(false);
-    setExpandedSql({});
-  };
-
-  const toggleSql = (msgId: string) => {
-    setExpandedSql((prev) => ({ ...prev, [msgId]: !prev[msgId] }));
   };
 
   const handleSend = useCallback(
@@ -351,23 +391,9 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                   }`}
                 >
                   {/* Conteúdo com suporte a formatação executiva */}
-                  <div className="whitespace-pre-line leading-relaxed space-y-2">
+                  <div className="leading-relaxed">
                     {msg.content ? (
-                      <div>
-                        {msg.content.split("\n\n").map((paragraph, pIdx) => (
-                          <p key={pIdx} className="mb-2 last:mb-0">
-                            {paragraph.split("**").map((chunk, cIdx) =>
-                              cIdx % 2 === 1 ? (
-                                <strong key={cIdx} className="font-semibold text-white">
-                                  {chunk}
-                                </strong>
-                              ) : (
-                                chunk
-                              )
-                            )}
-                          </p>
-                        ))}
-                      </div>
+                      formatMessageContent(msg.content)
                     ) : (
                       // Efeito de digitação suave enquanto aguarda o primeiro chunk
                       <div className="flex items-center gap-2 text-slate-400 py-1">
@@ -378,48 +404,6 @@ export function CopilotSidebar({ isOpen, onClose, initialPrompt }: CopilotSideba
                       </div>
                     )}
                   </div>
-
-                  {/* SQL Telemetry & Code Accordion */}
-                  {msg.sql && (
-                    <div className="mt-2 pt-2 border-t border-white/10 space-y-1.5">
-                      <div className="flex items-center justify-between">
-                        <button
-                          type="button"
-                          onClick={() => toggleSql(msg.id)}
-                          className="flex items-center gap-1.5 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
-                        >
-                          <Code2 className="w-3.5 h-3.5" />
-                          <span>{expandedSql[msg.id] ? "Ocultar SQL" : "Inspecionar SQL DuckDB"}</span>
-                          {expandedSql[msg.id] ? (
-                            <ChevronUp className="w-3 h-3" />
-                          ) : (
-                            <ChevronDown className="w-3 h-3" />
-                          )}
-                        </button>
-
-                        {msg.executionTime && (
-                          <span className="flex items-center gap-1 text-[10px] font-mono text-slate-400">
-                            <Clock className="w-3 h-3 text-emerald-400" />
-                            {msg.executionTime.toFixed(1)} ms
-                          </span>
-                        )}
-                      </div>
-
-                      {expandedSql[msg.id] && (
-                        <div className="space-y-2 animate-in fade-in duration-150">
-                          <pre className="p-3 rounded-xl bg-black/80 border border-white/10 text-[11px] font-mono text-emerald-300 overflow-x-auto">
-                            {msg.sql}
-                          </pre>
-                          {msg.data && msg.data.length > 0 && (
-                            <div className="p-2.5 rounded-xl bg-black/60 border border-white/5 text-[10px] font-mono text-slate-300 overflow-x-auto">
-                              <span className="text-cyan-400 font-bold block mb-1">Resultado:</span>
-                              <pre className="whitespace-pre">{JSON.stringify(msg.data, null, 2)}</pre>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  )}
 
                   <div
                     className={`text-[10px] text-right font-mono pt-1 ${
