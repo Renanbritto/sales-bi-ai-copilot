@@ -526,7 +526,7 @@ export default function DashboardPage() {
         aria-label="Abrir RN Intelligence Copilot"
       >
         <MessageSquare className="w-4 h-4 text-white group-hover:rotate-6 transition-transform" />
-        <span className="font-bold tracking-tight">Copilot IA</span>
+        <span className="font-bold tracking-tight">RN Intelligence</span>
       </button>
 
       {/* 5. COPILOT CHAT DRAWER (COM EMBLEMA OFICIAL E STREAMING SSE) */}
